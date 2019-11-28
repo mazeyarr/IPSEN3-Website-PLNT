@@ -1,0 +1,32 @@
+<!-- Search bar component -->
+<div class="container">
+  <!-- Actual form -->
+  <div class="md-form input-group mb-3">
+
+    <!-- Icon -->
+    <div class="input-group-prepend white-background rounded-corners-left">
+      <span class="input-group-text md-addon"><i class="fas fa-search"></i></span>
+    </div>
+
+    <!-- Input field -->
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Zoek voor projecten"
+      aria-label="Zoek voor projecten"
+      aria-describedby="button-addon2"
+      (keydown.enter)="onFindProjectWithProjectName()"
+      #projectNameInput>
+
+    <!-- Search button -->
+    <div class="input-group-append ">
+      <button
+        mdbBtn color="primary"
+        size="lg"
+        class="m-0 px-3 py-2 rounded-corners-right"
+        type="button" id="button-addon2"
+        (click)="onFindProjectWithProjectName()"
+        mdbWavesEffect>Zoeken"</button>
+    </div>
+  </div>
+</div>

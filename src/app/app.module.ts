@@ -5,12 +5,16 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { SearchbarComponent } from './searchbar/searchbar.component';
+import { SearchSectionComponent } from './search-section/search-section.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavBarComponent
+    NavBarComponent,
+    SearchbarComponent,
+    SearchSectionComponent
   ],
   imports: [
     BrowserModule,
