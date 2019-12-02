@@ -7,6 +7,7 @@ import { ApiService } from '../../../services/api/api.service';
   providedIn: 'root'
 })
 export class AuthService {
+  private authUser: User;
   private authToken: string;
 
   constructor(private api: ApiService, private http: HttpClient) {
@@ -22,6 +23,10 @@ export class AuthService {
   register(): User {
     // TODO: Register
     return new User();
+  }
+
+  getAuthUser(): User {
+    return this.authUser;
   }
 
   getAuthToken(): string {
