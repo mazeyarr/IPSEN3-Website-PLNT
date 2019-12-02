@@ -7,11 +7,24 @@
   <links>
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link waves-light" mdbWavesEffect>Home<span class="sr-only">(current)</span></a>
-      </li>
       <li class="nav-item">
-        <a class="nav-link waves-light" mdbWavesEffect>Projects</a>
+        <a
+          routerLink="/"
+          class="nav-link waves-light"
+          mdbWavesEffect
+        >
+          Home
+        </a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          routerLink="/projects"
+          class="nav-link waves-light"
+          mdbWavesEffect
+        >
+          Projects
+        </a>
       </li>
     </ul>
     <!-- Links -->
