@@ -4,9 +4,10 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NavBarBrandComponent } from './nav-bar-brand/nav-bar-brand.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { NavBarBrandComponent } from './components/nav-bar-brand/nav-bar-brand.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthModule } from './modules/auth/auth.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]

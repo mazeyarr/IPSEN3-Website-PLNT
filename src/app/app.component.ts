@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ConfigService } from './services/config/config.service';
+import { AuthService } from './modules/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +9,11 @@ import { ConfigService } from './services/config/config.service';
 export class AppComponent implements OnInit {
   title = 'website';
 
-  constructor(private configService: ConfigService) {
+  constructor(private auth: AuthService) {
 
   }
 
   ngOnInit(): void {
-    console.log(this.configService.getConfig());
+    this.auth.login();
   }
 }
