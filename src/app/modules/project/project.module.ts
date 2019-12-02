@@ -9,7 +9,13 @@ import { ViewProjectsComponent } from './pages/view-projects/view-projects.compo
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 
 @NgModule({
-  declarations: [EditProjectComponent, CreateProjectComponent, ViewProjectComponent, ViewProjectsComponent, ProjectCardComponent],
+  declarations: [
+    EditProjectComponent,
+    CreateProjectComponent,
+    ViewProjectComponent,
+    ViewProjectsComponent,
+    ProjectCardComponent
+  ],
   imports: [
     RouterModule.forChild(projectRoutes),
     CommonModule,
