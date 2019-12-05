@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MDBModalRef} from 'angular-bootstrap-md';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
   validatingForm: FormGroup;
 
-  constructor(public loginModalRef: MDBModalRef) {}
+  constructor(public loginModalRef: MDBModalRef, private authService: AuthService) {}
 
 
   ngOnInit() {
@@ -20,10 +21,19 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  login(): void {
+  btnLoginClick = async (): Promise<void> => {
     if (this.loginFormModalEmail.valid && this.loginFormModalPassword.valid) {
-      // TODO: if is valid input then send to backend for further validation and login
-      console.log('VALID CREDENTIALS');
+      await this.authService.login(this.loginFormModalEmail.value, this.loginFormModalPassword.value);
+
+      console.log(this.authService.getAuthUser());
+      console.log(this.authService.isAuthenticated);
+
+      if (this.authService.isAuthenticated) {
+        this.loginModalRef.hide();
+      } else {
+        // TODO: show user that not right credentials
+      }
+
     } else {
       console.log('INVALID CREDENTIALS');
     }

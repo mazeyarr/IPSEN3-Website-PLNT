@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {AuthService} from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-view-project',
