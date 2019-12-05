@@ -5,13 +5,15 @@ import { RouterModule } from '@angular/router';
 import { sharedRoutes } from './shared.routes';
 import { ModalComponent } from './components/modal/modal.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, ModalComponent],
   imports: [
     RouterModule.forRoot(sharedRoutes),
     CommonModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    ReactiveFormsModule
   ],
   entryComponents: [ModalComponent],
   providers: []
