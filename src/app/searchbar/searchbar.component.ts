@@ -7,6 +7,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
   @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef;
+  projects: object[];
 
   constructor() { }
 
