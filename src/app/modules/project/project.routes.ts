@@ -1,0 +1,28 @@
+import { Routes } from '@angular/router';
+import { ViewProjectsComponent } from './pages/view-projects/view-projects.component';
+import { ViewProjectComponent } from './pages/view-project/view-project.component';
+import { CreateProjectComponent } from './pages/create-project/create-project.component';
+import { EditProjectComponent } from './pages/edit-project/edit-project.component';
+
+export const projectRoutes: Routes = [
+  {
+    path: 'projects',
+    component: ViewProjectsComponent,
+    data: {animation: 'Projects'}
+  },
+  {
+    path: 'project/:id',
+    component: ViewProjectComponent,
+    data: {animation: 'Project'}
+  },
+  {
+    path: 'create-project',
+    component: CreateProjectComponent,
+    data: {animation: 'Project'}
+  },
+  {
+    path: 'edit-project/:id',
+    component: EditProjectComponent,
+    data: {animation: 'Project'}
+  }
+];

@@ -1,0 +1,57 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark black fixed-top scrolling-navbar">
+
+  <app-nav-bar-brand></app-nav-bar-brand>
+
+  <!-- Collapsible content -->
+  <links>
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a
+          routerLink="/"
+          class="nav-link waves-light"
+          mdbWavesEffect
+        >
+          Home
+        </a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="active">
+        <a
+          routerLink="/projects"
+          class="nav-link waves-light"
+          mdbWavesEffect
+        >
+          Projects
+        </a>
+      </li>
+    </ul>
+    <!-- Links -->
+
+      <div class="my-0">
+        <button
+          type="button"
+          mdbBtn
+          color="default"
+          outline="true"
+        >
+          Login
+        </button>
+
+        <button
+          mdbBtn
+          type="button"
+          color="default"
+          outline="true"
+        >
+          Register
+        </button>
+      </div>
+  </links>
+
+  <!-- Collapsible content -->
+  <app-login></app-login>
+  <app-register></app-register>
+</mdb-navbar>
+<!--/.Navbar-->

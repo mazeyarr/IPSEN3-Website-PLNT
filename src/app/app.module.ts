@@ -1,29 +1,33 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
-// Components
 import { AppComponent } from './app.component';
-import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { SearchbarComponent } from './searchbar/searchbar.component';
-import { SearchSectionComponent } from './search-section/search-section.component';
-
+import { NavBarComponent } from './modules/shared/components/nav-bar/nav-bar.component';
+import { NavBarBrandComponent } from './modules/shared/components/nav-bar-brand/nav-bar-brand.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedModule } from './modules/shared/shared.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { ProjectModule } from './modules/project/project.module';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    SearchbarComponent,
-    SearchSectionComponent
+    NavBarBrandComponent,
   ],
   imports: [
     BrowserModule,
+    RouterModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    SharedModule,
+    AuthModule,
+    ProjectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
