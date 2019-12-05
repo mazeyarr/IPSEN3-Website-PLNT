@@ -5,16 +5,21 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MDBBootstrapModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [RegisterComponent, LoginComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    MDBBootstrapModule
   ],
   exports: [
     LoginComponent,
     RegisterComponent
   ],
+  entryComponents: [ LoginComponent ],
   providers: [
     AuthService,
     {
