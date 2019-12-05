@@ -17,15 +17,15 @@ export class ApiService {
   private static readonly baseUrl = 'http://localhost:9000';
   private static readonly prefix = '/api';
 
-  get(options: IApiOptions) {
+  get(options: IApiOptions): Observable<any> {
     return this.http.get(this.getApiUrl() + options.endpoint, options.body);
   }
 
-  post(options: IApiOptions) {
+  post(options: IApiOptions): Observable<any> {
     return this.http.post(this.getApiUrl() + options.endpoint, options.body);
   }
 
-  put(options: IApiOptions) {
+  put(options: IApiOptions): Observable<any> {
     return this.http.put(this.getApiUrl() + options.endpoint, options.body);
   }
 

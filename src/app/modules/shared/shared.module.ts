@@ -3,19 +3,20 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './pages/home/home.component';
 import { RouterModule } from '@angular/router';
 import { sharedRoutes } from './shared.routes';
-import { ModalComponent } from './components/modal/modal.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ProjectModule } from '../project/project.module';
 
 @NgModule({
-  declarations: [HomeComponent, ModalComponent],
+  declarations: [HomeComponent],
   imports: [
     RouterModule.forRoot(sharedRoutes),
     CommonModule,
     MDBBootstrapModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ProjectModule
   ],
-  entryComponents: [ModalComponent],
+  entryComponents: [],
   providers: []
 })
 export class SharedModule {

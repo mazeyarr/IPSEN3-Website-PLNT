@@ -14,6 +14,9 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     CreateProjectComponent,
     ViewProjectComponent,
     ViewProjectsComponent,
+    ProjectCardComponent,
+  ],
+  exports: [
     ProjectCardComponent
   ],
   imports: [
