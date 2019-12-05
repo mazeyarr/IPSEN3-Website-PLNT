@@ -11,6 +11,9 @@ import {MDBRootModule} from 'angular-bootstrap-md';
 
 @NgModule({
   declarations: [HomeComponent, SearchSectionComponent, SearchbarComponent],
+  exports: [
+    SearchSectionComponent
+  ],
   imports: [
     RouterModule.forRoot(sharedRoutes),
     CommonModule,
