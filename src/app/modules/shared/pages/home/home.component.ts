@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../../../../app.route-animations';
 import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
-import { ModalComponent } from '../../components/modal/modal.component';
+import { ApiService } from '../../services/api/api.service';
+import { ProjectService } from '../../../project/services/project.service';
+import { Observable } from 'rxjs';
+import { IProject, Project } from '../../../../models/Project/project';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -10,12 +14,14 @@ import { ModalComponent } from '../../components/modal/modal.component';
   animations: [ slideInAnimation ]
 })
 export class HomeComponent implements OnInit {
-  modalRef: MDBModalRef;
+  private projects: Project[] = [];
 
-  constructor(private modalService: MDBModalService) {}
-
-  openModal() {
-    this.modalRef = this.modalService.show(ModalComponent);
+  constructor(private projectService: ProjectService) {
+    projectService.getProjectsAll().subscribe((projects: IProject[]) => {
+      projects.map((project: IProject) => {
+        this.projects.push(new Project(project));
+      });
+    });
   }
 
   ngOnInit(): void {
