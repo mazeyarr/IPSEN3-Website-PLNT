@@ -4,8 +4,9 @@ import { MDBModalRef, MDBModalService } from 'angular-bootstrap-md';
 import { ApiService } from '../../services/api/api.service';
 import { ProjectService } from '../../../project/services/project.service';
 import { Observable } from 'rxjs';
-import { IProject, Project } from '../../../../models/Project/project';
-import { map } from 'rxjs/operators';
+import { Project } from '../../../../models/Project/project';
+import { filter, take } from 'rxjs/operators';
+import { ProjectTypes } from '../../../project/types/project-types.enum';
 
 @Component({
   selector: 'app-home',
@@ -14,14 +15,14 @@ import { map } from 'rxjs/operators';
   animations: [ slideInAnimation ]
 })
 export class HomeComponent implements OnInit {
-  private projects: Project[] = [];
+  private static readonly MAX_PROJECTS_TO_SHOW = 4;
+  private projects: Observable<Project[]>;
 
   constructor(private projectService: ProjectService) {
-    projectService.getProjectsAll().subscribe((projects: IProject[]) => {
-      projects.map((project: IProject) => {
-        this.projects.push(new Project(project));
-      });
-    });
+    this.projects = this.projectService.getProjectsAll().pipe(
+      filter((projects: Project[], index: number) => projects[index].catagory === ProjectTypes.EXCELLENT),
+      take(HomeComponent.MAX_PROJECTS_TO_SHOW)
+    );
   }
 
   ngOnInit(): void {

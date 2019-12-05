@@ -1,0 +1,5 @@
+export enum ProjectTypes {
+  EXCELLENT = 'EXCELLENT',
+  ADEQUATE = 'ADEQUATE',
+  INADEQUATE = 'INADEQUATE',
+}

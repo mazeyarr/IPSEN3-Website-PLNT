@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../shared/services/api/api.service';
 import { IProject, Project } from '../../../models/Project/project';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { ProjectTypes } from '../types/project-types.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,11 @@ export class ProjectService {
 
   constructor(private api: ApiService) { }
 
-  public getProjectsAll(): Observable<IProject[]> {
-    return this.api.get({ endpoint: this.PREFIX + '/all', auth: false, body: {} });
+  public getProjectsAll(): Observable<Project[]> {
+    return this.api.get({ endpoint: this.PREFIX + '/all', auth: false, body: {} })
+      .pipe(
+        map((projects: IProject[]) => projects.map((project: IProject) => new Project(project))),
+      );
   }
 
   // public getProjectById(): Project {
