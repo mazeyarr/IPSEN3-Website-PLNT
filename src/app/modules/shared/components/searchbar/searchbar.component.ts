@@ -1,4 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {SearchbarService} from './searchbar.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -7,15 +8,20 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 })
 export class SearchbarComponent implements OnInit {
   @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef;
-  projects: object[];
+  listOfProjects: object[];
 
-  constructor() { }
+  constructor(private searchbarService: SearchbarService) { }
 
   ngOnInit() {
   }
 
   private onFindProjectWithProjectName() {
-    console.log(this.projectNameInput.nativeElement.value);
+    this.searchbarService.fetchProjects(this.projectNameInput.nativeElement.value).subscribe(projects => {
+      this.listOfProjects = projects;
+      console.log(this.listOfProjects);
+    });
+
+
   }
 
 }

@@ -23,7 +23,7 @@ p{
 /* Sections' background */
 .background {
   height: 70vh;
-  background: #5bc787 url("src/assets/images/background-piece.png");
+  background: #5bc787 url("../../../../../assets/images/background-piece.png");
   background-repeat: repeat;
   margin: 0 auto;
   text-align: center;
