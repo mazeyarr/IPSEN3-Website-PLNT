@@ -3,29 +3,23 @@
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Zoek resultaten</h3>
   <div class="card-body">
     <div id="table" class="table-editable">
-      <table class="table table-bordered table-responsive-md table-striped text-center">
-        <tr *ngFor="let project of projectList; let id = index">
-          <td>
-            <span (keyup)="changeValue(id, 'title', $event)" (blur)="updateList(id, 'title', $event)" contenteditable="true">{{project.title}}</span>
-          </td>
-          <td>
-            <span contenteditable="false" (keyup)="changeValue(id, 'category', $event)" (blur)="updateList(id, 'category', $event)">{{project.category}}</span>
-          </td>
-          <td>
-            <span contenteditable="false" (keyup)="changeValue(id, 'fieldOfStudy', $event)" (blur)="updateList(id, 'fieldOfStudy', $event)">{{project.fieldOfStudy}}</span>
-          </td>
-          <td>
-            <span contenteditable="false" (keyup)="changeValue(id, 'study', $event)" (blur)="updateList(id, 'study', $event)">{{project.study}}</span>
-          </td>
-          <td>
-            <span contenteditable="false" (keyup)="changeValue(id, 'language', $event)" (blur)="updateList(id, 'language ', $event)">{{project.language}}</span>
-          </td>
-          <td>
-            <span class="table-remove">
-              <app-like></app-like>
-            </span>
-          </td>
+      <table mdbTable #tableEl="mdbTable" class="z-depth-1 table table-bordered table-responsive-md table-striped text-center">
+        <thead>
+        <tr>
+          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
+          </th>
         </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let el of elements; let i = index">
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.title}}</td>
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.category}}</td>
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fieldOfStudy}}</td>
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.study}}</td>
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.language}}</td>
+          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><app-like></app-like></td>
+        </tr>
+        </tbody>
         <tfoot class="grey lighten-5 w-100">
         <tr>
           <td colspan="6">
