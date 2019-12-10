@@ -24,10 +24,10 @@ import { ProjectModule } from './modules/project/project.module';
     RouterModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot(),
     SharedModule,
     AuthModule,
     ProjectModule,
+    MDBBootstrapModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]
