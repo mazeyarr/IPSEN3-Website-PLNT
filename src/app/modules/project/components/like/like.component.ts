@@ -12,4 +12,7 @@ export class LikeComponent implements OnInit {
   ngOnInit() {
   }
 
+  like(id: number) {
+    alert('sorry, liken kan nog niet');
+  }
 }

@@ -18,6 +18,13 @@ export class ProjectListComponent implements OnInit {
       { id: 2, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
       { id: 3, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
       { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
   ];
 
   elements: any = [];
@@ -28,16 +35,12 @@ export class ProjectListComponent implements OnInit {
     this.projectList[id][property] = editField;
   }
 
-  like(id: number) {
-    alert('sorry, liken kan nog niet');
-  }
-
   changeValue(id: number, property: string, event: any) {
     this.editField = event.target.textContent;
   }
 
   ngOnInit() {
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= this.projectList.length; i++) {
       this.elements.push({id: i.toString(), first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i});
     }
 
