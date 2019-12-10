@@ -13,9 +13,7 @@ interface IApiOptions {
     params?: HttpParams | {
       [param: string]: string | string[];
     };
-    reportProgress?: boolean;
-    responseType: any;
-    withCredentials?: boolean;
+    [key: string]: any;
   };
 }
 

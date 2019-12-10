@@ -13,7 +13,11 @@ export class ProjectService {
   constructor(private api: ApiService) { }
 
   public getProjectsAll(): Observable<Project[]> {
-    return this.api.get({ endpoint: this.PREFIX + '/all', auth: false, body: {} })
+    return this.api.get({
+      endpoint: this.PREFIX + '/all',
+      auth: false,
+      body: {}
+    })
       .pipe(
         map((projects: IProject[]) => projects.map((project: IProject) => new Project(project))),
       );
