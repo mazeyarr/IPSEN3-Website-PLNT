@@ -19,9 +19,26 @@ p{
 .background {
   background: #5bc787 url("../../../../../assets/images/background-piece.png") repeat;
   text-align: center;
-  padding: 20vh 0;
+  padding: 15vh 0;
+  margin: 5%;
+  border-radius: 10px;
 }
 
 .background-searchbar {
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 1000px) {
+  h1{
+    font-size: 2.2em;
+  }
+
+  p{
+    font-size: 1.0em;
+  }
+
+  .background {
+    margin: 5% 0%;
+    padding: 15vh 5%;
+  }
 }
