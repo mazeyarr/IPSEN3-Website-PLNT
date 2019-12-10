@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ApiService } from '../../shared/services/api/api.service';
 import { IProject, Project } from '../../../models/Project/project';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ProjectTypes } from '../types/project-types.enum';
 
 @Injectable({
   providedIn: 'root'
