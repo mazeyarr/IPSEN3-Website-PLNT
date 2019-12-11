@@ -1,0 +1,70 @@
+/*
+Author: Jesse Minneboo
+Date: 28 November 2019
+*/
+
+/* Global */
+.white-background{
+  background-color: white;
+}
+
+.rounded-corners-left{
+  border-radius: 10px 0 0 10px !important;
+}
+
+.rounded-corners-right{
+  border-radius: 0 10px 10px 0 !important;
+}
+
+
+/* Form */
+.form-control{
+  background-color: white !important;
+  font-size: 1.6em !important;
+  padding: 10px;
+}
+
+.md-form{
+  margin: 0 auto !important;
+  width: 65%;
+  transition: 0.3s;
+}
+
+.md-form:hover{
+  -webkit-box-shadow: 0 8px 6px -6px #4d5f64;
+  -moz-box-shadow: 0 8px 6px -6px #4d5f64;
+  box-shadow: 0 8px 6px -6px #4d5f64;
+}
+
+
+/* Input field overrides */
+input[type="text"]{
+  margin: 0 auto;
+  border: 0;
+}
+
+/*"disabled" the blue color on the input field*/
+input[type=text]:focus:not([readonly]){
+  border-bottom: 0px solid white;
+  box-shadow: 0 0px 0 0 white;
+}
+
+/* Responsive */
+@media only screen and (max-width: 1000px) {
+  .md-form{
+    width: 90%;
+    font-size: 0.8em;
+  }
+
+  .form-control{
+    font-size: 1.0em !important;
+  }
+}
+
+
+.loader {
+  text-align: center;
+  font-size: 1.4em;
+  color: white;
+  margin-top: 5%;
+}

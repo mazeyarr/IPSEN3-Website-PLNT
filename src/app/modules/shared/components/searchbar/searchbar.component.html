@@ -1,0 +1,45 @@
+<!-- Search bar component -->
+<div class="container">
+
+  <!-- FORM -->
+  <div class="md-form input-group mb-3">
+
+    <!-- ICON -->
+    <div class="input-group-prepend white-background rounded-corners-left">
+      <span class="input-group-text md-addon"><i class="fas fa-search"></i></span>
+    </div>
+    <!-- END ICON -->
+
+    <!-- INPUT FIELD -->
+    <input
+      id="typewriter"
+      type="text"
+      class="form-control"
+      placeholder="Zoek voor een project"
+      aria-label="Zoek voor projecten"
+      aria-describedby="button-addon2"
+      (keydown.enter)="onFindProjectWithProjectName()"
+      #projectNameInput>
+    <!-- END INPUT FIELD -->
+
+    <!-- SEARCH BUTTON -->
+    <div class="input-group-append">
+      <button
+        mdbBtn
+        color="primary"
+        size="lg"
+        class="m-0 px-3 py-2 rounded-corners-right"
+        type="button"
+        id="button-addon2"
+        (click)="onFindProjectWithProjectName()"
+        mdbWavesEffect>Zoeken</button>
+    </div>
+    <!-- END SEARCH BUTTON -->
+
+  </div>
+  <!-- END FORM -->
+  <div class="spinner-border loader" role="status" *ngIf="isFetching">
+    <span class="sr-only">Loading...</span>
+  </div>
+
+</div>
