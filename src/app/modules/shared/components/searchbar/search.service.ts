@@ -4,7 +4,7 @@ import {map} from 'rxjs/operators';
 import {ProjectModel} from '../../../../models/project.model';
 
 @Injectable({providedIn: 'root'})
-export class ProjectService {
+export class SearchService {
 
   constructor(private http: HttpClient) {}
 

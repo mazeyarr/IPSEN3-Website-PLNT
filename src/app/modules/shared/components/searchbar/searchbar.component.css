@@ -60,3 +60,11 @@ input[type=text]:focus:not([readonly]){
     font-size: 1.0em !important;
   }
 }
+
+
+.loader {
+  text-align: center;
+  font-size: 1.4em;
+  color: white;
+  margin-top: 5%;
+}

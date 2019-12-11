@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {ProjectService} from './project.service';
+import {SearchService} from './search.service';
 
 @Component({
   selector: 'app-searchbar',
@@ -14,7 +14,7 @@ export class SearchbarComponent implements OnInit {
   @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef; // search result
   listOfProjects: object[];
 
-  constructor(private searchbarService: ProjectService) { }
+  constructor(private searchbarService: SearchService) { }
 
   ngOnInit() {
   }
