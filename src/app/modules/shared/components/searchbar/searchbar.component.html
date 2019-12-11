@@ -20,6 +20,7 @@
       aria-describedby="button-addon2"
       (keydown.enter)="onFindProjectWithProjectName()"
       #projectNameInput>
+    <!--todo: ROUTER LINK TO PROJECTS-->
     <!-- END INPUT FIELD -->
 
     <!-- SEARCH BUTTON -->
@@ -31,15 +32,12 @@
         class="m-0 px-3 py-2 rounded-corners-right"
         type="button"
         id="button-addon2"
+        routerLink="projects"
         (click)="onFindProjectWithProjectName()"
         mdbWavesEffect>Zoeken</button>
     </div>
     <!-- END SEARCH BUTTON -->
 
-  </div>
-  <!-- END FORM -->
-  <div class="spinner-border loader" role="status" *ngIf="isFetching">
-    <span class="sr-only">Loading...</span>
   </div>
 
 </div>

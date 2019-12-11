@@ -25,7 +25,7 @@ import { ProjectModule } from '../project/project.module';
     ProjectModule
   ],
   entryComponents: [],
-  providers: []
+  providers: [
     CommonModule,
     MDBRootModule
   ]
