@@ -3,7 +3,7 @@ export interface ProjectModel {
   title: string;
   language: string;
   tags: string;
-  catagory: string;
+  category: string;
   fieldOfStudy: string;
   study: string;
   createdUserId: number;

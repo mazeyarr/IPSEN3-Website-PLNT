@@ -18,9 +18,8 @@
       placeholder="Zoek voor een project"
       aria-label="Zoek voor projecten"
       aria-describedby="button-addon2"
-      (keydown.enter)="onFindProjectWithProjectName()"
-      #projectNameInput>
-    <!--todo: ROUTER LINK TO PROJECTS-->
+      (keydown.enter)="pushSearchResultToProjectComponent()"
+      #projectNameInput> <!--todo: ROUTER LINK TO PROJECTS-->
     <!-- END INPUT FIELD -->
 
     <!-- SEARCH BUTTON -->
@@ -33,7 +32,7 @@
         type="button"
         id="button-addon2"
         routerLink="projects"
-        (click)="onFindProjectWithProjectName()"
+        (click)="pushSearchResultToProjectComponent()"
         mdbWavesEffect>Zoeken</button>
     </div>
     <!-- END SEARCH BUTTON -->

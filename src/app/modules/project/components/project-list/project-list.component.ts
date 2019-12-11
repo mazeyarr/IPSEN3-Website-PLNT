@@ -1,69 +1,61 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild, HostListener, AfterViewInit} from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnInit,
+  ViewChild,
+  HostListener,
+  AfterViewInit,
+  Injectable,
+  Output,
+  Input,
+  EventEmitter
+} from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
+import {DataService} from '../../../shared/components/searchbar/data.service';
+import {SearchService} from '../../../shared/components/searchbar/search.service';
+import {ProjectModel} from '../../../../models/project.model';
 
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.css']
+  styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit {
+  searchResult: string;
+  listOfProjects: ProjectModel[] = [];
+
+  constructor(private cdRef: ChangeDetectorRef, private data: DataService, private searchService: SearchService) { }
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
+
   elements: any = [];
   previous: any = [];
-  headElements = ['title', 'category', 'field of study', 'study', 'language', 'likes'];
 
-  constructor(private cdRef: ChangeDetectorRef) { }
+  headElements = ['title', 'category', 'field of study', 'study', 'language', 'Likes'];
 
-  projectList: Array<any> = [
-      { id: 1, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 2, title: 'test fafa', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 3, title: 'test dwadawd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test dwada', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test dbgdg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test vdxgesg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test bfxhrd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test bfxh', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test hrdh', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test gegsd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test nfgjtfj', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test ggsrdg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test hrdhdr', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test odwadject', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-      { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 1, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 2, title: 'test fafa', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 3, title: 'test dwadawd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test dwada', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test dbgdg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test vdxgesg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test bfxhrd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test bfxh', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test hrdh', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test gegsd', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test nfgjtfj', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test ggsrdg', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test hrdhdr', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test odwadject', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-    { id: 4, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
-  ];
+
+  // projectList: Array<any> = [
+  //     { id: 1, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+  // ];
 
   ngOnInit() {
-    for (const project of this.projectList) {
-      this.elements.push({title: project.title, category: project.category, fieldOfStudy: project.fieldOfStudy, study: project.study,
-        language: project.language, likes: project.likes});
-    }
+    this.data.currentSearchResult.subscribe(message => {
+      this.searchResult = message;
+
+      this.searchService.fetchProjects(this.searchResult).subscribe(projects => {
+        this.listOfProjects = projects;
+        // console.log(this.listOfProjects);
+
+        for (let project of projects) {
+          // console.log(project.title);
+          this.elements.push({title: project.title, category: project.category, fieldOfStudy: project.fieldOfStudy, study: project.study,
+            language: project.language});
+        }
+
+        // console.log(this.elements);
+      });
+    });
 
     this.mdbTable.setDataSource(this.elements);
     this.elements = this.mdbTable.getDataSource();
@@ -77,4 +69,6 @@ export class ProjectListComponent implements OnInit {
     this.mdbTablePagination.calculateLastItemIndex();
     this.cdRef.detectChanges();
   }
+
+
 }

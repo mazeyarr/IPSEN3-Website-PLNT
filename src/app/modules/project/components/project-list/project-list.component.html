@@ -11,13 +11,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let el of elements; let i = index">
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.title}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.category}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fieldOfStudy}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.study}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.language}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><app-like></app-like></td>
+        <tr *ngFor="let el of elements">
+          <td>{{el.title}}</td>
+          <td>{{el.category}}</td>
+          <td>{{el.fieldOfStudy}}</td>
+          <td>{{el.study}}</td>
+          <td>{{el.language}}</td>
+          <td><app-like></app-like></td>
         </tr>
         </tbody>
         <tfoot class="grey lighten-5 w-100">
@@ -31,4 +31,13 @@
     </div>
   </div>
 </div>
+
+<!--<tr *ngFor="let el of elements; let i = index">-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.title}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.category}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fieldOfStudy}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.study}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.language}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"><app-like></app-like></td>-->
+<!--</tr>-->
 <!-- Editable table -->

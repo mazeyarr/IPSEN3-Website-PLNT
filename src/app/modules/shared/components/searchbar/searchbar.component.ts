@@ -1,10 +1,11 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {SearchService} from './search.service';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { ProjectListComponent } from '../../../project/components/project-list/project-list.component';
+import {DataService} from './data.service';
 
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchbar.component.html',
-  styleUrls: ['./searchbar.component.css']
+  styleUrls: ['./searchbar.component.css'],
 })
 
 /**
@@ -12,22 +13,20 @@ import {SearchService} from './search.service';
  */
 export class SearchbarComponent implements OnInit {
   @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef; // search result
-  listOfProjects: object[];
+  searchResult: string;
 
-  constructor(private searchbarService: SearchService) { }
+  constructor(private data: DataService) { }
 
   ngOnInit() {
+    this.data.currentSearchResult.subscribe(message => this.searchResult = message);
   }
 
   /**
    * @author Jesse Minneboo
-   * Receives all projects with a search result param
+   * pushes search result to project list componeent
    */
-  private onFindProjectWithProjectName() {
-    this.searchbarService.fetchProjects(this.projectNameInput.nativeElement.value).subscribe(projects => {
-      this.listOfProjects = projects;
-      console.log(this.listOfProjects);
-    });
+  private pushSearchResultToProjectComponent() {
+    this.data.changeMessage(this.projectNameInput.nativeElement.value);
   }
 
 }
