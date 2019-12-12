@@ -1,6 +1,7 @@
 <!-- Editable table -->
 <div class="card">
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Zoek resultaten</h3>
+  <div *ngIf=""><h3 class="card-header text-center font-weight-bold text-uppercase py-4">Zoek resultaten</h3></div>
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4" #isEmpty></h3>
   <div class="card-body">
     <div id="table" class="table-editable">
       <table mdbTable #tableEl="mdbTable" class="z-depth-1 table table-bordered table-responsive-md table-striped text-center">

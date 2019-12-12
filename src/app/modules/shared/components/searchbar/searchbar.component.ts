@@ -1,6 +1,6 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import { ProjectListComponent } from '../../../project/components/project-list/project-list.component';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from './data.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-searchbar',
@@ -15,7 +15,7 @@ export class SearchbarComponent implements OnInit {
   @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef; // search result
   searchResult: string;
 
-  constructor(private data: DataService) { }
+  constructor(private data: DataService, private router: Router) { }
 
   ngOnInit() {
     this.data.currentSearchResult.subscribe(message => this.searchResult = message);
@@ -23,10 +23,11 @@ export class SearchbarComponent implements OnInit {
 
   /**
    * @author Jesse Minneboo
-   * pushes search result to project list componeent
+   * pushes search result to project list component
    */
   private pushSearchResultToProjectComponent() {
     this.data.changeMessage(this.projectNameInput.nativeElement.value);
+    this.router.navigateByUrl('/projects');
   }
 
 }

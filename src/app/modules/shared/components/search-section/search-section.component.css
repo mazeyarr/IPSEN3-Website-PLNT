@@ -19,9 +19,7 @@ p{
 .background {
   background: #5bc787 url("../../../../../assets/images/background-piece.png") repeat;
   text-align: center;
-  padding: 12vh 0;
-  margin: 5%;
-  border-radius: 10px;
+  padding: 20vh 5%;
 }
 
 .background-searchbar {
@@ -35,10 +33,5 @@ p{
 
   p{
     font-size: 1.0em;
-  }
-
-  .background {
-    margin: 5% 0%;
-    padding: 12vh 5%;
   }
 }

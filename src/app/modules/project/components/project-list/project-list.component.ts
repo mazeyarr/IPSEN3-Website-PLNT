@@ -24,6 +24,7 @@ import {ProjectModel} from '../../../../models/project.model';
 export class ProjectListComponent implements OnInit {
   searchResult: string;
   listOfProjects: ProjectModel[] = [];
+  listIsEmpty: boolean;
 
   constructor(private cdRef: ChangeDetectorRef, private data: DataService, private searchService: SearchService) { }
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -32,7 +33,7 @@ export class ProjectListComponent implements OnInit {
   elements: any = [];
   previous: any = [];
 
-  headElements = ['title', 'category', 'field of study', 'study', 'language', 'Likes'];
+  headElements = ['Titel', 'Categorie', 'Vak', 'Opleiding', 'Taal', 'Likes'];
 
 
   // projectList: Array<any> = [
@@ -40,21 +41,23 @@ export class ProjectListComponent implements OnInit {
   // ];
 
   ngOnInit() {
+    this.listIsEmpty = true;
+
     this.data.currentSearchResult.subscribe(message => {
       this.searchResult = message;
 
       this.searchService.fetchProjects(this.searchResult).subscribe(projects => {
         this.listOfProjects = projects;
-        // console.log(this.listOfProjects);
 
         for (let project of projects) {
-          // console.log(project.title);
           this.elements.push({title: project.title, category: project.category, fieldOfStudy: project.fieldOfStudy, study: project.study,
             language: project.language});
         }
-
-        // console.log(this.elements);
       });
+
+      if (this.listOfProjects != null) {
+        this.listIsEmpty = false;
+      }
     });
 
     this.mdbTable.setDataSource(this.elements);
