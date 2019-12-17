@@ -13,8 +13,9 @@ export class SearchService {
    * @param projectName name of projects
    */
   fetchProjects(projectName: string) {
+
     let searchParams = new HttpParams();
-    searchParams = searchParams.append('searchResult', projectName);
+    searchParams = searchParams.append('searchString', projectName);
     return this.http
       .get<{ [key: string]: ProjectModel }>(
         'http://localhost:9000/api/project/search',
@@ -27,6 +28,7 @@ export class SearchService {
               projectArray.push({...responseData[key], id: key});
             }
           }
+          console.log(projectArray);
           return projectArray;
         })
       );
