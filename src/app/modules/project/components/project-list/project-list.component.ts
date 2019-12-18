@@ -50,6 +50,7 @@ export class ProjectListComponent implements OnInit {
         this.listOfProjects = projects;
 
         for (let project of projects) {
+          //TODO: pagination toevoegen
           this.elements.push({title: project.title, grade: project.grade, fieldOfStudy: project.education.title,
           study: project.education.institute.name, language: project.language});
         }
