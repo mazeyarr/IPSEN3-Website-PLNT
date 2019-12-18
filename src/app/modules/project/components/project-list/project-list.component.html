@@ -1,6 +1,6 @@
 <!-- Editable table -->
 <div class="card">
-  <div *ngIf=""><h3 class="card-header text-center font-weight-bold text-uppercase py-4">Zoek resultaten</h3></div>
+  <div><h3 class="card-header text-center font-weight-bold text-uppercase py-4">Zoek resultaten</h3></div>
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4" #isEmpty></h3>
   <div class="card-body">
     <div id="table" class="table-editable">
@@ -14,7 +14,7 @@
         <tbody>
         <tr *ngFor="let el of elements">
           <td>{{el.title}}</td>
-          <td>{{el.category}}</td>
+          <td>{{el.grade}}</td>
           <td>{{el.fieldOfStudy}}</td>
           <td>{{el.study}}</td>
           <td>{{el.language}}</td>
@@ -35,7 +35,7 @@
 
 <!--<tr *ngFor="let el of elements; let i = index">-->
 <!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.title}}</td>-->
-<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.category}}</td>-->
+<!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.grade}}</td>-->
 <!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.fieldOfStudy}}</td>-->
 <!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.study}}</td>-->
 <!--  <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.language}}</td>-->

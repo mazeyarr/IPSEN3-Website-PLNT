@@ -33,11 +33,11 @@ export class ProjectListComponent implements OnInit {
   elements: any = [];
   previous: any = [];
 
-  headElements = ['Titel', 'Categorie', 'Vak', 'Opleiding', 'Taal', 'Likes'];
+  headElements = ['Titel', 'cijfer', 'Vak', 'Opleiding', 'Taal', 'Likes'];
 
 
   // projectList: Array<any> = [
-  //     { id: 1, title: 'test project', category: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
+  //     { id: 1, title: 'test project', grade: '9+', fieldOfStudy: 'psygologie', study: 'HSLeiden', language: 'nederlands', likes: 12 },
   // ];
 
   ngOnInit() {
@@ -50,8 +50,8 @@ export class ProjectListComponent implements OnInit {
         this.listOfProjects = projects;
 
         for (let project of projects) {
-          this.elements.push({title: project.title, category: project.category, fieldOfStudy: project.fieldOfStudy, study: project.study,
-            language: project.language});
+          this.elements.push({title: project.title, grade: project.grade, fieldOfStudy: project.education.title,
+          study: project.education.institute.name, language: project.language});
         }
       });
 
