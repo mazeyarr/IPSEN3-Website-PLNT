@@ -38,5 +38,9 @@ export class ApiService {
     return this.http.put(this.getApiUrl() + options.endpoint, options.body);
   }
 
+  delete(options: IApiOptions): Observable<any> {
+    return this.http.delete(this.getApiUrl() + options.endpoint, options.body);
+  }
+
   getApiUrl = (): string => ApiService.baseUrl + ApiService.prefix;
 }
