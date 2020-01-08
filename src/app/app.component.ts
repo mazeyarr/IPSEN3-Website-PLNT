@@ -12,12 +12,11 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'website';
 
-  constructor(private auth: AuthService) {
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    this.auth.login();
   }
 
   getAnimationData(routerOutlet: RouterOutlet) {

@@ -31,7 +31,9 @@ export class ApiService {
   }
 
   post(options: IApiOptions): Observable<any> {
-    return this.http.post(this.getApiUrl() + options.endpoint, options.body);
+    return this.http.post(this.getApiUrl() + options.endpoint, options.body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    });
   }
 
   put(options: IApiOptions): Observable<any> {
