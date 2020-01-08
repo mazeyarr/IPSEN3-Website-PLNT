@@ -31,11 +31,17 @@ export class ApiService {
   }
 
   post(options: IApiOptions): Observable<any> {
-    return this.http.post(this.getApiUrl() + options.endpoint, options.body);
+    return this.http.post(this.getApiUrl() + options.endpoint, options.body, {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    });
   }
 
   put(options: IApiOptions): Observable<any> {
     return this.http.put(this.getApiUrl() + options.endpoint, options.body);
+  }
+
+  delete(options: IApiOptions): Observable<any> {
+    return this.http.delete(this.getApiUrl() + options.endpoint, options.body);
   }
 
   getApiUrl = (): string => ApiService.baseUrl + ApiService.prefix;
