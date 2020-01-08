@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 interface IApiOptions {
   auth?: boolean;
   endpoint?: string;
-  body?: any;
+  body?: {
+    headers?: HttpHeaders | {
+      [header: string]: string | string[];
+    };
+    observe?: any;
+    params?: HttpParams | {
+      [param: string]: string | string[];
+    };
+    [key: string]: any;
+  };
 }
 
 @Injectable({
@@ -17,7 +26,7 @@ export class ApiService {
   private static readonly baseUrl = 'http://localhost:9000';
   private static readonly prefix = '/api';
 
-  get(options: IApiOptions): Observable<any> {
+  get(options: IApiOptions, ): Observable<any> {
     return this.http.get(this.getApiUrl() + options.endpoint, options.body);
   }
 
@@ -29,6 +38,10 @@ export class ApiService {
 
   put(options: IApiOptions): Observable<any> {
     return this.http.put(this.getApiUrl() + options.endpoint, options.body);
+  }
+
+  delete(options: IApiOptions): Observable<any> {
+    return this.http.delete(this.getApiUrl() + options.endpoint, options.body);
   }
 
   getApiUrl = (): string => ApiService.baseUrl + ApiService.prefix;
