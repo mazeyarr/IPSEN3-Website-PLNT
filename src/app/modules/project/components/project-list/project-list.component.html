@@ -6,25 +6,27 @@
     <div id="table" class="table-editable">
       <table mdbTable #tableEl="mdbTable" class="z-depth-1 table table-bordered table-responsive-md table-striped text-center">
         <thead>
-        <tr>
-          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
-          </th>
-        </tr>
+          <tr>
+            <th *ngFor="let header of tableHeaders;" scope="col">
+              {{header}}
+            </th>
+          </tr>
         </thead>
+
         <tbody>
-        <tr *ngFor="let el of elements">
-          <td>{{el.title}}</td>
-          <td>{{el.grade}}</td>
-          <td>{{el.fieldOfStudy}}</td>
-          <td>{{el.study}}</td>
-          <td>{{el.language}}</td>
-          <td><app-like></app-like></td>
-        </tr>
+          <tr *ngFor="let project of projects">
+            <td>{{project.title}}</td>
+            <td>{{project.language}}</td>
+            <td>{{project.grade}}</td>
+            <td>{{project.education.title}}</td>
+            <td>{{project.education.institute.name}}</td>
+            <td>{{ project.hasLikes.LIKE.length }}</td>
+          </tr>
         </tbody>
         <tfoot class="grey lighten-5 w-100">
         <tr>
           <td colspan="6">
-            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+            <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="projects"></mdb-table-pagination>
           </td>
         </tr>
         </tfoot>

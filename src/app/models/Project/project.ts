@@ -90,4 +90,8 @@ export class Project {
     this.hasTotalLikes = project.hasTotalLikes;
     this.hasResource = project.hasResource;
   }
+
+  static tableHeadProperties(): string[] {
+    return ['Titel', 'Taal', 'Cijfers', 'Vak', 'Instelling', 'Likes'];
+  }
 }

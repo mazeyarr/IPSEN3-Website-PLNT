@@ -1,38 +1,37 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import {ProjectModel} from '../../../../models/project.model';
 import { IProject, Project } from '../../../../models/Project/project';
+import { ApiService } from '../../services/api/api.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Injectable({providedIn: 'root'})
 export class SearchService {
   private searchResults: Project[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
 
   /**
    * @author Jesse Minneboo
    * @param title name of projects
    */
   searchProjectsByTitle(title: string) {
-    let searchParams = new HttpParams();
-    searchParams = searchParams.append('searchString', title);
-    return this.http
-      .get<{ [key: string]: ProjectModel }>(
-        'http://localhost:9000/api/project/search',
-        { params: searchParams }
-        )
-      .pipe(map(responseData => {
-          const projectArray = [];
-          for (const key in responseData) {
-            if (responseData.hasOwnProperty(key)) {
-              projectArray.push({...responseData[key], id: key});
-            }
-          }
-          console.log(projectArray);
-          return projectArray;
-        })
-      );
+    this.apiService.get({
+      auth: true,
+      endpoint: '/project/search',
+      body: {
+        params: new HttpParams()
+          .set('searchString', title)
+          .set('caseSensitive', 'false')
+      }
+    }).pipe(
+      tap((data => console.log(data)))
+    ).subscribe();
+  }
+
+  isSearchResultsEmpty(): boolean {
+    return this.searchResults.length < 1;
   }
 
   getSearchResults(): Project[] {

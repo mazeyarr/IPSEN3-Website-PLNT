@@ -16,7 +16,7 @@
       placeholder="Zoek voor een project"
       aria-label="Zoek voor projecten"
       aria-describedby="button-addon2"
-      (keydown.enter)="pushSearchResultToProjectComponent()"
+      (keydown.enter)="searchBarOnEnter()"
       #projectNameInput
     />
     <!-- END INPUT FIELD -->
@@ -30,7 +30,7 @@
         class="m-0 px-3 py-2 rounded-corners-right"
         type="button"
         id="button-addon2"
-        (click)="pushSearchResultToProjectComponent()"
+        (click)="btnSearchOnClick()"
         mdbWavesEffect
       >
         Zoeken

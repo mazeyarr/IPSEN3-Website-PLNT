@@ -21,13 +21,20 @@ interface IApiOptions {
   providedIn: 'root'
 })
 export class ApiService {
-
   constructor(private http: HttpClient) { }
   private static readonly baseUrl = 'http://localhost:9000';
   private static readonly prefix = '/api';
 
   get(options: IApiOptions, ): Observable<any> {
-    return this.http.get(this.getApiUrl() + options.endpoint, options.body);
+    options.body.headers = {
+      isAuth: options.auth ? 'true' : 'false'
+    };
+
+    try {
+      return this.http.get(this.getApiUrl() + options.endpoint, options.body);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   post(options: IApiOptions): Observable<any> {
