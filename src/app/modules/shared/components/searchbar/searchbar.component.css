@@ -9,13 +9,12 @@ Date: 28 November 2019
 }
 
 .rounded-corners-left{
-  border-radius: 10px 0 0 10px !important;
+  border-radius: 10px 0 0 10px;
 }
 
 .rounded-corners-right{
-  border-radius: 0 10px 10px 0 !important;
+  border-radius: 0 10px 10px 0;
 }
-
 
 /* Form */
 .form-control{
@@ -36,7 +35,6 @@ Date: 28 November 2019
   box-shadow: 0 8px 6px -6px #4d5f64;
 }
 
-
 /* Input field overrides */
 input[type="text"]{
   margin: 0 auto;
@@ -45,8 +43,8 @@ input[type="text"]{
 
 /*"disabled" the blue color on the input field*/
 input[type=text]:focus:not([readonly]){
-  border-bottom: 0px solid white;
-  box-shadow: 0 0px 0 0 white;
+  border-bottom: 0 solid white;
+  box-shadow: 0 0 0 0 white;
 }
 
 /* Responsive */
@@ -60,7 +58,6 @@ input[type=text]:focus:not([readonly]){
     font-size: 1.0em !important;
   }
 }
-
 
 .loader {
   text-align: center;

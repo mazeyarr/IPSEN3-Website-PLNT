@@ -1,9 +1,7 @@
 <!-- Search bar component -->
 <div class="container">
-
   <!-- FORM -->
   <div class="md-form input-group mb-3">
-
     <!-- ICON -->
     <div class="input-group-prepend white-background rounded-corners-left">
       <span class="input-group-text md-addon"><i class="fas fa-search"></i></span>
@@ -19,7 +17,8 @@
       aria-label="Zoek voor projecten"
       aria-describedby="button-addon2"
       (keydown.enter)="pushSearchResultToProjectComponent()"
-      #projectNameInput> <!--todo: ROUTER LINK TO PROJECTS-->
+      #projectNameInput
+    />
     <!-- END INPUT FIELD -->
 
     <!-- SEARCH BUTTON -->
@@ -32,10 +31,15 @@
         type="button"
         id="button-addon2"
         (click)="pushSearchResultToProjectComponent()"
-        mdbWavesEffect>Zoeken</button>
+        mdbWavesEffect
+      >
+        Zoeken
+      </button>
     </div>
     <!-- END SEARCH BUTTON -->
-
   </div>
-
 </div>
+
+
+<!-- TODO: Code cleanup (self closing elements) -->
+<!-- TODO: Code cleanup: remove unnessecary attributes -->

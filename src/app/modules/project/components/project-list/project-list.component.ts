@@ -14,6 +14,7 @@ import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-
 import {DataService} from '../../../shared/components/searchbar/data.service';
 import {SearchService} from '../../../shared/components/searchbar/search.service';
 import {ProjectModel} from '../../../../models/project.model';
+import { IProject, Project } from '../../../../models/Project/project';
 
 
 @Component({
@@ -22,8 +23,8 @@ import {ProjectModel} from '../../../../models/project.model';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit {
-  searchResult: string;
-  listOfProjects: ProjectModel[] = [];
+  searchResult: string; // TODO: remove
+  listOfProjects: Project[];
   listIsEmpty: boolean;
 
   constructor(private cdRef: ChangeDetectorRef, private data: DataService, private searchService: SearchService) { }
@@ -46,11 +47,11 @@ export class ProjectListComponent implements OnInit {
     this.data.currentSearchResult.subscribe(message => {
       this.searchResult = message;
 
-      this.searchService.fetchProjects(this.searchResult).subscribe(projects => {
+      this.searchService.searchProjectsByTitle(this.searchResult).subscribe(projects => {
         this.listOfProjects = projects;
 
-        for (let project of projects) {
-          //TODO: pagination toevoegen
+        for (const project of projects) {
+          // TODO: pagination toevoegen
           this.elements.push({title: project.title, grade: project.grade, fieldOfStudy: project.education.title,
           study: project.education.institute.name, language: project.language});
         }
