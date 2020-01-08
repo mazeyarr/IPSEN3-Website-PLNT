@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../../auth/services/auth.service';
 
 @Component({
@@ -7,6 +7,7 @@ import {AuthService} from '../../../auth/services/auth.service';
   styleUrls: ['./view-projects.component.css']
 })
 export class ViewProjectsComponent implements OnInit {
+  @Input() searchResultFromSearchBar: string; // CHILD
 
   constructor(private authService: AuthService) { }
 

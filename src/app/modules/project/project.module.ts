@@ -7,6 +7,10 @@ import { CreateProjectComponent } from './pages/create-project/create-project.co
 import { ViewProjectComponent } from './pages/view-project/view-project.component';
 import { ViewProjectsComponent } from './pages/view-projects/view-projects.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
+import { ProjectListComponent } from './components/project-list/project-list.component';
+import {ButtonsModule, IconsModule, TableModule} from 'angular-bootstrap-md';
+import {FormsModule} from '@angular/forms';
+import { LikeComponent } from './components/like/like.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +19,8 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
     ViewProjectComponent,
     ViewProjectsComponent,
     ProjectCardComponent,
+    ProjectListComponent,
+    LikeComponent
   ],
   exports: [
     ProjectCardComponent
@@ -22,6 +28,10 @@ import { ProjectCardComponent } from './components/project-card/project-card.com
   imports: [
     RouterModule.forChild(projectRoutes),
     CommonModule,
+    IconsModule,
+    ButtonsModule,
+    TableModule,
+    FormsModule,
   ]
 })
 export class ProjectModule { }
