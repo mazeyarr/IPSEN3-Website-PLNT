@@ -9,7 +9,7 @@ import {MDBRootModule} from 'angular-bootstrap-md';
 
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectModule } from '../project/project.module';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { ProjectModule } from '../project/project.module';
     CommonModule,
     MDBBootstrapModule.forRoot(),
     ReactiveFormsModule,
-    ProjectModule
+    ProjectModule,
+    FormsModule
   ],
   entryComponents: [],
   providers: [

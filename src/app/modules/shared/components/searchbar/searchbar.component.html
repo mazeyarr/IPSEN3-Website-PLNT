@@ -10,14 +10,13 @@
 
     <!-- INPUT FIELD -->
     <input
-      id="typewriter"
       type="text"
       class="form-control"
       placeholder="Zoek voor een project"
       aria-label="Zoek voor projecten"
       aria-describedby="button-addon2"
+      [(ngModel)]="searchString"
       (keydown.enter)="searchBarOnEnter()"
-      #projectNameInput
     />
     <!-- END INPUT FIELD -->
 

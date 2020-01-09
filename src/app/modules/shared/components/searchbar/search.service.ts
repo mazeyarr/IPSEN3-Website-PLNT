@@ -5,6 +5,7 @@ import {ProjectModel} from '../../../../models/project.model';
 import { IProject, Project } from '../../../../models/Project/project';
 import { ApiService } from '../../services/api/api.service';
 import { AuthService } from '../../../auth/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class SearchService {
@@ -12,37 +13,27 @@ export class SearchService {
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
 
-  /**
-   * @author Jesse Minneboo
-   * @param title name of projects
-   */
-  searchProjectsByTitle(title: string) {
-    this.apiService.get({
+  searchProjectsByTitle(title: string, isCaseSensitive: boolean = false): Observable<Project[]> {
+    return this.apiService.get({
       auth: true,
       endpoint: '/project/search',
       body: {
         params: new HttpParams()
           .set('searchString', title)
-          .set('caseSensitive', 'false')
+          .set('caseSensitive', String(isCaseSensitive))
       }
     }).pipe(
-      tap((data => console.log(data)))
-    ).subscribe();
-  }
-
-  isSearchResultsEmpty(): boolean {
-    return this.searchResults.length < 1;
+      map(
+        (projects: IProject[]) => projects.map((project: IProject) => new Project(project))
+      )
+    );
   }
 
   getSearchResults(): Project[] {
     return this.searchResults;
   }
 
-  setSearchResults(searchResults: IProject[]) {
-    searchResults.forEach((project: IProject) => {
-      this.searchResults.push(
-        new Project(project)
-      );
-    });
+  setSearchResults(projects: Project[]): void {
+    this.searchResults = projects;
   }
 }

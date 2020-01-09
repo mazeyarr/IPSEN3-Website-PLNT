@@ -2,6 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {DataService} from './data.service';
 import {Router} from '@angular/router';
 import { SearchService } from './search.service';
+import { Project } from '../../../../models/Project/project';
 
 @Component({
   selector: 'app-searchbar',
@@ -13,36 +14,29 @@ import { SearchService } from './search.service';
  * @author Jesse Minneboo
  */
 export class SearchbarComponent implements OnInit {
-  @ViewChild('projectNameInput', {static: true}) projectNameInput: ElementRef; // search result
-  searchResult: string;
+  searchString: string;
 
-  constructor(private searchService: SearchService, private router: Router) { }
-
-  ngOnInit() {
-    // this.searchService.currentSearchResult.subscribe(message => this.searchResult = message);
+  constructor(private searchService: SearchService, private router: Router) {
+    this.searchString = '';
   }
 
-  /**
-   * @author Jesse Minneboo
-   * pushes search result to project list component
-   */
-  private pushSearchResultToProjectComponent() {
-    // this.searchService.changeMessage(this.projectNameInput.nativeElement.value);
-    this.router.navigateByUrl('/projects');
+  ngOnInit() {
   }
 
   private doSearch(searchString: string) {
-    // TODO: call search service
-    this.searchService.searchProjectsByTitle(searchString);
-    // TODO: search service set search results
+    this.searchService.searchProjectsByTitle(searchString)
+      .subscribe((projects: Project[]) => {
+        this.searchService.setSearchResults(projects);
+        this.router.navigateByUrl('/projects');
+      });
   }
 
   private btnSearchOnClick() {
-    this.doSearch('');
+    this.doSearch(this.searchString);
   }
 
   private searchBarOnEnter() {
-    this.doSearch('');
+    this.doSearch(this.searchString);
   }
 
 }

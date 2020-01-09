@@ -22,13 +22,11 @@ interface IApiOptions {
 })
 export class ApiService {
   constructor(private http: HttpClient) { }
-  private static readonly baseUrl = 'http://localhost:9000';
+  private static readonly baseUrl = 'http://localhost:9000'; // TODO: to env!
   private static readonly prefix = '/api';
 
-  get(options: IApiOptions, ): Observable<any> {
-    options.body.headers = {
-      isAuth: options.auth ? 'true' : 'false'
-    };
+  get(options: IApiOptions): Observable<any> {
+    options = this.setAuthHeaderIfNeeded(options);
 
     try {
       return this.http.get(this.getApiUrl() + options.endpoint, options.body);
@@ -38,18 +36,46 @@ export class ApiService {
   }
 
   post(options: IApiOptions): Observable<any> {
-    return this.http.post(this.getApiUrl() + options.endpoint, options.body, {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    });
+    options = this.setAuthHeaderIfNeeded(options);
+
+    try {
+      return this.http.post(this.getApiUrl() + options.endpoint, options.body, {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      });
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   put(options: IApiOptions): Observable<any> {
-    return this.http.put(this.getApiUrl() + options.endpoint, options.body);
+    options = this.setAuthHeaderIfNeeded(options);
+
+    try {
+      return this.http.put(this.getApiUrl() + options.endpoint, options.body);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   delete(options: IApiOptions): Observable<any> {
-    return this.http.delete(this.getApiUrl() + options.endpoint, options.body);
+    options = this.setAuthHeaderIfNeeded(options);
+
+    try {
+      return this.http.delete(this.getApiUrl() + options.endpoint, options.body);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   getApiUrl = (): string => ApiService.baseUrl + ApiService.prefix;
+
+  setAuthHeaderIfNeeded(options: IApiOptions): IApiOptions {
+    options.body.headers = {
+      auth: options.auth
+        ? 'true'
+        : 'false'
+    };
+
+    return options;
+  }
 }
