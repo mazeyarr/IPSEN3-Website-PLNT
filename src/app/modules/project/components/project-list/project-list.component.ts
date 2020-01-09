@@ -3,17 +3,11 @@ import {
   Component,
   OnInit,
   ViewChild,
-  HostListener,
-  AfterViewInit,
-  Injectable,
-  Output,
-  Input,
-  EventEmitter
+  AfterViewInit, HostListener
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import {SearchBarService} from '../../../shared/components/searchbar/searchBar.service';
-import {ProjectModel} from '../../../../models/project.model';
-import { IProject, Project } from '../../../../models/Project/project';
+import { Project } from '../../../../models/Project/project';
 
 
 @Component({
@@ -22,20 +16,25 @@ import { IProject, Project } from '../../../../models/Project/project';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
+
+  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) {
+    this.searchTextWithinResultSet = '';
+  }
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
 
   tableHeaders = Project.tableHeadProperties();
   projects = this.searchService.getSearchResults();
+
+  searchTextWithinResultSet: string;
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
-
-  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) { }
+  @HostListener('input') oninput() {
+    this.searchResultSet();
+  }
 
   ngOnInit() {
-    this.mdbTable.setDataSource(this.projects);
-    this.currentShowing = this.mdbTable.getDataSource();
-    this.previousShowing = this.mdbTable.getDataSource();
+    this.initDataTable();
   }
 
   ngAfterViewInit() {
@@ -46,11 +45,30 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     this.cdRef.detectChanges();
   }
 
+  initDataTable() {
+    this.mdbTable.setDataSource(this.projects);
+    this.currentShowing = this.mdbTable.getDataSource();
+    this.previousShowing = this.mdbTable.getDataSource();
+  }
+
   paginationCheck(rowIndex: number): boolean {
     const NEXT_ROW_INDEX = 1;
 
     return rowIndex + NEXT_ROW_INDEX
       >= this.mdbTablePagination.firstItemIndex
       && rowIndex < this.mdbTablePagination.lastItemIndex;
+  }
+
+  searchResultSet() {
+    const prev = this.mdbTable.getDataSource();
+
+    if (!this.searchTextWithinResultSet) {
+      this.mdbTable.setDataSource(this.previousShowing);
+      this.projects = this.mdbTable.getDataSource();
+    }
+    if (this.searchTextWithinResultSet) {
+      this.projects = this.mdbTable.searchLocalDataBy(this.searchTextWithinResultSet);
+      this.mdbTable.setDataSource(prev);
+    }
   }
 }

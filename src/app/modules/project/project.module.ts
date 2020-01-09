@@ -8,7 +8,7 @@ import { ViewProjectComponent } from './pages/view-project/view-project.componen
 import { ViewProjectsComponent } from './pages/view-projects/view-projects.component';
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
-import {ButtonsModule, IconsModule, TableModule} from 'angular-bootstrap-md';
+import { ButtonsModule, IconsModule, MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
 import {FormsModule} from '@angular/forms';
 import { LikeComponent } from './components/like/like.component';
 
@@ -32,6 +32,7 @@ import { LikeComponent } from './components/like/like.component';
     ButtonsModule,
     TableModule,
     FormsModule,
+    MDBBootstrapModule.forRoot(),
   ]
 })
 export class ProjectModule { }

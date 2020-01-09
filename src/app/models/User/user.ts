@@ -31,4 +31,8 @@ export class User {
     this.jwt = user.jwt;
     this.roles = user.roles;
   }
+
+  getFullname(): string {
+    return `${this.firstname} ${this.lastname}`;
+  }
 }

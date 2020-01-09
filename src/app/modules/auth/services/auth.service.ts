@@ -45,11 +45,6 @@ export class AuthService {
     });
   }
 
-  // register(): User {
-  //   // TODO: Register
-  //   return new User();
-  // }
-
   setAuthenticated(to: boolean) {
     this.isAuthenticated = to;
   }

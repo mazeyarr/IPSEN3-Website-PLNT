@@ -28,8 +28,11 @@
       </li>
     </ul>
     <!-- Links -->
+      <div class="my-0 text-white" *ngIf="authService.isAuthenticated">
+        {{ authService.getAuthUser().getFullname() }}
+      </div>
 
-      <div class="my-0">
+      <div class="my-0" *ngIf="!authService.isAuthenticated">
         <button
           type="button"
           mdbBtn
