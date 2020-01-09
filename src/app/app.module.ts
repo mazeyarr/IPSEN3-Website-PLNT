@@ -11,8 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from './modules/shared/shared.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ProjectModule } from './modules/project/project.module';
-import {DataService} from './modules/shared/components/searchbar/data.service';
-
 
 @NgModule({
   declarations: [
@@ -30,7 +28,7 @@ import {DataService} from './modules/shared/components/searchbar/data.service';
     ProjectModule,
     MDBBootstrapModule.forRoot(),
   ],
-  providers: [DataService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

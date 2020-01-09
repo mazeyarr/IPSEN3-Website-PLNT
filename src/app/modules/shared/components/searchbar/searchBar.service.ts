@@ -8,7 +8,7 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
-export class SearchService {
+export class SearchBarService {
   private searchResults: Project[] = [];
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}

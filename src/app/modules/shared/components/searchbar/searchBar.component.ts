@@ -1,22 +1,21 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DataService} from './data.service';
 import {Router} from '@angular/router';
-import { SearchService } from './search.service';
+import { SearchBarService } from './searchBar.service';
 import { Project } from '../../../../models/Project/project';
 
 @Component({
   selector: 'app-searchbar',
-  templateUrl: './searchbar.component.html',
-  styleUrls: ['./searchbar.component.css'],
+  templateUrl: './searchBar.component.html',
+  styleUrls: ['./searchBar.component.css'],
 })
 
 /**
  * @author Jesse Minneboo
  */
-export class SearchbarComponent implements OnInit {
+export class SearchBarComponent implements OnInit {
   searchString: string;
 
-  constructor(private searchService: SearchService, private router: Router) {
+  constructor(private searchService: SearchBarService, private router: Router) {
     this.searchString = '';
   }
 

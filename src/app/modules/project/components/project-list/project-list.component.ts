@@ -11,8 +11,7 @@ import {
   EventEmitter
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {DataService} from '../../../shared/components/searchbar/data.service';
-import {SearchService} from '../../../shared/components/searchbar/search.service';
+import {SearchBarService} from '../../../shared/components/searchbar/searchBar.service';
 import {ProjectModel} from '../../../../models/project.model';
 import { IProject, Project } from '../../../../models/Project/project';
 
@@ -31,7 +30,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef, private data: DataService, private searchService: SearchService) { }
+  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) { }
 
   ngOnInit() {
     this.mdbTable.setDataSource(this.projects);
