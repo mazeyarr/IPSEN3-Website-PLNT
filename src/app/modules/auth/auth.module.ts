@@ -19,7 +19,7 @@ import {MDBBootstrapModule} from 'angular-bootstrap-md';
     LoginComponent,
     RegisterComponent
   ],
-  entryComponents: [ LoginComponent ],
+  entryComponents: [ LoginComponent, RegisterComponent ],
   providers: [
     AuthService,
     {

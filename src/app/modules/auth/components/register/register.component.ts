@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.validatingForm = new FormGroup({
-      registerFormModalEmail: new FormControl('', Validators.email),
+      registerFormModalEmail: new FormControl('', [Validators.email, Validators.required]),
       registerFormModalPassword: new FormControl('', Validators.required),
       registerFormModalFirstname: new FormControl('', Validators.required),
       registerFormModalLastname: new FormControl('', Validators.required)
@@ -24,7 +24,12 @@ export class RegisterComponent implements OnInit {
   }
 
   btnRegisterClick = async (): Promise<void> => {
-    if (this.registerFormModalEmail.valid && this.registerFormModalPassword.valid) {
+    if (
+      this.registerFormModalEmail.valid &&
+      this.registerFormModalPassword.valid &&
+      this.registerFormModalFirstname.valid &&
+      this.registerFormModalLastname.valid
+    ) {
       await this.authService.register(
         this.registerFormModalEmail.value,
         this.registerFormModalPassword.value,
@@ -39,13 +44,12 @@ export class RegisterComponent implements OnInit {
       if (this.authService.isAuthenticated) {
         this.registerModalRef.hide();
       } else {
-        console.log('SOMETHING WENT WRONG 2 ELECTRIC BOOGALOO');
+        console.log('SOMETHING WENT WRONG');
       }
-
     } else {
-      console.log('SOMETHING WENT WRONG');
+      // todo display error on screen
+      console.log('INPUT INVALID');
     }
-
   }
 
   get registerFormModalEmail() {

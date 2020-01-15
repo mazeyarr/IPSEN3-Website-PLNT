@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ApiService} from '../../shared/services/api/api.service';
 import {IUser, User} from '../../../models/User/user';
-import {catchError, retry} from 'rxjs/operators';
+import {catchError, retry, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 @Injectable({
@@ -58,17 +58,10 @@ export class AuthService {
         endpoint: this.PREFIX + '/create'
       })
         .pipe(
+          tap(data => console.log(data)),
           retry(2),
           catchError(() => of(this.setAuthenticated(false)))
         ).subscribe((user: IUser) => {
-        this.setAuthUser(new User(user));
-
-        this.setAuthToken(
-          this.getAuthUser().jwt
-        );
-
-        this.setAuthenticated(true);
-
         resolve();
       });
     });
