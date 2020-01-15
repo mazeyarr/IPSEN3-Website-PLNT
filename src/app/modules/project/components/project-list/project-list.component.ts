@@ -16,10 +16,12 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
-  @Input() projects: Observable<Project[]>;
+  @Input() obvProjects: Observable<Project[]>;
 
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
+
+  projects: Project[] = [];
 
   tableHeaders = Project.tableHeadProperties();
 
@@ -48,9 +50,13 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   initDataTable() {
-    this.mdbTable.setDataSource(this.projects);
-    this.currentShowing = this.mdbTable.getDataSource();
-    this.previousShowing = this.mdbTable.getDataSource();
+    this.obvProjects.subscribe((projects: Project[]) => {
+      this.projects = projects;
+
+      this.mdbTable.setDataSource(this.projects);
+      this.currentShowing = this.mdbTable.getDataSource();
+      this.previousShowing = this.mdbTable.getDataSource();
+    });
   }
 
   paginationCheck(rowIndex: number): boolean {
@@ -73,6 +79,4 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
       this.mdbTable.setDataSource(prev);
     }
   }
-
-
 }

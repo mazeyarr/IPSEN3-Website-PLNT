@@ -31,7 +31,7 @@
         </thead>
 
         <tbody>
-          <tr *ngFor="let project of projects | async; let i = index;">
+          <tr *ngFor="let project of projects; let i = index;">
             <td *ngIf="paginationCheck(i)">
               {{project.title}}
             </td>
@@ -63,7 +63,7 @@
           <td colspan="6">
             <mdb-table-pagination
               [tableEl]="tableEl"
-              [searchDataSource]="projects"
+              [searchDataSource]="obvProjects"
             >
             </mdb-table-pagination>
           </td>
