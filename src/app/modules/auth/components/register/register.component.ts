@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MDBModalRef} from 'angular-bootstrap-md';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -6,10 +9,58 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  validatingForm: FormGroup;
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(public registerModalRef: MDBModalRef, private authService: AuthService) {
   }
 
+  ngOnInit() {
+    this.validatingForm = new FormGroup({
+      registerFormModalEmail: new FormControl('', Validators.email),
+      registerFormModalPassword: new FormControl('', Validators.required),
+      registerFormModalFirstname: new FormControl('', Validators.required),
+      registerFormModalLastname: new FormControl('', Validators.required)
+    });
+  }
+
+  btnRegisterClick = async (): Promise<void> => {
+    if (this.registerFormModalEmail.valid && this.registerFormModalPassword.valid) {
+      await this.authService.register(
+        this.registerFormModalEmail.value,
+        this.registerFormModalPassword.value,
+        this.registerFormModalFirstname.value,
+        this.registerFormModalLastname.value
+      );
+      await this.authService.login(this.registerFormModalEmail.value, this.registerFormModalPassword.value);
+
+      console.log(this.authService.getAuthUser());
+      console.log(this.authService.isAuthenticated);
+
+      if (this.authService.isAuthenticated) {
+        this.registerModalRef.hide();
+      } else {
+        console.log('SOMETHING WENT WRONG 2 ELECTRIC BOOGALOO');
+      }
+
+    } else {
+      console.log('SOMETHING WENT WRONG');
+    }
+
+  }
+
+  get registerFormModalEmail() {
+    return this.validatingForm.get('registerFormModalEmail');
+  }
+
+  get registerFormModalPassword() {
+    return this.validatingForm.get('registerFormModalPassword');
+  }
+
+  get registerFormModalFirstname() {
+    return this.validatingForm.get('registerFormModalFirstname');
+  }
+
+  get registerFormModalLastname() {
+    return this.validatingForm.get('registerFormModalLastname');
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MDBModalRef} from 'angular-bootstrap-md';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
@@ -11,8 +11,8 @@ import {AuthService} from '../../services/auth.service';
 export class LoginComponent implements OnInit {
   validatingForm: FormGroup;
 
-  constructor(public loginModalRef: MDBModalRef, private authService: AuthService) {}
-
+  constructor(public loginModalRef: MDBModalRef, private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.validatingForm = new FormGroup({
