@@ -3,7 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewInit, HostListener
+  AfterViewInit, HostListener, Input
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import {SearchBarService} from '../../../shared/components/searchbar/searchBar.service';
@@ -16,19 +16,21 @@ import { Project } from '../../../../models/Project/project';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
+  @Input() projects: Project[];
 
-  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) {
-    this.searchTextWithinResultSet = '';
-  }
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
 
   tableHeaders = Project.tableHeadProperties();
-  projects = this.searchService.getSearchResults();
 
   searchTextWithinResultSet: string;
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
+
+  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) {
+    this.searchTextWithinResultSet = '';
+  }
+
   @HostListener('input') oninput() {
     this.searchResultSet();
   }

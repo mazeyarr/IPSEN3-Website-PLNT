@@ -17,7 +17,11 @@
         </a>
       </li>
 
-      <li class="nav-item" routerLinkActive="active">
+      <li
+        class="nav-item"
+        routerLinkActive="active"
+        *ngIf="authService.isAuthenticated"
+      >
         <a
           routerLink="/projects"
           class="nav-link waves-light"
