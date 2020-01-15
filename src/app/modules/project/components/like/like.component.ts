@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Project} from '../../../../models/Project/project';
+import {Router} from '@angular/router';
+import {LikeService} from './like.service';
 
 @Component({
   selector: 'app-like',
@@ -6,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./like.component.css']
 })
 export class LikeComponent implements OnInit {
+  constructor(private likeService: LikeService, private router: Router) { }
 
-  constructor() { }
-
-  ngOnInit() {
+  likeProject($id: number) {
+    this.likeService.likeProjectById($id)
+      .subscribe((project: Project[]) => {
+        this.likeService.setLikeResults(project);
+        this.router.navigateByUrl('/projects');
+      });
   }
 
-  like(id: number) {
-    alert('sorry, liken kan nog niet');
+  ngOnInit() {
   }
 }

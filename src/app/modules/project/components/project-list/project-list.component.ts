@@ -3,11 +3,13 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewInit, HostListener, Input
+  AfterViewInit, HostListener, Input, Output, EventEmitter,
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import { Project } from '../../../../models/Project/project';
 import { Observable } from 'rxjs';
+import { LikeComponent } from '../like/like.component';
+import {ProjectService} from '../../services/project.service';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { Observable } from 'rxjs';
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
   @Input() obvProjects: Observable<Project[]>;
+  @Input() likeComponent: LikeComponent;
 
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
@@ -29,7 +32,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor(private cdRef: ChangeDetectorRef, private projectService: ProjectService) {
     this.searchTextWithinResultSet = '';
   }
 
@@ -78,5 +81,13 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
       this.projects = this.mdbTable.searchLocalDataBy(this.searchTextWithinResultSet);
       this.mdbTable.setDataSource(prev);
     }
+  }
+
+  onBtnLikeClick(projectId: number) {
+    this.projectService.likeProjectById(projectId).subscribe((project: Project) => {
+      const indexOfProject: number = this.projects.findIndex((mProject: Project) => mProject.id === project.id);
+      this.projects[indexOfProject].hasLikes = project.hasLikes;
+      this.projects[indexOfProject].hasTotalLikes = project.hasTotalLikes;
+    });
   }
 }

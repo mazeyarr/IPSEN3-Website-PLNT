@@ -55,6 +55,7 @@
             </td>
 
             <td *ngIf="paginationCheck(i)">
+              <app-like (click)="onBtnLikeClick(project.id)"></app-like>
               {{ project.hasLikes.LIKE.length }}
             </td>
           </tr>

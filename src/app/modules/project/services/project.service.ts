@@ -22,4 +22,13 @@ export class ProjectService {
       ))
     );
   }
+
+  likeProjectById(id: number): Observable<Project> {
+    return this.api.put({
+      auth: true,
+      endpoint: `${this.PREFIX}/like/${id}`
+    }).pipe(
+      map((project: IProject) => new Project(project))
+    );
+  }
 }
