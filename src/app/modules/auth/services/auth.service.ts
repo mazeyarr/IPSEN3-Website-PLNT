@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { ApiService } from '../../shared/services/api/api.service';
+import {ApiService} from '../../shared/services/api/api.service';
 import {IUser, User} from '../../../models/User/user';
-import {catchError, retry} from 'rxjs/operators';
+import {catchError, retry, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 
 @Injectable({
@@ -40,6 +40,28 @@ export class AuthService {
 
         this.setAuthenticated(true);
 
+        resolve();
+      });
+    });
+  }
+
+  register(username: string, password: string, firstname: string, lastname: string) {
+    return new Promise((resolve) => {
+      this.api.post({
+        auth: false,
+        body: new HttpParams()
+          .set('username', username)
+          .set('password', password)
+          .set('firstname', firstname)
+          .set('lastname', lastname)
+          .set('role', 'USER'),
+        endpoint: this.PREFIX + '/create'
+      })
+        .pipe(
+          tap(data => console.log(data)),
+          retry(2),
+          catchError(() => of(this.setAuthenticated(false)))
+        ).subscribe((user: IUser) => {
         resolve();
       });
     });

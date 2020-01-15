@@ -1,0 +1,69 @@
+<div class="modal-header text-center">
+  <h4 class="modal-title w-100 font-weight-bold">Register</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="registerModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body mx-3">
+  <div class="md-form mb-5">
+    <mdb-icon fas icon="envelope" class="prefix grey-text"></mdb-icon>
+    <input type="email" id="defaultForm-email" [formControl]="registerFormModalEmail" class="form-control"
+           mdbInput mdbValidate>
+    <label for="defaultForm-email">Your email</label>
+    <mdb-error
+      *ngIf="registerFormModalEmail.invalid && (registerFormModalEmail.dirty || registerFormModalEmail.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input invalid
+    </mdb-error>
+    <mdb-success
+      *ngIf="registerFormModalEmail.valid && (registerFormModalEmail.dirty || registerFormModalEmail.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input valid
+    </mdb-success>
+  </div>
+
+  <div class="md-form mb-5">
+    <mdb-icon fas icon="lock" class="prefix grey-text"></mdb-icon>
+    <input type="password" id="defaultForm-pass" [formControl]="registerFormModalPassword" class="form-control"
+           mdbInput mdbValidate>
+    <label for="defaultForm-pass">Your password</label>
+    <mdb-error
+      *ngIf="registerFormModalPassword.invalid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input invalid
+    </mdb-error>
+    <mdb-success
+      *ngIf="registerFormModalPassword.valid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input valid
+    </mdb-success>
+  </div>
+  <div class="md-form mb-5">
+    <mdb-icon fas icon="" class="prefix grey-text"></mdb-icon>
+    <input type="text" id="defaultForm-firstname" [formControl]="registerFormModalFirstname" class="form-control"
+           mdbInput mdbValidate>
+    <label for="defaultForm-firstname">Your first name</label>
+    <mdb-error
+      *ngIf="registerFormModalFirstname.invalid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input invalid
+    </mdb-error>
+    <mdb-success
+      *ngIf="registerFormModalFirstname.valid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input valid
+    </mdb-success>
+  </div>
+  <div class="md-form mb-5">
+    <mdb-icon fas icon="" class="prefix grey-text"></mdb-icon>
+    <input type="text" id="defaultForm-lastname" [formControl]="registerFormModalLastname" class="form-control"
+           mdbInput mdbValidate>
+    <label for="defaultForm-lastname">Your last name</label>
+    <mdb-error
+      *ngIf="registerFormModalLastname.invalid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input invalid
+    </mdb-error>
+    <mdb-success
+      *ngIf="registerFormModalLastname.valid && (registerFormModalPassword.dirty || registerFormModalPassword.dirty || registerFormModalFirstname.dirty || registerFormModalLastname.dirty)">
+      Input valid
+    </mdb-success>
+  </div>
+
+</div>
+<div class="modal-footer d-flex justify-content-center">
+  <button mdbBtn color="default" class="waves-light" mdbWavesEffect (click)="btnRegisterClick()">register</button>
+</div>
