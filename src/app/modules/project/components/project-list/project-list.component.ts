@@ -6,8 +6,8 @@ import {
   AfterViewInit, HostListener, Input
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
-import {SearchBarService} from '../../../shared/components/searchbar/searchBar.service';
 import { Project } from '../../../../models/Project/project';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -16,10 +16,12 @@ import { Project } from '../../../../models/Project/project';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
-  @Input() projects: Project[];
+  @Input() obvProjects: Observable<Project[]>;
 
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
+
+  projects: Project[] = [];
 
   tableHeaders = Project.tableHeadProperties();
 
@@ -27,7 +29,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef, private searchService: SearchBarService) {
+  constructor(private cdRef: ChangeDetectorRef) {
     this.searchTextWithinResultSet = '';
   }
 
@@ -48,9 +50,13 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   initDataTable() {
-    this.mdbTable.setDataSource(this.projects);
-    this.currentShowing = this.mdbTable.getDataSource();
-    this.previousShowing = this.mdbTable.getDataSource();
+    this.obvProjects.subscribe((projects: Project[]) => {
+      this.projects = projects;
+
+      this.mdbTable.setDataSource(this.projects);
+      this.currentShowing = this.mdbTable.getDataSource();
+      this.previousShowing = this.mdbTable.getDataSource();
+    });
   }
 
   paginationCheck(rowIndex: number): boolean {

@@ -3,6 +3,7 @@ import {AuthService} from '../../../auth/services/auth.service';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { ProjectService } from '../../services/project.service';
 import { Project } from '../../../../models/Project/project';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-view-projects',
@@ -10,15 +11,13 @@ import { Project } from '../../../../models/Project/project';
   styleUrls: ['./view-projects.component.css']
 })
 export class ViewProjectsComponent implements OnInit {
-  projects: Project[] = [];
+  private projects: Observable<Project[]>;
 
   constructor(private projectService: ProjectService) {
+    this.projects = this.projectService.getProjects();
   }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe(
-      (projects: Project[]) => this.projects = projects
-    );
   }
 
 }
