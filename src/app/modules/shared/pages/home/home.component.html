@@ -1,7 +1,8 @@
-<div class="background">
-  <h1>Vind uw projecten</h1>
-  <p>De beste documenten gedeeld door docenten in één plek.</p>
-  <div class="background-searchbar">
-    <app-searchbar></app-searchbar>
+<div class="home-container background">
+  <div *ngIf="authService.isAuthenticated" class="w-50">
+      <h1 class="mb-3">Zoeken</h1>
+      <div class="background-searchbar">
+        <app-searchbar></app-searchbar>
+      </div>
   </div>
 </div>

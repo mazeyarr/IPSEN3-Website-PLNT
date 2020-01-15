@@ -22,9 +22,10 @@ import { LikeComponent } from './components/like/like.component';
     ProjectListComponent,
     LikeComponent
   ],
-  exports: [
-    ProjectCardComponent
-  ],
+    exports: [
+        ProjectCardComponent,
+        ProjectListComponent
+    ],
   imports: [
     RouterModule.forChild(projectRoutes),
     CommonModule,

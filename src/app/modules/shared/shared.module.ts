@@ -10,9 +10,10 @@ import {MDBRootModule} from 'angular-bootstrap-md';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectModule } from '../project/project.module';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 @NgModule({
-  declarations: [HomeComponent, SearchBarComponent],
+  declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent],
   exports: [
 
   ],

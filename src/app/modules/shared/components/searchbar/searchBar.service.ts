@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class SearchBarService {
-  private searchResults: Project[] = [];
+  private obvProjectSearchResults: Observable<Project[]>;
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
 
@@ -29,11 +29,11 @@ export class SearchBarService {
     );
   }
 
-  getSearchResults(): Project[] {
-    return this.searchResults;
+  getSearchResults(): Observable<Project[]> {
+    return this.obvProjectSearchResults;
   }
 
-  setSearchResults(projects: Project[]): void {
-    this.searchResults = projects;
+  setSearchResults(projects: Observable<Project[]>): void {
+    this.obvProjectSearchResults = projects;
   }
 }

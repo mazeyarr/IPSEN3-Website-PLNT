@@ -23,11 +23,10 @@ export class SearchBarComponent implements OnInit {
   }
 
   private doSearch(searchString: string) {
-    this.searchService.searchProjectsByTitle(searchString)
-      .subscribe((projects: Project[]) => {
-        this.searchService.setSearchResults(projects);
-        this.router.navigateByUrl('/projects');
-      });
+    this.searchService.setSearchResults(
+      this.searchService.searchProjectsByTitle(searchString)
+    );
+    this.router.navigate(['search-results']);
   }
 
   private btnSearchOnClick() {
@@ -37,5 +36,4 @@ export class SearchBarComponent implements OnInit {
   private searchBarOnEnter() {
     this.doSearch(this.searchString);
   }
-
 }

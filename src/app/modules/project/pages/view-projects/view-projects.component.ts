@@ -11,10 +11,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./view-projects.component.css']
 })
 export class ViewProjectsComponent implements OnInit {
-  private projects: Observable<Project[]>;
+  private obvProjects: Observable<Project[]>;
 
   constructor(private projectService: ProjectService) {
-    this.projects = this.projectService.getProjects();
+    this.obvProjects = this.projectService.getProjects();
   }
 
   ngOnInit() {

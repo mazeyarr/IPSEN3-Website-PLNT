@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../../../../app.route-animations';
 import { ProjectService } from '../../../project/services/project.service';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,7 @@ import { ProjectService } from '../../../project/services/project.service';
   animations: [ slideInAnimation ]
 })
 export class HomeComponent implements OnInit {
-  constructor(private projectService: ProjectService) {
+  constructor(private authService: AuthService) {
   }
 
   ngOnInit(): void {
