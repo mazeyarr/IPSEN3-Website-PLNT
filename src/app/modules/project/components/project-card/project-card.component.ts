@@ -8,18 +8,18 @@ import { animate, style, transition, trigger } from '@angular/animations';
   styleUrls: ['./project-card.component.css'],
   animations: [
     trigger(
-      'cardZoom',
+      'fadeInOut',
       [
         transition(
           ':enter', [
-            style({ transform: 'scale(0)', opacity: 0 }),
-            animate('500ms', style({ transform: 'scale(1)', opacity: 1 }))
+            style({  opacity: 0 }),
+            animate('700ms', style({ opacity: 1 }))
           ]
         ),
         transition(
           ':leave', [
-            style({ transform: 'scale(1)', }),
-            animate('500ms', style({ transform: 'scale(0)', opacity: 0 }))
+            style({ opacity: 1 }),
+            animate('500ms', style({ opacity: 0 }))
           ]
         )]
     )

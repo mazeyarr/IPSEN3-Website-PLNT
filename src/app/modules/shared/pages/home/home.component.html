@@ -20,8 +20,18 @@
         </div>
       </ng-container>
 
-      <div class="col-6 my-3" *ngFor="let project of excellentProjects">
-        <app-project-card [project]="project"></app-project-card>
+      <div class="col-12" *ngIf="!isExcellentProjectsEmpty()">
+        <div class="row justify-content-center" [@fadeInOut]>
+          <div class="col-6 my-3">
+            <h1 class="text-white font-weight-bold">Excellente Projecten</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 my-3" *ngFor="let project of excellentProjects">
+            <app-project-card [project]="project"></app-project-card>
+          </div>
+        </div>
       </div>
     </div>
   </div>
