@@ -25,11 +25,23 @@
         <div class="col-12">
           <a
             class="btn btn-success btn-block"
-            routerLink="/"
+            routerLink="/create-project"
           >
             <mdb-icon fas icon="plus" size="1x"></mdb-icon>
             Toevoegen
           </a>
+        </div>
+
+        <div class="col-12 text-center mt-3" *ngIf="loading">
+          <div class="spinner-grow" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
       </div>
 
@@ -43,6 +55,7 @@
         </thead>
 
         <tbody>
+
           <tr *ngFor="let project of projects; let i = index;">
             <td *ngIf="paginationCheck(i)">
               {{project.title}}

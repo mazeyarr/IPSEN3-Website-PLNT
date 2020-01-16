@@ -16,6 +16,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
+  loading = true;
+
   @Input() obvProjects: Observable<Project[]>;
 
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
@@ -51,6 +53,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   initDataTable() {
     this.obvProjects.subscribe((projects: Project[]) => {
+      this.loading = false;
       this.projects = projects;
 
       this.mdbTable.setDataSource(this.projects);

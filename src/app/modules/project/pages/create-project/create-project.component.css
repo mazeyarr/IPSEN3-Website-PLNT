@@ -1,0 +1,5 @@
+.background {
+  height: 100vh;
+  overflow-x: hidden;
+  background: #5bc787 url("../../../../../assets/images/background-piece.png") repeat;
+}

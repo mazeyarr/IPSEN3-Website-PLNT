@@ -1,1 +1,74 @@
-<p>create-project works!</p>
+<div class="create-project-container p-5 mt-5 background">
+  <div class="row justify-content-center pt-5">
+    <h1 class="font-weight-bold text-white">Uploaden</h1>
+    <div class="col-md-12 my-3">
+      <mdb-card>
+        <mdb-card-body>
+          <!-- Horizontal Steppers -->
+          <div class="row">
+            <div class="col-md-12">
+
+              <!-- Stepers Wrapper -->
+              <ul class="stepper stepper-horizontal">
+
+                <!-- First Step -->
+                <li class="completed">
+                  <a>
+                    <span class="circle">1</span>
+                    <span class="label">Bestanden toevoegen</span>
+                  </a>
+                </li>
+
+                <!-- Second Step -->
+                <li>
+                  <a>
+                    <span class="circle">2</span>
+                    <span class="label">Informatie toevoegen</span>
+                  </a>
+                </li>
+
+                <!-- Third Step -->
+                <li>
+                  <a>
+                    <span class="circle">3</span>
+                    <span class="label">Bestanden taggen</span>
+                  </a>
+                </li>
+
+                <!-- Fourth Step -->
+                <li>
+                  <a>
+                    <span class="circle">3</span>
+                    <span class="label">Bestanden uploaden</span>
+                  </a>
+                </li>
+
+              </ul>
+              <!-- /.Stepers Wrapper -->
+
+            </div>
+          </div>
+          <!-- /.Horizontal Steppers -->
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+    <div class="col-md-12">
+      <mdb-card>
+        <mdb-card-body>
+          <div class="row">
+            <div class="col-md-12">
+              <ngx-dropzone (change)="onSelect($event)">
+                <ngx-dropzone-label>Klik hier of sleep uw bestanden hiernaartoe</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>
+

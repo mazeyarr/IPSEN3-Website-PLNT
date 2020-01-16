@@ -11,6 +11,8 @@ import { ProjectListComponent } from './components/project-list/project-list.com
 import { ButtonsModule, IconsModule, MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
 import {FormsModule} from '@angular/forms';
 import { LikeComponent } from './components/like/like.component';
+import { ProjectCreateStepperComponent } from './components/project-create-stepper/project-create-stepper.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,13 @@ import { LikeComponent } from './components/like/like.component';
     ViewProjectsComponent,
     ProjectCardComponent,
     ProjectListComponent,
-    LikeComponent
+    LikeComponent,
+    ProjectCreateStepperComponent,
   ],
-    exports: [
-        ProjectCardComponent,
-        ProjectListComponent
-    ],
+  exports: [
+    ProjectCardComponent,
+    ProjectListComponent
+  ],
   imports: [
     RouterModule.forChild(projectRoutes),
     CommonModule,
@@ -34,6 +37,7 @@ import { LikeComponent } from './components/like/like.component';
     TableModule,
     FormsModule,
     MDBBootstrapModule.forRoot(),
+    NgxDropzoneModule
   ]
 })
 export class ProjectModule { }

@@ -14,9 +14,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 
 @NgModule({
   declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent],
-  exports: [
-
-  ],
+  exports: [],
   imports: [
     RouterModule.forRoot(sharedRoutes),
     CommonModule,
@@ -31,4 +29,6 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
     MDBRootModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+
+}
