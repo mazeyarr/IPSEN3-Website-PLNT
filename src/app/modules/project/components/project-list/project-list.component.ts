@@ -3,7 +3,7 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewInit, HostListener, Input
+  AfterViewInit, HostListener, Input, Output, EventEmitter
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import { Project } from '../../../../models/Project/project';
@@ -16,6 +16,14 @@ import { Observable } from 'rxjs';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
+
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.searchTextWithinResultSet = '';
+  }
+
+  // @Output() filterOnChange = new EventEmitter<string[]>(); // TODO: TODO: Remove
+  // filterList: string[] = []; // TODO: Remove
+
   loading = true;
 
   @Input() obvProjects: Observable<Project[]>;
@@ -31,9 +39,16 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef) {
-    this.searchTextWithinResultSet = '';
-  }
+  // TODO: Remove
+  // filterOnClick() {
+  //   this.addFilter('x');
+  // }
+
+  // TODO: Remove
+  // addFilter(filter: string) {
+  //   this.filterList.push(filter);
+  //   this.filterOnChange.emit(this.filterList);
+  // }
 
   @HostListener('input') oninput() {
     this.searchResultSet();

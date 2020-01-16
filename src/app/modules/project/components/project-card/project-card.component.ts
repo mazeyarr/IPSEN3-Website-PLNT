@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Project } from '../../../../models/Project/project';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ProjectService } from '../../services/project.service';
+import { distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'app-project-card',
