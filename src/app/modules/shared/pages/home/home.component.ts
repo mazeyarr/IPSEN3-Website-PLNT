@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from '../../../../app.route-animations';
 import { ProjectService } from '../../../project/services/project.service';
 import { AuthService } from '../../../auth/services/auth.service';
+import { Project } from '../../../../models/Project/project';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,16 @@ import { AuthService } from '../../../auth/services/auth.service';
   animations: [ slideInAnimation ]
 })
 export class HomeComponent implements OnInit {
-  constructor(private authService: AuthService) {
+  excellentProjects: Project[] = [];
+  constructor(private authService: AuthService, private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
+    this.projectService.getExcellentProjectsLimit(4).subscribe(
+      (projects: Project[]) => this.excellentProjects = projects
+    );
   }
+
+  isExcellentProjectsEmpty = (): boolean => this.excellentProjects.length < 1;
 
 }

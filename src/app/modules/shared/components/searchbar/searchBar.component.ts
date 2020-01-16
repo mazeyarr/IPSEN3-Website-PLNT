@@ -2,11 +2,30 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import { SearchBarService } from './searchBar.service';
 import { Project } from '../../../../models/Project/project';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-searchbar',
   templateUrl: './searchBar.component.html',
   styleUrls: ['./searchBar.component.css'],
+  animations: [
+    trigger(
+      'fadeInOut',
+      [
+        transition(
+          ':enter', [
+            style({  opacity: 0 }),
+            animate('700ms', style({ opacity: 1 }))
+          ]
+        ),
+        transition(
+          ':leave', [
+            style({ opacity: 1 }),
+            animate('500ms', style({ opacity: 0 }))
+          ]
+        )]
+    )
+  ]
 })
 
 /**

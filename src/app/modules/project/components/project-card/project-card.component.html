@@ -1,18 +1,34 @@
-<div class="card m-2">
+<mdb-card class="project-card" [@cardZoom]>
+  <mdb-card-body>
+    <mdb-card-title>
+      <h4>
+        {{ project.title }}
+      </h4>
+    </mdb-card-title>
 
-  <!-- Card image -->
-  <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/43.jpg" alt="Card image cap">
+    <mdb-card-text>
+      {{ project.education.title }}
+    </mdb-card-text>
 
-  <!-- Card content -->
-  <div class="card-body">
+    <mdb-card-text>
+      {{ project.education.institute.name }}
+    </mdb-card-text>
 
-    <!-- Title -->
-    <h4 class="card-title"><a>{{ name }}</a></h4>
-    <!-- Text -->
-    <p class="card-text">{{ description }}</p>
-    <!-- Button -->
-    <a href="#" class="btn btn-primary">View ProjectModel</a>
+    <div class="flex-row">
+      <mdb-badge pill="true" color="blue" >
+        <mdb-icon fas icon="thumbs-up"></mdb-icon>
+        {{ project.hasLikes.LIKE.length }}
+      </mdb-badge>
+    </div>
 
-  </div>
-
-</div>
+    <div class="flex-row">
+      <ng-container *ngIf="project.hasTags.length > 0">
+        <span class="mr-1" *ngFor="let tag of project.hasTags">
+          <mdb-badge info="true">
+            {{ tag.name }}
+          </mdb-badge>
+        </span>
+      </ng-container>
+    </div>
+  </mdb-card-body>
+</mdb-card>

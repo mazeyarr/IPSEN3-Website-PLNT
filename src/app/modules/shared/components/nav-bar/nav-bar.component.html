@@ -33,6 +33,7 @@
     </ul>
     <!-- Links -->
       <div class="my-0 text-white" *ngIf="authService.isAuthenticated">
+        <mdb-icon fas icon="user"></mdb-icon>
         {{ authService.getAuthUser().getFullname() }}
       </div>
 
