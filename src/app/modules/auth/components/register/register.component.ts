@@ -11,6 +11,7 @@ import {AuthService} from '../../services/auth.service';
 export class RegisterComponent implements OnInit {
   validatingForm: FormGroup;
 
+
   constructor(public registerModalRef: MDBModalRef, private authService: AuthService) {
   }
 
@@ -47,7 +48,6 @@ export class RegisterComponent implements OnInit {
         console.log('SOMETHING WENT WRONG');
       }
     } else {
-      // todo display error on screen
       console.log('INPUT INVALID');
     }
   }
