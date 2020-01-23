@@ -39,13 +39,13 @@ export class ProjectService {
     );
   }
 
-  getExcellentProjects(): Observable<Project[]> {
+  getExcellentProjects(): Observable<ProjectSimple[]> {
     return this.api.get({
       auth: false,
       endpoint: `${this.PREFIX}/excellent`
     }).pipe(
-      map((projects: IProject[]) => projects.map(
-        (project: IProject) => new Project(project)
+      map((projects: IProjectSimple[]) => projects.map(
+        (project: IProjectSimple) => new ProjectSimple(project)
       ))
     );
   }

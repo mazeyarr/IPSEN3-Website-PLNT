@@ -4,74 +4,48 @@
     <div class="col-md-12 my-3">
       <mdb-card>
         <mdb-card-body>
-          <!-- Horizontal Steppers -->
           <div class="row">
+
             <div class="col-md-12">
-
-              <!-- Stepers Wrapper -->
               <ul class="stepper stepper-horizontal">
-
-                <!-- First Step -->
-                <li class="completed">
+                <li
+                  *ngFor="let step of steps; let i = index"
+                  [class.active]="step.active || step.complete"
+                >
                   <a>
-                    <span class="circle">1</span>
-                    <span class="label">Bestanden toevoegen</span>
+                    <span class="circle">{{ i + 1 }}</span>
+                    <span class="label">{{ step.title }}</span>
                   </a>
                 </li>
-
-                <!-- Second Step -->
-                <li>
-                  <a>
-                    <span class="circle">2</span>
-                    <span class="label">Informatie toevoegen</span>
-                  </a>
-                </li>
-
-                <!-- Third Step -->
-                <li>
-                  <a>
-                    <span class="circle">3</span>
-                    <span class="label">Bestanden taggen</span>
-                  </a>
-                </li>
-
-                <!-- Fourth Step -->
-                <li>
-                  <a>
-                    <span class="circle">3</span>
-                    <span class="label">Bestanden uploaden</span>
-                  </a>
-                </li>
-
               </ul>
-              <!-- /.Stepers Wrapper -->
-
             </div>
+
           </div>
-          <!-- /.Horizontal Steppers -->
         </mdb-card-body>
       </mdb-card>
     </div>
 
     <div class="col-md-12">
-      <mdb-card>
-        <mdb-card-body>
-          <div class="row">
-            <div class="col-md-12">
-              <ngx-dropzone (change)="onSelect($event)">
-                <ngx-dropzone-label>Klik hier of sleep uw bestanden hiernaartoe</ngx-dropzone-label>
-                <ngx-dropzone-preview
-                  *ngFor="let f of files"
-                  [removable]="true"
-                  (removed)="onRemove(f)"
-                >
-                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                </ngx-dropzone-preview>
-              </ngx-dropzone>
-            </div>
-          </div>
-        </mdb-card-body>
-      </mdb-card>
+      <ng-container [ngSwitch]="activeStepComponent.stepComponentType">
+        <app-create-project-dropzone
+          *ngSwitchCase="StepComponentTypes.PRE_UPLOAD"
+          [cachedFiles]="files"
+          (eFilesChange)="validatePreUpload($event)"
+        >
+        </app-create-project-dropzone>
+      </ng-container>
+    </div>
+
+    <div class="col-xs-12 justify-content-end d-flex">
+      <button class="btn btn-info font-weight-bold" (click)="onPreviousStepClick()">
+        vorige
+      </button>
+    </div>
+
+    <div class="col-xs-12 justify-content-start d-flex">
+      <button class="btn btn-info font-weight-bold" (click)="onNextStepClick()">
+        volgende
+      </button>
     </div>
   </div>
 </div>
