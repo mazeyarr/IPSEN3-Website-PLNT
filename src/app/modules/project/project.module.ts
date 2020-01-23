@@ -14,6 +14,7 @@ import { LikeComponent } from './components/like/like.component';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { CreateProjectDropzoneComponent } from './components/create-project-dropzone/create-project-dropzone.component';
 import { NgxdModule } from '@ngxd/core';
+import { CreateProjectDataComponent } from './components/create-project-data/create-project-data.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgxdModule } from '@ngxd/core';
     ProjectListComponent,
     LikeComponent,
     CreateProjectDropzoneComponent,
+    CreateProjectDataComponent,
   ],
   exports: [
     ProjectCardComponent,

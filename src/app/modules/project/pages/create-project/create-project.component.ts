@@ -1,5 +1,5 @@
 import { Component, OnInit, Type } from '@angular/core';
-import { CreateProjectDropzoneComponent } from '../../components/create-project-dropzone/create-project-dropzone.component';
+import { CreateProjectData } from '../../components/create-project-data/create-project-data.component';
 
 interface IStep {
   title: string;
@@ -22,9 +22,10 @@ export enum StepComponentType {
   styleUrls: ['./create-project.component.css']
 })
 export class CreateProjectComponent implements OnInit {
-  private static readonly FIRST_STEP = 0;
+  private static readonly FIRST_STEP = 1;
 
   private files: File[] = [];
+  private createProjectData: CreateProjectData[];
 
   private StepComponentTypes = StepComponentType;
   private activeStepComponent: IStep;
@@ -58,13 +59,24 @@ export class CreateProjectComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.activeStepComponent = this.steps[CreateProjectComponent.FIRST_STEP];
+    this.setStepActive(CreateProjectComponent.FIRST_STEP, true);
   }
 
   validatePreUpload($files: File[]): void {
     this.files = $files;
 
     if (this.files.length < 1) {
+      this.setStepReady(this.getCurrentIndex(), false);
+      return;
+    }
+
+    this.setStepReady(this.getCurrentIndex(), true);
+  }
+
+  validateCreateProjectData($createProjectData: CreateProjectData[]): void {
+    this.createProjectData = $createProjectData;
+
+    if (this.files.length !== this.createProjectData.length) {
       this.setStepReady(this.getCurrentIndex(), false);
       return;
     }
@@ -82,8 +94,6 @@ export class CreateProjectComponent implements OnInit {
       this.setStepActive(currentStepIndex, false);
 
       this.setStepActive(previousStepIndex, true);
-
-      this.activeStepComponent = this.steps[previousStepIndex];
     }
   }
 
@@ -102,8 +112,6 @@ export class CreateProjectComponent implements OnInit {
       this.setStepActive(currentStepIndex, false);
 
       this.setStepActive(nextStepIndex, true);
-
-      this.activeStepComponent = this.steps[nextStepIndex];
 
       return;
     }
@@ -127,6 +135,10 @@ export class CreateProjectComponent implements OnInit {
 
   setStepActive(stepIndex: number, toggle: boolean): void {
     this.steps[stepIndex].active = toggle;
+
+    if (toggle) {
+      this.activeStepComponent = this.steps[stepIndex];
+    }
   }
 
   getCurrentIndex = (): number => this.steps.findIndex(
