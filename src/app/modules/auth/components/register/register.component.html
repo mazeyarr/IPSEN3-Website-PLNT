@@ -1,4 +1,4 @@
-<div class="modal-header text-center">
+  <div class="modal-header text-center">
   <h4 class="modal-title w-100 font-weight-bold">Register</h4>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="registerModalRef.hide()">
     <span aria-hidden="true">&times;</span>
@@ -35,7 +35,7 @@
     </mdb-success>
   </div>
   <div class="md-form mb-5">
-    <mdb-icon fas icon="" class="prefix grey-text"></mdb-icon>
+    <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
     <input type="text" id="defaultForm-firstname" [formControl]="registerFormModalFirstname" class="form-control"
            mdbInput mdbValidate>
     <label for="defaultForm-firstname">Your first name</label>
@@ -49,7 +49,7 @@
     </mdb-success>
   </div>
   <div class="md-form mb-5">
-    <mdb-icon fas icon="" class="prefix grey-text"></mdb-icon>
+    <mdb-icon fas icon="user" class="prefix grey-text"></mdb-icon>
     <input type="text" id="defaultForm-lastname" [formControl]="registerFormModalLastname" class="form-control"
            mdbInput mdbValidate>
     <label for="defaultForm-lastname">Your last name</label>
