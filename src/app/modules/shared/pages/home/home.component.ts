@@ -5,6 +5,8 @@ import { AuthService } from '../../../auth/services/auth.service';
 import { Project } from '../../../../models/Project/project';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { ProjectSimple } from '../../../../models/Project/project.simple';
+import {TagCloudService} from '../../components/tag-cloud/tag-cloud.service';
+import {Tag} from '../../../../models/Tag/tag';
 
 @Component({
   selector: 'app-home',
@@ -32,12 +34,16 @@ import { ProjectSimple } from '../../../../models/Project/project.simple';
 })
 export class HomeComponent implements OnInit {
   excellentProjects: ProjectSimple[] = [];
-  constructor(private authService: AuthService, private projectService: ProjectService) {
+  tags: Tag[] = [];
+  constructor(private authService: AuthService, private projectService: ProjectService, private tagCloudService: TagCloudService) {
   }
 
   ngOnInit(): void {
     this.projectService.getExcellentProjectsLimit(4).subscribe(
       (projects: ProjectSimple[]) => this.excellentProjects = projects
+    );
+    this.tagCloudService.getTagsLimit(4).subscribe(
+      (tags: Tag[]) => this.tags = tags
     );
   }
 

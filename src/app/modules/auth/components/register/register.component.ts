@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
 import {MDBModalRef} from 'angular-bootstrap-md';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';

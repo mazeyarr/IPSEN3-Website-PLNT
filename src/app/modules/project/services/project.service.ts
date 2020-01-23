@@ -1,10 +1,9 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
-import { ApiService } from '../../shared/services/api/api.service';
-import { IProject, Project } from '../../../models/Project/project';
-import { map, take, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { fromArray } from 'rxjs/internal/observable/fromArray';
-import { IProjectSimple, ProjectSimple } from '../../../models/Project/project.simple';
+import {Injectable} from '@angular/core';
+import {ApiService} from '../../shared/services/api/api.service';
+import {IProject, Project} from '../../../models/Project/project';
+import {map} from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {IProjectSimple, ProjectSimple} from '../../../models/Project/project.simple';
 
 @Injectable({
   providedIn: 'root'
