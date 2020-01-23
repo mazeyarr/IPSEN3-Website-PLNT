@@ -4,6 +4,7 @@ import { ProjectService } from '../../../project/services/project.service';
 import { AuthService } from '../../../auth/services/auth.service';
 import { Project } from '../../../../models/Project/project';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { ProjectSimple } from '../../../../models/Project/project.simple';
 
 @Component({
   selector: 'app-home',
@@ -30,13 +31,13 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ]
 })
 export class HomeComponent implements OnInit {
-  excellentProjects: Project[] = [];
+  excellentProjects: ProjectSimple[] = [];
   constructor(private authService: AuthService, private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
     this.projectService.getExcellentProjectsLimit(4).subscribe(
-      (projects: Project[]) => this.excellentProjects = projects
+      (projects: ProjectSimple[]) => this.excellentProjects = projects
     );
   }
 
