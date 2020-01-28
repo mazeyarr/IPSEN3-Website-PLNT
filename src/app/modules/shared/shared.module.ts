@@ -12,9 +12,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProjectModule } from '../project/project.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { TagCloudComponent } from './components/tag-cloud/tag-cloud.component';
+import { TagComponent } from './components/tag/tag.component';
 
 @NgModule({
-  declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent, TagCloudComponent],
+  declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent, TagCloudComponent, TagComponent],
   exports: [],
   imports: [
     RouterModule.forRoot(sharedRoutes),
