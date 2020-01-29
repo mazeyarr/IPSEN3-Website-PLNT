@@ -1,10 +1,12 @@
 import { Injectable} from '@angular/core';
 import {ApiService} from '../../shared/services/api/api.service';
 import {IProject, Project} from '../../../models/Project/project';
-import {map, tap} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IProjectSimple, ProjectSimple} from '../../../models/Project/project.simple';
 import {Education, IEducation} from '../../../models/Education/education';
+import {HttpParams} from '@angular/common/http';
+import {CreateProjectData} from '../components/create-project-data/create-project-data.component';
 
 @Injectable({
   providedIn: 'root'
@@ -59,5 +61,36 @@ export class ProjectService {
         (education: IEducation) => new Education(education)
       ))
     );
+  }
+
+  createProjects(createProjectData: CreateProjectData[]) {
+    const promises = [];
+
+    createProjectData.forEach((projectData: CreateProjectData) => {
+      promises.push(
+        new Promise(resolve => {
+          this.api.post({
+            auth: true,
+            body: new HttpParams()
+              .set('title', projectData.createProjectParams.title)
+              .set('language', projectData.createProjectParams.language)
+              .set('grade', projectData.createProjectParams.grade.toString())
+              .set('educationId', projectData.createProjectParams.educationId.toString()),
+            endpoint: this.PREFIX + '/create'
+          }).pipe(
+            map((project: IProject) => new Project(project))
+          ).subscribe((project: Project) => {
+
+            resolve(project);
+          });
+        })
+      );
+    });
+
+    return Promise.all(promises);
+  }
+
+  createProjectResource(project: Project, resource: File) {
+    return
   }
 }

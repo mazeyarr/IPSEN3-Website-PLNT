@@ -44,6 +44,14 @@
         >
         </app-create-project-data>
       </ng-container>
+
+      <ng-container [ngSwitch]="activeStepComponent.stepComponentType">
+        <app-create-project-upload
+          *ngSwitchCase="StepComponentTypes.UPLOAD"
+          [createProjectData]="createProjectData"
+        >
+        </app-create-project-upload>
+      </ng-container>
     </div>
 
     <div class="col-xs-12 justify-content-end d-flex">

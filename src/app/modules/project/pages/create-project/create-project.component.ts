@@ -81,6 +81,13 @@ export class CreateProjectComponent implements OnInit {
       return;
     }
 
+    this.createProjectData.forEach((projectData: CreateProjectData) => {
+      if (!projectData.createProjectParams.validated) {
+        this.setStepReady(this.getCurrentIndex(), false);
+        return;
+      }
+    });
+
     this.setStepReady(this.getCurrentIndex(), true);
   }
 
