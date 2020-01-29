@@ -3,7 +3,7 @@ import {IProject, Project} from '../../../../models/Project/project';
 import {ProjectService} from '../../services/project.service';
 import {Education, IInstitute} from '../../../../models/Education/education';
 
-export interface CreateProjectData {
+export interface ICreateProjectData {
   createProjectParams: {
     title: string;
     language: string;
@@ -25,18 +25,18 @@ export interface CreateProjectData {
 })
 export class CreateProjectDataComponent implements OnInit {
   @Input() cachedFiles: File[];
-  @Input() cachedCreateProjectData: CreateProjectData[];
+  @Input() cachedCreateProjectData: ICreateProjectData[];
 
-  @Output() eFilesData: EventEmitter<CreateProjectData[]>;
+  @Output() eFilesData: EventEmitter<ICreateProjectData[]>;
 
   files: File[] = [];
-  createProjectData: CreateProjectData[] = [];
+  createProjectData: ICreateProjectData[] = [];
 
   educations: Education[] = [];
   institutes: IInstitute[] = [];
 
   constructor(private projectService: ProjectService) {
-    this.eFilesData = new EventEmitter<CreateProjectData[]>();
+    this.eFilesData = new EventEmitter<ICreateProjectData[]>();
   }
 
   ngOnInit() {
@@ -133,7 +133,7 @@ export class CreateProjectDataComponent implements OnInit {
   }
 
   validateProjectData() {
-    this.createProjectData.forEach((projectData: CreateProjectData) => {
+    this.createProjectData.forEach((projectData: ICreateProjectData) => {
       if (projectData.createProjectParams.title === '') {
         projectData.createProjectParams.validated = false;
         return;

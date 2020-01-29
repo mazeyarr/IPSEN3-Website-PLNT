@@ -1,12 +1,14 @@
 import { Injectable} from '@angular/core';
 import {ApiService} from '../../shared/services/api/api.service';
 import {IProject, Project} from '../../../models/Project/project';
-import {map} from 'rxjs/operators';
+import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IProjectSimple, ProjectSimple} from '../../../models/Project/project.simple';
 import {Education, IEducation} from '../../../models/Education/education';
 import {HttpParams} from '@angular/common/http';
-import {CreateProjectData} from '../components/create-project-data/create-project-data.component';
+import {ICreateProjectData} from '../components/create-project-data/create-project-data.component';
+import {UploadTypes} from '../types/upload-types';
+import {IResource, Resource} from '../../../models/Resource/resource';
 
 @Injectable({
   providedIn: 'root'
@@ -63,12 +65,12 @@ export class ProjectService {
     );
   }
 
-  createProjects(createProjectData: CreateProjectData[]) {
+  createProjects(createProjectData: ICreateProjectData[]): Promise<Project[]> {
     const promises = [];
 
-    createProjectData.forEach((projectData: CreateProjectData) => {
+    createProjectData.forEach((projectData: ICreateProjectData) => {
       promises.push(
-        new Promise(resolve => {
+        new Promise<Project>(resolve => {
           this.api.post({
             auth: true,
             body: new HttpParams()
@@ -79,10 +81,12 @@ export class ProjectService {
             endpoint: this.PREFIX + '/create'
           }).pipe(
             map((project: IProject) => new Project(project))
-          ).subscribe((project: Project) => {
-
-            resolve(project);
-          });
+          ).subscribe(
+            (project: Project) =>
+              this.createProjectResource(project, projectData.file).then(
+                (projectWithResource: Project) => resolve(projectWithResource)
+              )
+          );
         })
       );
     });
@@ -90,7 +94,23 @@ export class ProjectService {
     return Promise.all(promises);
   }
 
-  createProjectResource(project: Project, resource: File) {
-    return; // TODO: multi upload
+  createProjectResource(project: Project, resource: File): Promise<Project> {
+    const formsData = new FormData();
+
+    formsData.append('entityId', project.id.toString());
+    formsData.append('uploadType', UploadTypes.PROJECT);
+    formsData.append('resource', resource);
+
+    return new Promise<Project>(resolve => {
+      this.api.post({
+        auth: true,
+        body: formsData,
+        endpoint: '/resource/upload'
+      }).pipe(
+        map((createdResource: IResource) => new Resource(createdResource))
+      ).subscribe(
+        (createdResource: Resource) => resolve(createdResource.project)
+      );
+    });
   }
 }
