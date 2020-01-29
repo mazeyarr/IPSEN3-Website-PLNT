@@ -1,0 +1,57 @@
+<!-- Default form register -->
+<form class="text-center border border-light p-5">
+
+  <p class="h4 mb-4">Voeg informatie toe</p>
+
+  <div class="form-row mb-4">
+    <div class="col-xs-12 col-md-8">
+      <!-- Titel -->
+      <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Titel">
+    </div>
+    <div class="col-xs-8 col-md-4">
+      <!-- Course -->
+      <select class="browser-default custom-select">
+        <option selected hidden>Kies een vak</option>
+        <option value="1">Psychologie</option>
+        <option value="2">Informatica</option>
+        <option value="3">Wiskunde</option>
+        <option value="4">Bio Informatica</option>
+        <option value="5">Biologie</option>
+        <option value="6">Werktuigbouwkunde</option>
+        <option value="7">Economie</option>
+      </select>
+    </div>
+  </div>
+    <div class="form-row mb-4">
+      <div class="col-xs-12 col-md-6">
+        <!-- School -->
+        <select class="browser-default custom-select">
+          <option selected hidden>Kies een school</option>
+          <option value="1">Hogeschool Leiden</option>
+          <option value="2">Universiteit Leiden</option>
+          <option value="3">Hogeschool Amsterdam</option>
+        </select>
+      </div>
+        <div class="col-xs-12 col-md-6">
+          <!-- Language-->
+          <select class="browser-default custom-select">
+            <option selected hidden>Kies een taal</option>
+            <option value="1">Nedelands</option>
+            <option value="2">Engels</option>
+          </select>
+        </div>
+  </div>
+
+
+  <div class="form-group">
+    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Typ hier uw beschrijving"></textarea>
+  </div>
+
+  <!-- Newsletter -->
+  <div class="row">
+    <div class="col-md-6 mx-auto d-flex justify-content-center">
+      <mdb-checkbox [default]="true">Excellent</mdb-checkbox>
+    </div>
+  </div>
+</form>
+<!-- Default form register -->
