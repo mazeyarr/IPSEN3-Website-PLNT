@@ -22,10 +22,10 @@ export enum StepComponentType {
   styleUrls: ['./create-project.component.css']
 })
 export class CreateProjectComponent implements OnInit {
-  private static readonly FIRST_STEP = 1;
+  private static readonly FIRST_STEP = 0;
 
   private files: File[] = [];
-  private createProjectData: CreateProjectData[];
+  private createProjectData: CreateProjectData[] = [];
 
   private StepComponentTypes = StepComponentType;
   private activeStepComponent: IStep;

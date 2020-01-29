@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import { Injectable} from '@angular/core';
 import {ApiService} from '../../shared/services/api/api.service';
 import {IProject, Project} from '../../../models/Project/project';
 import {map, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {IProjectSimple, ProjectSimple} from '../../../models/Project/project.simple';
+import {Education, IEducation} from '../../../models/Education/education';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +31,6 @@ export class ProjectService {
       auth: false,
       endpoint: `${this.PREFIX}/excellent`
     }).pipe(
-      tap(data => console.log(data)),
       map((projects: IProjectSimple[]) => projects
         .slice(0, amount)
         .map((project: IProjectSimple) => new ProjectSimple(project))
@@ -46,6 +46,17 @@ export class ProjectService {
     }).pipe(
       map((projects: IProjectSimple[]) => projects.map(
         (project: IProjectSimple) => new ProjectSimple(project)
+      ))
+    );
+  }
+
+  getEducationAll(): Observable<IEducation[]> {
+    return this.api.get({
+      auth: false, // TODO: set true
+      endpoint: '/education/all'
+    }).pipe(
+      map((educations: IEducation[]) => educations.map(
+        (education: IEducation) => new Education(education)
       ))
     );
   }

@@ -39,6 +39,7 @@
         <app-create-project-data
           *ngSwitchCase="StepComponentTypes.DATA"
           [cachedFiles]="files"
+          [cachedCreateProjectData]="createProjectData"
           (eFilesData)="validateCreateProjectData($event)"
         >
         </app-create-project-data>
