@@ -1,10 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from '../../../auth/services/auth.service';
-import { ApiService } from '../../../shared/services/api/api.service';
-import { ProjectService } from '../../services/project.service';
-import { Project } from '../../../../models/Project/project';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter } from 'rxjs/operators';
+import {ApiService} from '../../../shared/services/api/api.service';
+import {ProjectService} from '../../services/project.service';
+import {Project} from '../../../../models/Project/project';
+import {Observable} from 'rxjs';
+import {distinctUntilChanged, filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-view-projects',

@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import {ProjectModel} from '../../../../models/project.model';
 import { IProject, Project } from '../../../../models/Project/project';
 import { ApiService } from '../../services/api/api.service';
 import { AuthService } from '../../../auth/services/auth.service';
