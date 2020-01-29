@@ -91,6 +91,6 @@ export class ProjectService {
   }
 
   createProjectResource(project: Project, resource: File) {
-    return;
+    return; // TODO: multi upload
   }
 }

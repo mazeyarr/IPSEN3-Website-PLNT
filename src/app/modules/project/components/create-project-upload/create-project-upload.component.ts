@@ -20,7 +20,7 @@ export class CreateProjectUploadComponent implements OnInit {
   createProjects() {
     this.projectService.createProjects(this.createProjectData).then(
       (projects: Project[]) => {
-
+        // TODO: finish
       }
     );
   }
