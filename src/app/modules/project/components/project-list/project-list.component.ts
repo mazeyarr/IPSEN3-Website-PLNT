@@ -101,11 +101,12 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onBtnLikeClick(projectId: number) {
-    this.projectService.likeProjectById(projectId).subscribe((project: Project) => {
-      const indexOfProject: number = this.projects.findIndex((mProject: Project) => mProject.id === project.id);
-      this.projects[indexOfProject].hasLikes = project.hasLikes;
-      this.projects[indexOfProject].hasTotalLikes = project.hasTotalLikes;
-    });
-  }
+  // todo: projectService opeens kapot na master merge
+  // onBtnLikeClick(projectId: number) {
+  //   this.projectService.likeProjectById(projectId).subscribe((project: Project) => {
+  //     const indexOfProject: number = this.projects.findIndex((mProject: Project) => mProject.id === project.id);
+  //     this.projects[indexOfProject].hasLikes = project.hasLikes;
+  //     this.projects[indexOfProject].hasTotalLikes = project.hasTotalLikes;
+  //   });
+  // }
 }
