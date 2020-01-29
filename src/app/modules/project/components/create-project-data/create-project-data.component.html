@@ -1,13 +1,14 @@
 <!-- Default form register -->
-<form class="text-center border border-light p-5">
+<form class="text-center border border-light p-5 mb-3" *ngFor="let projectData of createProjectData; let index;">
 
-  <p class="h4 mb-4">Voeg informatie toe</p>
+  <p class="h4 mb-4">Voeg informatie toe voor: {{ projectData.title }}</p>
 
   <div class="form-row mb-4">
     <div class="col-xs-12 col-md-8">
       <!-- Titel -->
-      <input type="text" id="defaultRegisterFormFirstName" class="form-control" placeholder="Titel">
+      <input type="text" class="form-control" placeholder="Titel">
     </div>
+
     <div class="col-xs-8 col-md-4">
       <!-- Course -->
       <select class="browser-default custom-select">
@@ -22,6 +23,7 @@
       </select>
     </div>
   </div>
+
     <div class="form-row mb-4">
       <div class="col-xs-12 col-md-6">
         <!-- School -->
@@ -42,16 +44,18 @@
         </div>
   </div>
 
-
+  <!-- Description -->
   <div class="form-group">
-    <textarea class="form-control rounded-0" id="exampleFormControlTextarea2" rows="3" placeholder="Typ hier uw beschrijving"></textarea>
+    <textarea class="form-control rounded-0" rows="3" placeholder="Typ hier uw beschrijving"></textarea>
   </div>
 
-  <!-- Newsletter -->
+
+
+  <!-- excellent -->
   <div class="row">
     <div class="col-md-6 mx-auto d-flex justify-content-center">
       <mdb-checkbox [default]="true">Excellent</mdb-checkbox>
     </div>
   </div>
 </form>
-<!-- Default form register -->
+

@@ -31,7 +31,6 @@ export class CreateProjectDataComponent implements OnInit {
   }
 
   initForms() {
-    // TODO: push error fix!
     this.files.forEach((file: File) => {
       this.createProjectData.push({
         title: file.name,
