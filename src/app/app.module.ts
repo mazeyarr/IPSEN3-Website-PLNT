@@ -29,6 +29,7 @@ import { ProjectModule } from './modules/project/project.module';
     MDBBootstrapModule.forRoot()
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
