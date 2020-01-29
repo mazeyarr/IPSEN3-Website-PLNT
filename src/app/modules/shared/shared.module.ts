@@ -13,9 +13,10 @@ import { ProjectModule } from '../project/project.module';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { TagCloudComponent } from './components/tag-cloud/tag-cloud.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TagResultsComponent } from './pages/tag-results/tag-results.component';
 
 @NgModule({
-  declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent, TagCloudComponent, TagComponent],
+  declarations: [HomeComponent, SearchBarComponent, SearchResultsComponent, TagCloudComponent, TagComponent, TagResultsComponent],
   exports: [],
   imports: [
     RouterModule.forRoot(sharedRoutes),

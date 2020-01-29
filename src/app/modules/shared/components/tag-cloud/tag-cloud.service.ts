@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../services/api/api.service';
 import {Observable} from 'rxjs';
-import {Tag, ITag} from '../../../../models/Tag/tag';
-import {map, tap} from 'rxjs/operators';
+import {Project} from '../../../../models/Project/project';
+import {HttpParams} from '@angular/common/http';
 
 export interface ITagCloud {
   [key: string]: number;
@@ -17,13 +17,25 @@ export class TagCloudService {
   constructor(private api: ApiService) {
   }
 
-  getTagsLimit(amount: number): Observable<ITagCloud> {
+  getTags(): Observable<ITagCloud> {
     return this.api.get({
       auth: true,
       endpoint: `${this.PREFIX}/all`
     });
   }
 
+  getTag(tagString: string): Observable<Project[]> {
+    return this.api.get({
+      auth: true,
+      endpoint: `${this.PREFIX}/search/tag`,
+      body: {
+        params: new HttpParams()
+          .set('tagString', tagString)
+      }
+    });
+  }
+
+  // todo remove this
   // getTags(): Observable<Tag[]> {
   //   return this.api.get({
   //     auth: true,
