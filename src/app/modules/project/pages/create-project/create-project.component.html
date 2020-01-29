@@ -1,1 +1,62 @@
-<p>create-project works!</p>
+<div class="create-project-container p-5 mt-5 background">
+  <div class="row justify-content-center pt-5">
+    <h1 class="font-weight-bold text-white">Uploaden</h1>
+    <div class="col-md-12 my-3">
+      <mdb-card>
+        <mdb-card-body>
+          <div class="row">
+
+            <div class="col-md-12">
+              <ul class="stepper stepper-horizontal">
+                <li
+                  *ngFor="let step of steps; let i = index"
+                  [class.active]="step.active || step.complete"
+                >
+                  <a>
+                    <span class="circle">{{ i + 1 }}</span>
+                    <span class="label">{{ step.title }}</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+
+    <div class="col-md-12">
+      <ng-container [ngSwitch]="activeStepComponent.stepComponentType">
+        <app-create-project-dropzone
+          *ngSwitchCase="StepComponentTypes.PRE_UPLOAD"
+          [cachedFiles]="files"
+          (eFilesChange)="validatePreUpload($event)"
+        >
+        </app-create-project-dropzone>
+      </ng-container>
+
+      <ng-container [ngSwitch]="activeStepComponent.stepComponentType">
+        <app-create-project-data
+          *ngSwitchCase="StepComponentTypes.DATA"
+          [cachedFiles]="files"
+          [cachedCreateProjectData]="createProjectData"
+          (eFilesData)="validateCreateProjectData($event)"
+        >
+        </app-create-project-data>
+      </ng-container>
+    </div>
+
+    <div class="col-xs-12 justify-content-end d-flex">
+      <button class="btn btn-info font-weight-bold" (click)="onPreviousStepClick()">
+        vorige
+      </button>
+    </div>
+
+    <div class="col-xs-12 justify-content-start d-flex">
+      <button class="btn btn-info font-weight-bold" (click)="onNextStepClick()">
+        volgende
+      </button>
+    </div>
+  </div>
+</div>
+

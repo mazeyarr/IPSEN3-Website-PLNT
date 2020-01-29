@@ -15,16 +15,18 @@ export const projectRoutes: Routes = [
   {
     path: 'project/:id',
     component: ViewProjectComponent,
-    data: {animation: 'Project'}
+    data: {animation: 'Project'},
+    canActivate: [AuthGuard]
   },
   {
     path: 'create-project',
     component: CreateProjectComponent,
-    data: {animation: 'Project'}
+    data: {animation: 'CreateProject'}
   },
   {
     path: 'edit-project/:id',
     component: EditProjectComponent,
-    data: {animation: 'Project'}
+    data: { animation: 'Project' },
+    canActivate: [AuthGuard]
   }
 ];

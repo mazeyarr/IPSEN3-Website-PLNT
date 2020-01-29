@@ -15,12 +15,21 @@ p{
   font-weight: normal;
 }
 
+.home-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .background {
   height: 100vh;
   overflow-x: hidden;
   background: #5bc787 url("../../../../../assets/images/background-piece.png") repeat;
   text-align: center;
-  padding: 28vh 5%;
+}
+
+.search-bar {
+  height: 100px;
 }
 
 .background-searchbar {

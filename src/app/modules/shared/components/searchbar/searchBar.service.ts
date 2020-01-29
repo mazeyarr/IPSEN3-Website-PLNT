@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import {ProjectModel} from '../../../../models/project.model';
 import { IProject, Project } from '../../../../models/Project/project';
 import { ApiService } from '../../services/api/api.service';
 import { AuthService } from '../../../auth/services/auth.service';
@@ -9,7 +8,7 @@ import { Observable } from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class SearchBarService {
-  private searchResults: Project[] = [];
+  private obvProjectSearchResults: Observable<Project[]>;
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
 
@@ -29,11 +28,11 @@ export class SearchBarService {
     );
   }
 
-  getSearchResults(): Project[] {
-    return this.searchResults;
+  getSearchResults(): Observable<Project[]> {
+    return this.obvProjectSearchResults;
   }
 
-  setSearchResults(projects: Project[]): void {
-    this.searchResults = projects;
+  setSearchResults(projects: Observable<Project[]>): void {
+    this.obvProjectSearchResults = projects;
   }
 }

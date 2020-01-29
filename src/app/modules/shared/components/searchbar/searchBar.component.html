@@ -1,7 +1,6 @@
 <!-- Search bar component -->
-<div class="container">
   <!-- FORM -->
-  <div class="md-form input-group mb-3">
+  <div class="md-form input-group mb-3 w-100" [@fadeInOut]>
     <!-- ICON -->
     <div class="input-group-prepend white-background rounded-corners-left">
       <span class="input-group-text md-addon"><i class="fas fa-search"></i></span>
@@ -12,8 +11,8 @@
     <input
       type="text"
       class="form-control"
-      placeholder="Zoek voor een project"
-      aria-label="Zoek voor projecten"
+      placeholder="Waar ben je naar opzoek?"
+      aria-label="Waar ben je naar opzoek?"
       aria-describedby="button-addon2"
       [(ngModel)]="searchString"
       (keydown.enter)="searchBarOnEnter()"
@@ -37,7 +36,6 @@
     </div>
     <!-- END SEARCH BUTTON -->
   </div>
-</div>
 
 
 <!-- TODO: Code cleanup (self closing elements) -->

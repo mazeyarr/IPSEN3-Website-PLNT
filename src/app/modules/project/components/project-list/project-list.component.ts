@@ -18,6 +18,16 @@ import {ProjectService} from '../../services/project.service';
   styleUrls: ['./project-list.component.css'],
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
+
+  constructor(private cdRef: ChangeDetectorRef) {
+    this.searchTextWithinResultSet = '';
+  }
+
+  // @Output() filterOnChange = new EventEmitter<string[]>(); // TODO: TODO: Remove
+  // filterList: string[] = []; // TODO: Remove
+
+  loading = true;
+
   @Input() obvProjects: Observable<Project[]>;
   @Input() likeComponent: LikeComponent;
 
@@ -32,9 +42,16 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
 
-  constructor(private cdRef: ChangeDetectorRef, private projectService: ProjectService) {
-    this.searchTextWithinResultSet = '';
-  }
+  // TODO: Remove
+  // filterOnClick() {
+  //   this.addFilter('x');
+  // }
+
+  // TODO: Remove
+  // addFilter(filter: string) {
+  //   this.filterList.push(filter);
+  //   this.filterOnChange.emit(this.filterList);
+  // }
 
   @HostListener('input') oninput() {
     this.searchResultSet();
@@ -54,6 +71,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   initDataTable() {
     this.obvProjects.subscribe((projects: Project[]) => {
+      this.loading = false;
       this.projects = projects;
 
       this.mdbTable.setDataSource(this.projects);

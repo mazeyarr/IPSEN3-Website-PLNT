@@ -1,0 +1,20 @@
+<mdb-card>
+  <mdb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone-label>Klik hier of sleep uw bestanden hiernaartoe</ngx-dropzone-label>
+          <ngx-dropzone-preview
+            *ngFor="let f of files"
+            [removable]="true"
+            (removed)="onRemove(f)"
+          >
+            <ngx-dropzone-label>
+              {{ f.name }} ({{ f.type }})
+            </ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+      </div>
+    </div>
+  </mdb-card-body>
+</mdb-card>

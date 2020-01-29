@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { projectRoutes } from './project.routes';
 import { EditProjectComponent } from './pages/edit-project/edit-project.component';
 import { CreateProjectComponent } from './pages/create-project/create-project.component';
@@ -9,8 +9,12 @@ import { ViewProjectsComponent } from './pages/view-projects/view-projects.compo
 import { ProjectCardComponent } from './components/project-card/project-card.component';
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { ButtonsModule, IconsModule, MDBBootstrapModule, TableModule } from 'angular-bootstrap-md';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { LikeComponent } from './components/like/like.component';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import { CreateProjectDropzoneComponent } from './components/create-project-dropzone/create-project-dropzone.component';
+import { NgxdModule } from '@ngxd/core';
+import { CreateProjectDataComponent } from './components/create-project-data/create-project-data.component';
 
 @NgModule({
   declarations: [
@@ -20,10 +24,13 @@ import { LikeComponent } from './components/like/like.component';
     ViewProjectsComponent,
     ProjectCardComponent,
     ProjectListComponent,
-    LikeComponent
+    LikeComponent,
+    CreateProjectDropzoneComponent,
+    CreateProjectDataComponent,
   ],
   exports: [
-    ProjectCardComponent
+    ProjectCardComponent,
+    ProjectListComponent
   ],
   imports: [
     RouterModule.forChild(projectRoutes),
@@ -33,6 +40,11 @@ import { LikeComponent } from './components/like/like.component';
     TableModule,
     FormsModule,
     MDBBootstrapModule.forRoot(),
+    NgxDropzoneModule,
+    NgxdModule
+  ],
+  entryComponents: [
+    CreateProjectDropzoneComponent
   ]
 })
 export class ProjectModule { }

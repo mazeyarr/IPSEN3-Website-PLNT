@@ -26,9 +26,10 @@ import { ProjectModule } from './modules/project/project.module';
     AuthModule,
     SharedModule,
     ProjectModule,
-    MDBBootstrapModule.forRoot(),
+    MDBBootstrapModule.forRoot()
   ],
   providers: [],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

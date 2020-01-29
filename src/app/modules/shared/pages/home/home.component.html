@@ -1,7 +1,42 @@
-<div class="background">
-  <h1>Vind uw projecten</h1>
-  <p>De beste documenten gedeeld door docenten in één plek.</p>
-  <div class="background-searchbar">
-    <app-searchbar></app-searchbar>
+<div class="home-container background">
+  <div>
+  </div>
+  <div *ngIf="authService.isAuthenticated" class="w-50">
+
+    <app-tag-cloud></app-tag-cloud>
+    <h1 class="mb-3">Zoeken</h1>
+    <div class="background-searchbar">
+      <app-searchbar></app-searchbar>
+    </div>
+  </div>
+
+  <div class="w-100 px-5" *ngIf="!authService.isAuthenticated">
+    <div class="row justify-content-center">
+      <ng-container *ngIf="isExcellentProjectsEmpty()">
+        <div class="spinner-grow" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-secondary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </ng-container>
+
+      <div class="col-12" *ngIf="!isExcellentProjectsEmpty()">
+        <div class="row justify-content-center" [@fadeInOut]>
+          <div class="col-6 my-3">
+            <h1 class="text-white font-weight-bold">Excellente Projecten</h1>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-6 my-3" *ngFor="let project of excellentProjects">
+            <app-project-card [project]="project"></app-project-card>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

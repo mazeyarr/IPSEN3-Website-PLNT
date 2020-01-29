@@ -1,5 +1,6 @@
 <!-- Editable table -->
 <div class="card">
+<!--  <button class="btn btn-block btn-primary" (click)="filterOnClick()">CLICK FOR CHANGE</button>-->
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
     Zoek resultaten
   </h3>
@@ -23,6 +24,30 @@
         </div>
       </div>
 
+      <div class="row justify-content-center align-items-center mb-4">
+        <div class="col-12">
+          <a
+            class="btn btn-success btn-block"
+            routerLink="/create-project"
+          >
+            <mdb-icon fas icon="plus" size="1x"></mdb-icon>
+            Toevoegen
+          </a>
+        </div>
+
+        <div class="col-12 text-center mt-3" *ngIf="loading">
+          <div class="spinner-grow" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
       <table mdbTable #tableEl="mdbTable" class="z-depth-1 table table-bordered table-responsive-md table-striped text-center">
         <thead>
           <tr>
@@ -33,6 +58,7 @@
         </thead>
 
         <tbody>
+
           <tr *ngFor="let project of projects; let i = index;">
             <td *ngIf="paginationCheck(i)">
               {{project.title}}
