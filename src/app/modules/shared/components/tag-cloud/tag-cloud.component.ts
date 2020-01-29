@@ -1,7 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Tag} from '../../../../models/Tag/tag';
 import {TagCloudService} from './tag-cloud.service';
-import {TagCloudType} from '../../../project/types/tag-cloud-type';
+
 
 @Component({
   selector: 'app-tag-cloud',
@@ -10,8 +10,6 @@ import {TagCloudType} from '../../../project/types/tag-cloud-type';
 })
 
 export class TagCloudComponent implements OnInit {
-  // todo remove tagsUsed
-  // tagsUsed: TagCloudType[] = [];
   tags = [];
 
   constructor(private tagCloudService: TagCloudService) {
@@ -26,14 +24,6 @@ export class TagCloudComponent implements OnInit {
       for (const [key, value] of Object.entries(tagCloud)) {
         this.tags.push(new Tag(key, value));
       }
-      // todo remove tagsUsed
-      // console.log(this.tagsUsed);
-      console.log(this.tags);
-      // this.loadTagCloud();
     });
   }
-
-  // loadTagCloud(): void {
-  // }
-
 }

@@ -35,15 +35,4 @@ export class TagCloudService {
     });
   }
 
-  // todo remove this
-  // getTags(): Observable<Tag[]> {
-  //   return this.api.get({
-  //     auth: true,
-  //     endpoint: `${this.PREFIX}/all`
-  //   }).pipe(
-  //     map((tags: ITag[]) => tags.map(
-  //       (tag: ITag) => new Tag(tag)
-  //     ))
-  //   );
-  // }
 }
