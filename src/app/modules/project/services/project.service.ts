@@ -5,6 +5,7 @@ import { map, take, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { fromArray } from 'rxjs/internal/observable/fromArray';
 import { IProjectSimple, ProjectSimple } from '../../../models/Project/project.simple';
+import {Education, IEducation} from "../../../models/Education/education";
 
 @Injectable({
   providedIn: 'root'
@@ -46,6 +47,17 @@ export class ProjectService {
     }).pipe(
       map((projects: IProjectSimple[]) => projects.map(
         (project: IProjectSimple) => new ProjectSimple(project)
+      ))
+    );
+  }
+
+  getEducationAll(): Observable<IEducation[]> {
+    return this.api.get({
+      auth: false, // TODO: set true
+      endpoint: '/education/all'
+    }).pipe(
+      map((educations: IEducation[]) => educations.map(
+        (education: IEducation) => new Education(education)
       ))
     );
   }

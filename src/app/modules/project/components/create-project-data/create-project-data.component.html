@@ -1,61 +1,96 @@
 <!-- Default form register -->
-<form class="text-center border border-light p-5 mb-3" *ngFor="let projectData of createProjectData; let index;">
+<form class="text-center border border-light p-5 mb-3" *ngFor="let projectData of createProjectData; let projectDataIndex = index">
 
-  <p class="h4 mb-4">Voeg informatie toe voor: {{ projectData.title }}</p>
+  <p class="h4 mb-4">Voeg informatie toe voor bestand: {{ projectData.createProjectParams.title }}</p>
 
   <div class="form-row mb-4">
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-12">
       <!-- Titel -->
-      <input type="text" class="form-control" placeholder="Titel">
-    </div>
-
-    <div class="col-xs-8 col-md-4">
-      <!-- Course -->
-      <select class="browser-default custom-select">
-        <option selected hidden>Kies een vak</option>
-        <option value="1">Psychologie</option>
-        <option value="2">Informatica</option>
-        <option value="3">Wiskunde</option>
-        <option value="4">Bio Informatica</option>
-        <option value="5">Biologie</option>
-        <option value="6">Werktuigbouwkunde</option>
-        <option value="7">Economie</option>
-      </select>
+      <input
+        type="text"
+        class="form-control"
+        [placeholder]="projectData.createProjectParams.title"
+        [(ngModel)]="projectData.createProjectParams.title"
+        [ngModelOptions]="{standalone: true}"
+      />
     </div>
   </div>
 
     <div class="form-row mb-4">
-      <div class="col-xs-12 col-md-6">
+      <div class="col-xs-12 col-md-6 mb-6">
         <!-- School -->
-        <select class="browser-default custom-select">
-          <option selected hidden>Kies een school</option>
-          <option value="1">Hogeschool Leiden</option>
-          <option value="2">Universiteit Leiden</option>
-          <option value="3">Hogeschool Amsterdam</option>
+        <select
+          #instituteSelect
+          class="browser-default custom-select h-100"
+          (change)="selectInstituteBy(instituteSelect.value)"
+        >
+          <option
+            [selected]="selectedInstitute === null"
+            hidden
+            value="null"
+          >
+            Kies een school
+          </option>
+
+          <option
+            *ngFor="let institute of institutes; let i = index;"
+            value="{{ institute.id }}"
+          >
+            {{ institute.name }}
+          </option>
         </select>
       </div>
-        <div class="col-xs-12 col-md-6">
-          <!-- Language-->
-          <select class="browser-default custom-select">
-            <option selected hidden>Kies een taal</option>
-            <option value="1">Nedelands</option>
-            <option value="2">Engels</option>
-          </select>
-        </div>
+
+      <div class="col-xs-12 col-md-6 mb-6">
+        <!-- Education -->
+        <select
+          #educationSelect
+          class="browser-default custom-select h-100"
+          [disabled]="selectedInstitute === null"
+          (change)="selectEducationBy(projectDataIndex, educationSelect.value)"
+        >
+          <option
+            *ngFor="let education of availableEducations; let i = index;"
+            value="{{ education.id }}"
+          >
+            {{ education.title }}
+          </option>
+        </select>
+      </div>
   </div>
 
-  <!-- Description -->
-  <div class="form-group">
-    <textarea class="form-control rounded-0" rows="3" placeholder="Typ hier uw beschrijving"></textarea>
+  <div class="form-row mb-4">
+    <div class="col-xs-12 col-md-6">
+      <!-- Language-->
+      <input
+        type="text"
+        class="form-control h-100"
+        placeholder="Vul hier de taal in..."
+        [(ngModel)]="projectData.createProjectParams.language"
+        [ngModelOptions]="{standalone: true}"
+      />
+    </div>
+
+    <div class="col-md-6 mx-auto d-flex justify-content-center">
+      <button
+        type="button"
+        class="btn btn-block waves-effect"
+        [class.btn-outline-secondary]="!projectData.createProjectParams.isExcellent"
+        [class.btn-secondary]="projectData.createProjectParams.isExcellent"
+        (click)="setExcellentTo(projectDataIndex)"
+      >
+        Excellent : {{ projectData.createProjectParams.isExcellent ? 'ja' : 'nee' }}
+      </button>
+    </div>
   </div>
+
+<!--  &lt;!&ndash; Description &ndash;&gt;-->
+<!--  <div class="form-group">-->
+<!--    <textarea class="form-control rounded-0" rows="3" placeholder="Typ hier uw beschrijving"></textarea>-->
+<!--  </div>-->
 
 
 
   <!-- excellent -->
-  <div class="row">
-    <div class="col-md-6 mx-auto d-flex justify-content-center">
-      <mdb-checkbox [default]="true">Excellent</mdb-checkbox>
-    </div>
-  </div>
 </form>
 
