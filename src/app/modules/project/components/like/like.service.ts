@@ -14,7 +14,7 @@ export class LikeService {
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
 
   likeProjectById(id: number): Observable<Project[]> {
-    return this.apiService.get({
+    return this.apiService.put({
       auth: true,
       endpoint: '/project/like',
       body: {
