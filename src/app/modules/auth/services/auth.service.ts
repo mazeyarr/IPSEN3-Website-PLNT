@@ -32,15 +32,20 @@ export class AuthService {
           retry(2),
           catchError(() => of(this.setAuthenticated(false)))
         ).subscribe((user: IUser) => {
-        this.setAuthUser(new User(user));
+        if (user.username != null) {
+          console.log('user exists');
+          this.setAuthUser(new User(user));
+          this.setAuthToken(
+            this.getAuthUser().jwt
+          );
 
-        this.setAuthToken(
-          this.getAuthUser().jwt
-        );
+          this.setAuthenticated(true);
 
-        this.setAuthenticated(true);
-
-        resolve();
+          resolve();
+        } else {
+          console.log('user doesnt exist');
+          resolve();
+        }
       });
     });
   }
