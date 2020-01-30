@@ -1,9 +1,7 @@
 <!-- Editable table -->
-<div class="card">
+<div>
 <!--  <button class="btn btn-block btn-primary" (click)="filterOnClick()">CLICK FOR CHANGE</button>-->
-  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
-    Zoek resultaten
-  </h3>
+
   <div class="card-body">
     <div id="table" class="table-editable">
       <div class="row">
@@ -66,7 +64,8 @@
             </td>
 
             <td *ngIf="paginationCheck(i)">
-              {{project.grade}}
+              <span *ngIf="project.grade >= 8">++</span>
+              <span *ngIf="project.grade < 8 ">+</span>
             </td>
 
             <td *ngIf="paginationCheck(i)">

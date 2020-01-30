@@ -11,6 +11,7 @@ import { IProjectSimple, ProjectSimple } from '../../../../models/Project/projec
 })
 export class TagService {
   private obvProjectSearchResults: Observable<ProjectSimple[]>;
+  private searchQuery: string;
   private readonly PREFIX = '/project';
 
   constructor(private api: ApiService) {
@@ -36,5 +37,13 @@ export class TagService {
 
   setSearchResults(projects: Observable<ProjectSimple[]>): void {
     this.obvProjectSearchResults = projects;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(query: string) {
+    this.searchQuery = query;
   }
 }
