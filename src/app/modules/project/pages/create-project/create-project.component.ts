@@ -1,5 +1,5 @@
 import { Component, OnInit, Type } from '@angular/core';
-import { CreateProjectData } from '../../components/create-project-data/create-project-data.component';
+import { ICreateProjectData } from '../../components/create-project-data/create-project-data.component';
 
 interface IStep {
   title: string;
@@ -25,7 +25,7 @@ export class CreateProjectComponent implements OnInit {
   private static readonly FIRST_STEP = 0;
 
   private files: File[] = [];
-  private createProjectData: CreateProjectData[] = [];
+  private createProjectData: ICreateProjectData[] = [];
 
   private StepComponentTypes = StepComponentType;
   private activeStepComponent: IStep;
@@ -73,13 +73,20 @@ export class CreateProjectComponent implements OnInit {
     this.setStepReady(this.getCurrentIndex(), true);
   }
 
-  validateCreateProjectData($createProjectData: CreateProjectData[]): void {
+  validateCreateProjectData($createProjectData: ICreateProjectData[]): void {
     this.createProjectData = $createProjectData;
 
     if (this.files.length !== this.createProjectData.length) {
       this.setStepReady(this.getCurrentIndex(), false);
       return;
     }
+
+    this.createProjectData.forEach((projectData: ICreateProjectData) => {
+      if (!projectData.createProjectParams.validated) {
+        this.setStepReady(this.getCurrentIndex(), false);
+        return;
+      }
+    });
 
     this.setStepReady(this.getCurrentIndex(), true);
   }

@@ -22,10 +22,10 @@
         <select
           #instituteSelect
           class="browser-default custom-select h-100"
-          (change)="selectInstituteBy(instituteSelect.value)"
+          (change)="selectInstituteBy(projectDataIndex, instituteSelect.value)"
         >
           <option
-            [selected]="selectedInstitute === null"
+            [selected]="projectData.createProjectParams.selectedInstitute === null"
             hidden
             value="null"
           >
@@ -46,11 +46,19 @@
         <select
           #educationSelect
           class="browser-default custom-select h-100"
-          [disabled]="selectedInstitute === null"
+          [disabled]="projectData.createProjectParams.selectedInstitute === null"
           (change)="selectEducationBy(projectDataIndex, educationSelect.value)"
         >
           <option
-            *ngFor="let education of availableEducations; let i = index;"
+            [selected]="projectData.createProjectParams.educationId === null"
+            hidden
+            value="null"
+          >
+            Kies een school
+          </option>
+
+          <option
+            *ngFor="let education of projectData.createProjectParams.availableEducations; let i = index;"
             value="{{ education.id }}"
           >
             {{ education.title }}

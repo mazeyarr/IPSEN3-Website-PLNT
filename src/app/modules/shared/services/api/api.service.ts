@@ -35,12 +35,20 @@ export class ApiService {
     }
   }
 
-  post(options: IApiOptions): Observable<any> {
+  post(options: IApiOptions, multipart = false): Observable<any> {
     options = this.configureOptions(options);
+
+    const headers: HttpHeaders = new HttpHeaders();
+
+    if (multipart) {
+      headers.set('Content-Type', 'multipart/form-data');
+    } else {
+      headers.set('Content-Type', 'application/x-www-form-urlencoded');
+    }
 
     try {
       return this.http.post(this.generateUrl(options.endpoint), options.body, {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        headers
       });
     } catch (e) {
       console.error(e);

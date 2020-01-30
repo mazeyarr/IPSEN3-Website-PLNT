@@ -39,9 +39,9 @@ export interface HasLikes {
 }
 
 export interface HasResource {
-  resourceUrl?: any;
-  createdAt?: any;
-  expiresAt?: any;
+  resourceUrl?: string;
+  createdAt?: number;
+  expiresAt?: number;
 }
 
 export interface IProject {
