@@ -33,8 +33,8 @@ export class AuthService {
           catchError(() => of(this.setAuthenticated(false)))
         ).subscribe((user: IUser) => {
         if (user.username != null) {
-          console.log('user exists');
           this.setAuthUser(new User(user));
+
           this.setAuthToken(
             this.getAuthUser().jwt
           );
@@ -43,8 +43,8 @@ export class AuthService {
 
           resolve();
         } else {
-          console.log('user doesnt exist');
           resolve();
+          throw new Error('user doesnt exist');
         }
       });
     });
@@ -63,7 +63,6 @@ export class AuthService {
         endpoint: this.PREFIX + '/create'
       })
         .pipe(
-          tap(data => console.log(data)),
           retry(2),
           catchError(() => of(this.setAuthenticated(false)))
         ).subscribe((user: IUser) => {

@@ -19,14 +19,12 @@ export class CreateProjectDropzoneComponent implements OnInit {
   }
 
   onSelect(event) {
-    console.log(event);
     this.files.push(...event.addedFiles);
 
     this.eFilesChange.emit(this.files);
   }
 
   onRemove(event) {
-    console.log(event);
     this.files.splice(this.files.indexOf(event), 1);
 
     this.eFilesChange.emit(this.files);

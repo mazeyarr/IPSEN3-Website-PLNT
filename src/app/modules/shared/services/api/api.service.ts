@@ -82,7 +82,7 @@ export class ApiService {
     options = this.setAuthHeaderIfNeeded(options);
 
     return options;
-  }
+  };
 
   getApiUrl = (): string => ApiService.baseUrl + ApiService.prefix;
 
@@ -96,7 +96,7 @@ export class ApiService {
     };
 
     return { ...defaultOptions, ...options };
-  }
+  };
 
 
   setAuthHeaderIfNeeded(options: IApiOptions): IApiOptions {

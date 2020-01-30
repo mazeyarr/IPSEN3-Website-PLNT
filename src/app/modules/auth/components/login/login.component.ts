@@ -25,9 +25,6 @@ export class LoginComponent implements OnInit {
     if (this.loginFormModalEmail.valid && this.loginFormModalPassword.valid) {
       await this.authService.login(this.loginFormModalEmail.value, this.loginFormModalPassword.value);
 
-      console.log(this.authService.getAuthUser());
-      console.log(this.authService.isAuthenticated);
-
       if (this.authService.isAuthenticated) {
         this.loginModalRef.hide();
       } else {
@@ -38,7 +35,7 @@ export class LoginComponent implements OnInit {
       console.log('INVALID CREDENTIALS');
     }
 
-  }
+  };
 
   get loginFormModalEmail() {
     return this.validatingForm.get('loginFormModalEmail');

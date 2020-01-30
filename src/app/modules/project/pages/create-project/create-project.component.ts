@@ -108,7 +108,6 @@ export class CreateProjectComponent implements OnInit {
     const currentStepIndex = this.getCurrentIndex();
 
     if (!this.steps[currentStepIndex].ready) {
-      console.log(`Cant go next because -> ${this.steps[currentStepIndex].stepComponentType} == ${this.steps[currentStepIndex].ready}`);
       return;
     }
 
@@ -150,7 +149,7 @@ export class CreateProjectComponent implements OnInit {
 
   getCurrentIndex = (): number => this.steps.findIndex(
     (step: IStep) => step.stepComponentType === this.activeStepComponent.stepComponentType
-  )
+  );
 
   isFirstStep = (stepIndex: number): boolean => stepIndex === 0;
   isLastStep = (stepIndex: number): boolean => this.steps[stepIndex + 1] === undefined;

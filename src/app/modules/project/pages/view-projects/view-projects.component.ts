@@ -20,20 +20,4 @@ export class ViewProjectsComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  // filterHasBeenChanged(event: string[]) {
-  //   console.log(event);
-  //   // TODO: check if filters are one
-  //   // TODO: if filter array is empty just get all projects
-  //   if ('filter is on') {
-  //     this.obvProjects = this.projectService.getProjects().pipe(
-  //       filter((projects: Project[]) => projects.filter(
-  //         (project: Project) => project.language === event
-  //       ))
-  //     );
-  //   } else {
-  //     this.obvProjects = this.projectService.getProjects();
-  //   }
-  // }
-
 }

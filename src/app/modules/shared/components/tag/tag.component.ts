@@ -37,7 +37,6 @@ export class TagComponent implements OnInit {
   }
 
   clickHandler() {
-    console.log(this.tag.name + ', ' + this.tag.amount);
     this.tagService.setSearchResults(this.tagService.getProjectByTag(this.tag.name));
     this.tagService.setSearchQuery(this.tag.name);
     this.router.navigate(['tag-results']);

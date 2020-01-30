@@ -1,7 +1,7 @@
-import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
-import {MDBModalRef} from 'angular-bootstrap-md';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../../services/auth.service';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { MDBModalRef } from 'angular-bootstrap-md';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -39,9 +39,6 @@ export class RegisterComponent implements OnInit {
       );
       await this.authService.login(this.registerFormModalEmail.value, this.registerFormModalPassword.value);
 
-      console.log(this.authService.getAuthUser());
-      console.log(this.authService.isAuthenticated);
-
       if (this.authService.isAuthenticated) {
         this.registerModalRef.hide();
       } else {
@@ -50,7 +47,7 @@ export class RegisterComponent implements OnInit {
     } else {
       console.log('INPUT INVALID');
     }
-  }
+  };
 
   get registerFormModalEmail() {
     return this.validatingForm.get('registerFormModalEmail');
