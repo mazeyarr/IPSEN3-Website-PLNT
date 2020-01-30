@@ -1,1 +1,11 @@
-<button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" (click)="like(id)">LIKE</button>
+<button
+  type="button"
+  mdbBtn
+  color="info"
+  rounded="true"
+  size="sm"
+  class="my-0"
+  (click)="onBtnLikeClick()"
+>
+  <mdb-icon fas icon="thumbs-up"></mdb-icon> {{ totalLikes }}
+</button>

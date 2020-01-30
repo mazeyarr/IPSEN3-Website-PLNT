@@ -9,6 +9,7 @@ import {HttpParams} from '@angular/common/http';
 import {ICreateProjectData} from '../components/create-project-data/create-project-data.component';
 import {UploadTypes} from '../types/upload-types';
 import {IResource, Resource} from '../../../models/Resource/resource';
+import { LikeTypes } from '../components/like/types/like-types';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +28,18 @@ export class ProjectService {
       map((projects: IProject[]) => projects.map(
         (project: IProject) => new Project(project)
       ))
+    );
+  }
+
+  likeProjectById(id: number): Observable<Project> {
+    return this.api.put({
+      auth: true,
+      body: new HttpParams()
+        .set('id', id.toString())
+        .set('likeType', LikeTypes.LIKE),
+      endpoint: `${this.PREFIX}/like`
+    }).pipe(
+      map((project: IProject) => new Project(project))
     );
   }
 

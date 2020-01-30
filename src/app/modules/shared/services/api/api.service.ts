@@ -59,7 +59,9 @@ export class ApiService {
     options = this.configureOptions(options);
 
     try {
-      return this.http.put(this.generateUrl(options.endpoint), options.body);
+      return this.http.put(this.generateUrl(options.endpoint), options.body, {
+        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+      });
     } catch (e) {
       console.error(e);
     }

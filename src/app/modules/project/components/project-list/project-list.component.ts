@@ -3,11 +3,14 @@ import {
   Component,
   OnInit,
   ViewChild,
-  AfterViewInit, HostListener, Input, Output, EventEmitter
+  AfterViewInit, HostListener, Input, Output, EventEmitter,
 } from '@angular/core';
 import {MdbTableDirective, MdbTablePaginationComponent} from 'angular-bootstrap-md';
 import { Project } from '../../../../models/Project/project';
 import { Observable } from 'rxjs';
+import { LikeComponent } from '../like/like.component';
+import {ProjectService} from '../../services/project.service';
+import { ProjectSimple } from '../../../../models/Project/project.simple';
 
 
 @Component({
@@ -17,38 +20,25 @@ import { Observable } from 'rxjs';
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
 
-  constructor(private cdRef: ChangeDetectorRef) {
+  constructor(private cdRef: ChangeDetectorRef, private projectService: ProjectService) {
     this.searchTextWithinResultSet = '';
   }
 
-  // @Output() filterOnChange = new EventEmitter<string[]>(); // TODO: TODO: Remove
-  // filterList: string[] = []; // TODO: Remove
-
   loading = true;
 
-  @Input() obvProjects: Observable<Project[]>;
+  @Input() obvProjects: Observable<ProjectSimple[]>;
+  @Input() likeComponent: LikeComponent;
 
   @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
 
-  projects: Project[] = [];
+  projects: ProjectSimple[] = [];
 
   tableHeaders = Project.tableHeadProperties();
 
   searchTextWithinResultSet: string;
   currentShowing: Project[] = [];
   previousShowing: Project[] = [];
-
-  // TODO: Remove
-  // filterOnClick() {
-  //   this.addFilter('x');
-  // }
-
-  // TODO: Remove
-  // addFilter(filter: string) {
-  //   this.filterList.push(filter);
-  //   this.filterOnChange.emit(this.filterList);
-  // }
 
   @HostListener('input') oninput() {
     this.searchResultSet();
@@ -67,7 +57,7 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
   }
 
   initDataTable() {
-    this.obvProjects.subscribe((projects: Project[]) => {
+    this.obvProjects.subscribe((projects: ProjectSimple[]) => {
       this.loading = false;
       this.projects = projects;
 
@@ -96,5 +86,16 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
       this.projects = this.mdbTable.searchLocalDataBy(this.searchTextWithinResultSet);
       this.mdbTable.setDataSource(prev);
     }
+  }
+
+  // todo: projectService opeens kapot na master merge
+  onProjectLike(projectId: number) {
+    this.projectService.likeProjectById(projectId)
+      .subscribe((project: Project) => {
+        const indexOfProject: number = this.projects.findIndex((mProject: ProjectSimple) => mProject.id === project.id);
+
+        this.projects[indexOfProject].hasLikes.LIKE = project.hasLikes.LIKE.length;
+        this.projects[indexOfProject].hasTotalLikes = project.hasTotalLikes;
+      });
   }
 }

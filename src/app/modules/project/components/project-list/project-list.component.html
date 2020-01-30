@@ -77,7 +77,11 @@
             </td>
 
             <td *ngIf="paginationCheck(i)">
-              {{ project.hasLikes.LIKE.length }}
+              <app-like
+                (eLiked)="onProjectLike(project.id)"
+                [totalLikes]="project.hasLikes.LIKE"
+              >
+              </app-like>
             </td>
           </tr>
         </tbody>

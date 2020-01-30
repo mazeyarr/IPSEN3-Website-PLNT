@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {Project} from '../../../../models/Project/project';
+import { ProjectSimple } from '../../../../models/Project/project.simple';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-like',
@@ -6,13 +9,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./like.component.css']
 })
 export class LikeComponent implements OnInit {
+  @Input() projectId: number;
+  @Input() totalLikes: number;
 
-  constructor() { }
+  @Output() eLiked: EventEmitter<number>;
+
+  constructor(private projectService: ProjectService) {
+    this.eLiked = new EventEmitter<number>();
+  }
 
   ngOnInit() {
   }
 
-  like(id: number) {
-    alert('sorry, liken kan nog niet');
+  onBtnLikeClick() {
+    this.eLiked.emit(this.projectId);
   }
+
 }
