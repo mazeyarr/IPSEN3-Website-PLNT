@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { LikeComponent } from '../like/like.component';
 import {ProjectService} from '../../services/project.service';
 import { ProjectSimple } from '../../../../models/Project/project.simple';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,9 @@ import { ProjectSimple } from '../../../../models/Project/project.simple';
 })
 export class ProjectListComponent implements OnInit, AfterViewInit {
 
-  constructor(private cdRef: ChangeDetectorRef, private projectService: ProjectService) {
+  constructor(private cdRef: ChangeDetectorRef,
+              private router: Router,
+              private projectService: ProjectService) {
     this.searchTextWithinResultSet = '';
   }
 
@@ -97,5 +100,9 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
         this.projects[indexOfProject].hasLikes.LIKE = project.hasLikes.LIKE.length;
         this.projects[indexOfProject].hasTotalLikes = project.hasTotalLikes;
       });
+  }
+
+  onClickBtnViewProject(projectId: number) {
+    this.router.navigate(['project', projectId]);
   }
 }

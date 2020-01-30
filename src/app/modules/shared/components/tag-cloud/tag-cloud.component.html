@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-4 my-3" *ngFor="let tag of tags">
-    <app-tag [tag]="tag"></app-tag>
+<div class="row mb-3">
+  <div class="col-md-3 my-1" *ngFor="let tag of tags">
+    <app-tag [tag]="tag" [color]="tag.color"></app-tag>
   </div>
 </div>

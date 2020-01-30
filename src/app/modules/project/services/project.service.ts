@@ -20,6 +20,15 @@ export class ProjectService {
   constructor(private api: ApiService) {
   }
 
+  getProjectBy(id: number): Observable<Project> {
+    return this.api.get({
+      auth: true,
+      endpoint: `${this.PREFIX}/${id}`
+    }).pipe(
+      map((project: IProject) => new Project(project))
+    );
+  }
+
   getProjects(): Observable<Project[]> {
     return this.api.get({
       auth: true,
@@ -125,5 +134,20 @@ export class ProjectService {
         (createdResource: Resource) => resolve(createdResource.project)
       );
     });
+  }
+
+  updateProject(updatedProject: Project): Observable<Project> {
+    return this.api.put({
+      auth: true,
+      body: new HttpParams()
+        .set('id', updatedProject.id.toString())
+        .set('title', updatedProject.title)
+        .set('language', updatedProject.language)
+        .set('grade', updatedProject.grade.toString())
+        .set('educationId', updatedProject.education.id.toString()),
+      endpoint: this.PREFIX + `/update/${updatedProject.id}`
+    }).pipe(
+      map((project: IProject) => new Project(project))
+    );
   }
 }

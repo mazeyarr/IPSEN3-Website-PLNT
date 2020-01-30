@@ -2,10 +2,11 @@
   <div>
   </div>
   <div *ngIf="authService.isAuthenticated" class="w-50">
+    <h3 class="mb-3 text-white font-weight-bold mb-5"><i>"De feiten van vandaag zijn de producten van het onderzoek van gisteren."</i></h3>
 
     <app-tag-cloud></app-tag-cloud>
-    <h1 class="mb-3">Zoeken</h1>
-    <div class="background-searchbar">
+
+    <div class="background-searchbar mt-5">
       <app-searchbar></app-searchbar>
     </div>
   </div>

@@ -1,1 +1,115 @@
-<p>view-project: {{ id }} works!</p>
+<div class="p-5 mt-5 background">
+  <div class="row justify-content-center">
+
+    <ng-container *ngIf="project !== null">
+      <div class="col-md-12 my-3">
+
+        <mdb-card>
+          <mdb-card-body>
+
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <mdb-card
+                  [class.purple]="project.excellent"
+                  [class.green]="!project.excellent"
+                >
+                  <mdb-card-body class="text-center p-2">
+                    <h1 class="font-weight-bold text-white mb-0">
+                      {{ project.title }}
+                    </h1>
+                  </mdb-card-body>
+                </mdb-card>
+              </div>
+            </div>
+
+            <app-property-show label="Instelling" [value]="project.education.institute.name"></app-property-show>
+            <app-property-show label="Vak" [value]="project.education.title"></app-property-show>
+            <app-property-show label="Taal" [value]="project.language"></app-property-show>
+            <div class="row">
+              <div class="col-3 mb-2">
+                <h6>Resultaat:</h6>
+              </div>
+
+              <div class="col-9">
+                <mdb-badge
+                  pill="true"
+                  [color]="project.grade >= 8 ? 'purple' : 'green'"
+                >
+                  {{ project.grade >= 8 ? '++' : '+' }}
+                </mdb-badge>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-12 mb-2">
+                <app-like
+                  (eLiked)="onProjectLike(project.id)"
+                  [totalLikes]="project.hasLikes.LIKE.length"
+                >
+                </app-like>
+              </div>
+
+              <div class="col-md-4 col-xs-12 d-flex align-items-center">
+                <ng-container *ngIf="project.hasTags.length > 0">
+                  <span class="mr-1" *ngFor="let tag of project.hasTags">
+                    <mdb-badge info="true">
+                      {{ tag.name }}
+                    </mdb-badge>
+                  </span>
+                </ng-container>
+              </div>
+
+              <div class="col-md-8 col-xs-12">
+                <div class="row d-flex justify-content-end mr-2">
+
+                  <div class="col-md-2 col-xs-12 p-0">
+                    <button
+                      mdbBtn
+                      type="button"
+                      color="blue"
+                      size="sm"
+                      mdbWavesEffect
+                      (click)="onViewProjectClick()"
+                    >
+                      Bekijk
+                    </button>
+                  </div>
+
+                  <div class="col-md-2 col-xs-12 p-0">
+                    <button
+                      mdbBtn
+                      type="button"
+                      color="yellow"
+                      size="sm"
+                      mdbWavesEffect
+                      (click)="onEditProjectClick()"
+                    >
+                      Wijzig
+                    </button>
+                  </div>
+
+                  <div class="col-md-2 col-xs-12 p-0">
+                    <button
+                      mdbBtn
+                      type="button"
+                      color="red"
+                      size="sm"
+                      mdbWavesEffect
+                    >
+                      Verwijderen
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+
+      </div>
+    </ng-container>
+
+  </div>
+</div>

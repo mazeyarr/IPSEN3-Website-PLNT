@@ -87,6 +87,20 @@
               >
               </app-like>
             </td>
+
+            <td *ngIf="paginationCheck(i)">
+              <button
+                type="button"
+                mdbBtn
+                color="info"
+                rounded="true"
+                size="sm"
+                class="my-0"
+                (click)="onClickBtnViewProject(project.id)"
+              >
+                <mdb-icon fas icon="eye"></mdb-icon>
+              </button>
+            </td>
           </tr>
         </tbody>
 

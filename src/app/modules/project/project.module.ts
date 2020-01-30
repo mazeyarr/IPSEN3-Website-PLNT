@@ -16,6 +16,7 @@ import { CreateProjectDropzoneComponent } from './components/create-project-drop
 import { NgxdModule } from '@ngxd/core';
 import { CreateProjectDataComponent } from './components/create-project-data/create-project-data.component';
 import { CreateProjectUploadComponent } from './components/create-project-upload/create-project-upload.component';
+import { PropertyShowComponent } from './components/property-show/property-show.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CreateProjectUploadComponent } from './components/create-project-upload
     CreateProjectDropzoneComponent,
     CreateProjectDataComponent,
     CreateProjectUploadComponent,
+    PropertyShowComponent,
   ],
   exports: [
     ProjectCardComponent,

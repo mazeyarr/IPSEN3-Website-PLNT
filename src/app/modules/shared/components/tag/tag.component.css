@@ -4,3 +4,7 @@
 }
 
 .pointer {cursor: pointer;}
+
+.tag-pill {
+  font-size: 15px;
+}

@@ -58,9 +58,12 @@ export class ApiService {
   put(options: IApiOptions): Observable<any> {
     options = this.configureOptions(options);
 
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
     try {
       return this.http.put(this.generateUrl(options.endpoint), options.body, {
-        headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+        headers
       });
     } catch (e) {
       console.error(e);

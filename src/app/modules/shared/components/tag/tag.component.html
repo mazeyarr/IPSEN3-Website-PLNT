@@ -1,6 +1,9 @@
-<mdb-badge class=pointer pill="true" color="white" style="min-width: 200px; min-height: 50px;" (click)="clickHandler()">
-  <h3 class=pointer style="margin-top: 10px; color:black;">
-    {{tag.name}}
-  </h3>
+<mdb-badge
+  class="pointer tag-pill"
+  pill="true"
+  [color]="color"
+  (click)="clickHandler()"
+>
+  {{tag.name}}
 </mdb-badge>
 

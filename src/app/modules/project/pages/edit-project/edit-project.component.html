@@ -1,1 +1,139 @@
-<p>edit-project: {{ id }} works!</p>
+<div class="p-5 mt-5 background">
+  <div class="row justify-content-center">
+
+    <ng-container *ngIf="project !== null">
+      <div class="col-md-12 my-3">
+
+        <mdb-card>
+          <mdb-card-body>
+
+            <div class="row mb-5">
+              <div class="col-md-12">
+                <mdb-card
+                  [class.purple]="project.excellent"
+                  [class.green]="!project.excellent"
+                >
+                  <mdb-card-body class="text-center p-2">
+                    <h1 class="font-weight-bold text-white mb-0">
+                      {{ project.title }}
+                    </h1>
+                  </mdb-card-body>
+                </mdb-card>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12">
+                <div class="md-form">
+                  <input
+                    mdbInput
+                    type="text"
+                    id="title"
+                    class="form-control"
+                    [value]="project.title"
+                    [(ngModel)]="project.title"
+                  >
+                  <label for="title" class="">
+                    Titel
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="md-form">
+                  <input mdbInput type="text" id="language" class="form-control" [value]="project.language">
+                  <label for="language" class="">
+                    Taal
+                  </label>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="md-form">
+                  <select
+                    #instituteSelect
+                    class="browser-default custom-select h-100"
+                    (change)="selectInstituteBy(instituteSelect.value)"
+                  >
+                    <option
+                      *ngFor="let institute of institutes; let i = index;"
+                      value="{{ institute.id }}"
+                      [selected]="selectedInstitute.id === institute.id"
+                    >
+                      {{ institute.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-6">
+                <div class="md-form">
+                  <select
+                    #educationSelect
+                    class="browser-default custom-select h-100"
+                    (change)="selectEducationBy(educationSelect.value)"
+                  >
+                    <option
+                      [selected]="selectedEducation === null"
+                      hidden
+                      value="null"
+                    >
+                      Kies een opleiding/vak
+                    </option>
+
+                    <option
+                      *ngFor="let education of this.availableEducations; let i = index;"
+                      value="{{ education.id }}"
+                      [selected]="selectedEducation.id === education.id"
+                    >
+                      {{ education.title }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-2 col-xs-3 mb-2">
+                <h6 class="m-0">
+                  Excellent: {{ project.excellent ? 'Ja' : 'Nee' }}
+                </h6>
+              </div>
+
+              <div class="col-9">
+                <mdb-badge
+                  pill="true"
+                  class="pointer"
+                  [class.purple]="project.excellent"
+                  [class.green]="!project.excellent"
+                  (click)="onExcellentClick()"
+                >
+                  {{ project.excellent ? '++' : '+' }}
+                </mdb-badge>
+              </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+              <div class="col-12 p-0">
+                <button
+                  mdbBtn
+                  type="button"
+                  color="green"
+                  mdbWavesEffect
+                  block="true"
+                  (click)="onClickBtnSave()"
+                >
+                  Opslaan
+                </button>
+              </div>
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+
+      </div>
+    </ng-container>
+
+  </div>
+</div>

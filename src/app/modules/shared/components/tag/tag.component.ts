@@ -28,7 +28,8 @@ import {Router} from '@angular/router';
   ],
 })
 export class TagComponent implements OnInit {
-  @Input() tag: Tag;
+    @Input() color: string;
+    @Input() tag: Tag;
 
   constructor(private tagService: TagService, private router: Router) {
   }

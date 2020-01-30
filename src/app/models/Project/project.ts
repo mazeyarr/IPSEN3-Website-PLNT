@@ -95,6 +95,6 @@ export class Project {
   }
 
   static tableHeadProperties(): string[] {
-    return ['Titel', 'Taal', 'Resultaat', 'Vak', 'Instelling', 'Likes'];
+    return ['Titel', 'Taal', 'Resultaat', 'Vak', 'Instelling', 'Likes', 'Inzien'];
   }
 }

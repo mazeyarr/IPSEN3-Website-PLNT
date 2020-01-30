@@ -10,7 +10,8 @@ import {TagCloudService} from './tag-cloud.service';
 })
 
 export class TagCloudComponent implements OnInit {
-  tags = [];
+  tags: Tag[] = [];
+  colors: string[] = ['red', 'orange', 'blue', 'purple'];
 
   constructor(private tagCloudService: TagCloudService) {
   }
@@ -22,11 +23,15 @@ export class TagCloudComponent implements OnInit {
   getTagCloud(): void {
     this.tagCloudService.getTags().subscribe(tagCloud => {
       for (const [key, value] of Object.entries(tagCloud)) {
-        this.tags.push(new Tag(key, value));
+        this.tags.push(new Tag(key, value, this.getRandomColor()));
       }
       this.tags.sort( (a: Tag, b: Tag) => {
         return b.amount - a.amount;
       });
     });
+  }
+
+  getRandomColor = (): string  => {
+    return this.colors[Math.floor(Math.random() * this.colors.length)];
   }
 }

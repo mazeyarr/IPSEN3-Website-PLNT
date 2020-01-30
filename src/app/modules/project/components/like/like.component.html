@@ -1,11 +1,3 @@
-<button
-  type="button"
-  mdbBtn
-  color="info"
-  rounded="true"
-  size="sm"
-  class="my-0"
-  (click)="onBtnLikeClick()"
->
+<mdb-badge class="btnLike" pill="true" info="purple" (click)="onBtnLikeClick()">
   <mdb-icon fas icon="thumbs-up"></mdb-icon> {{ totalLikes }}
-</button>
+</mdb-badge>
