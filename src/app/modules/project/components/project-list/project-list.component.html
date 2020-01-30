@@ -64,8 +64,12 @@
             </td>
 
             <td *ngIf="paginationCheck(i)">
-              <span *ngIf="project.grade >= 8">++</span>
-              <span *ngIf="project.grade < 8 ">+</span>
+              <mdb-badge
+                pill="true"
+                [color]="project.grade >= 8 ? 'purple' : 'green'"
+              >
+                {{ project.grade >= 8 ? '++' : '+' }}
+              </mdb-badge>
             </td>
 
             <td *ngIf="paginationCheck(i)">
