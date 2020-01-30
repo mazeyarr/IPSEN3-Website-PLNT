@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ApiService} from '../../shared/services/api/api.service';
-import {IUser, User} from '../../../models/User/user';
+import { IUser, Role, User } from '../../../models/User/user';
 import {catchError, retry, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 
@@ -12,6 +12,8 @@ export class AuthService {
   private readonly PREFIX = '/user';
 
   public isAuthenticated = false;
+  public isAdmin = false;
+
   private authUser: User;
   private authToken: string;
 
@@ -40,6 +42,7 @@ export class AuthService {
           );
 
           this.setAuthenticated(true);
+          this.checkAndSetAdmin();
 
           resolve();
         } else {
@@ -77,6 +80,16 @@ export class AuthService {
 
   setAuthUser(user: User) {
     this.authUser = user;
+  }
+
+  checkAndSetAdmin() {
+    if (this.getAuthUser() !== null) {
+      this.isAdmin = this.getAuthUser().roles.find((role: Role) => role.role === 'ADMIN') !== undefined;
+      console.log('isAdmin');
+    } else {
+      this.isAdmin = false;
+      console.log('is not admin');
+    }
   }
 
   getAuthUser(): User {

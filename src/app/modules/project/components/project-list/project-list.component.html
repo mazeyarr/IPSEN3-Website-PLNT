@@ -20,7 +20,7 @@
       </div>
 
       <div class="row justify-content-center align-items-center mb-4">
-        <div class="col-12">
+        <div class="col-12" *ngIf="this.authService.isAdmin">
           <a
             class="btn btn-success btn-block"
             routerLink="/create-project"

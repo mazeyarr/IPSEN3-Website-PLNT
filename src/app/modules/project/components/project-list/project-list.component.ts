@@ -12,6 +12,7 @@ import { LikeComponent } from '../like/like.component';
 import {ProjectService} from '../../services/project.service';
 import { ProjectSimple } from '../../../../models/Project/project.simple';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class ProjectListComponent implements OnInit, AfterViewInit {
 
   constructor(private cdRef: ChangeDetectorRef,
               private router: Router,
-              private projectService: ProjectService) {
+              private projectService: ProjectService,
+              private authService: AuthService) {
     this.searchTextWithinResultSet = '';
   }
 

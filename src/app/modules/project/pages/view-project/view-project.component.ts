@@ -20,7 +20,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private projectService: ProjectService,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
     this.obvProject = new Observable<Project>();
   }
 
