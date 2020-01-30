@@ -32,32 +32,39 @@
       </li>
     </ul>
     <!-- Links -->
-      <div class="my-0 text-white" *ngIf="authService.isAuthenticated">
-        <mdb-icon fas icon="user"></mdb-icon>
-        {{ authService.getAuthUser().getFullname() }}
-      </div>
+    <div class="my-0 text-white" *ngIf="authService.isAuthenticated">
+      <mdb-icon fas icon="user"></mdb-icon>
+      {{ authService.getAuthUser().getFullname() }}
+      <button
+        type="button"
+        mdbBtn
+        color="default"
+        outline="true"
+        (click)="logout()"
+      >Logout</button>
+    </div>
 
-      <div class="my-0" *ngIf="!authService.isAuthenticated">
-        <button
-          type="button"
-          mdbBtn
-          color="default"
-          outline="true"
-          (click)="openLoginModal()"
-        >
-          Login
-        </button>
+    <div class="my-0" *ngIf="!authService.isAuthenticated">
+      <button
+        type="button"
+        mdbBtn
+        color="default"
+        outline="true"
+        (click)="openLoginModal()"
+      >
+        Login
+      </button>
 
-        <button
-          mdbBtn
-          type="button"
-          color="default"
-          outline="true"
-          (click)="openRegisterModal()"
-        >
-          Register
-        </button>
-      </div>
+      <button
+        mdbBtn
+        type="button"
+        color="default"
+        outline="true"
+        (click)="openRegisterModal()"
+      >
+        Register
+      </button>
+    </div>
   </links>
 </mdb-navbar>
 <!--/.Navbar-->
