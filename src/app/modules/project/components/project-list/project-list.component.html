@@ -4,9 +4,6 @@
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
     Zoek resultaten
   </h3>
-
-  // todo: like
-
   <div class="card-body">
     <div id="table" class="table-editable">
       <div class="row">
@@ -81,8 +78,11 @@
             </td>
 
             <td *ngIf="paginationCheck(i)">
-              <app-like (click)="onBtnLikeClick(project.id)"></app-like>
-              {{ project.hasLikes.LIKE }}
+              <app-like
+                (eLiked)="onProjectLike(project.id)"
+                [totalLikes]="project.hasLikes.LIKE"
+              >
+              </app-like>
             </td>
           </tr>
         </tbody>

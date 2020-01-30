@@ -4,18 +4,19 @@ import {Observable} from 'rxjs';
 import {IProject, Project} from '../../../../models/Project/project';
 import {HttpParams} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import { IProjectSimple, ProjectSimple } from '../../../../models/Project/project.simple';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TagService {
-  private obvProjectSearchResults: Observable<Project[]>;
+  private obvProjectSearchResults: Observable<ProjectSimple[]>;
   private readonly PREFIX = '/project';
 
   constructor(private api: ApiService) {
   }
 
-  getProjectByTag(tagString: string): Observable<Project[]> {
+  getProjectByTag(tagString: string): Observable<ProjectSimple[]> {
     return this.api.get({
       auth: true,
       endpoint: `${this.PREFIX}/search/tag`,
@@ -25,15 +26,15 @@ export class TagService {
       }
     }).pipe(
       map(
-        (projects: IProject[]) => projects.map((project: IProject) => new Project(project))
+        (projects: IProjectSimple[]) => projects.map((project: IProjectSimple) => new ProjectSimple(project))
       ));
   }
 
-  getSearchResults(): Observable<Project[]> {
+  getSearchResults(): Observable<ProjectSimple[]> {
     return this.obvProjectSearchResults;
   }
 
-  setSearchResults(projects: Observable<Project[]>): void {
+  setSearchResults(projects: Observable<ProjectSimple[]>): void {
     this.obvProjectSearchResults = projects;
   }
 }

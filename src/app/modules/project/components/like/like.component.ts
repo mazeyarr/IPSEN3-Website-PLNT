@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import {Project} from '../../../../models/Project/project';
-import {Router} from '@angular/router';
-import {LikeService} from './like.service';
+import { ProjectSimple } from '../../../../models/Project/project.simple';
+import { ProjectService } from '../../services/project.service';
 
 @Component({
   selector: 'app-like',
@@ -9,16 +9,20 @@ import {LikeService} from './like.service';
   styleUrls: ['./like.component.css']
 })
 export class LikeComponent implements OnInit {
-  constructor(private likeService: LikeService, private router: Router) { }
+  @Input() projectId: number;
+  @Input() totalLikes: number;
 
-  likeProject($id: number) {
-    this.likeService.likeProjectById($id)
-      .subscribe((project: Project[]) => {
-        this.likeService.setLikeResults(project);
-        this.router.navigateByUrl('/projects');
-      });
+  @Output() eLiked: EventEmitter<number>;
+
+  constructor(private projectService: ProjectService) {
+    this.eLiked = new EventEmitter<number>();
   }
 
   ngOnInit() {
   }
+
+  onBtnLikeClick() {
+    this.eLiked.emit(this.projectId);
+  }
+
 }
