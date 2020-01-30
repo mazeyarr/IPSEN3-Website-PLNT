@@ -48,6 +48,7 @@ export interface IProject {
   id: number;
   title: string;
   language: string;
+  description: string;
   grade: number;
   createdBy: CreatedBy;
   education: Education;
@@ -63,6 +64,7 @@ export class Project {
   id: number;
   title: string;
   language: string;
+  description: string;
   grade: number;
   createdBy: CreatedBy;
   education: Education;
@@ -80,6 +82,7 @@ export class Project {
     this.id = project.id;
     this.title = project.title;
     this.language = project.language;
+    this.description = project.description;
     this.grade = project.grade;
     this.createdBy = project.createdBy;
     this.education = project.education;
@@ -92,6 +95,6 @@ export class Project {
   }
 
   static tableHeadProperties(): string[] {
-    return ['Titel', 'Taal', 'Cijfers', 'Vak', 'Instelling', 'Likes'];
+    return ['Titel', 'Taal', 'Resultaat', 'Vak', 'Instelling', 'Likes'];
   }
 }
