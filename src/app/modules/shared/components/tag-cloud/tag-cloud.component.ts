@@ -24,6 +24,9 @@ export class TagCloudComponent implements OnInit {
       for (const [key, value] of Object.entries(tagCloud)) {
         this.tags.push(new Tag(key, value));
       }
+      this.tags.sort( (a: Tag, b: Tag) => {
+        return b.amount - a.amount;
+      });
     });
   }
 }
