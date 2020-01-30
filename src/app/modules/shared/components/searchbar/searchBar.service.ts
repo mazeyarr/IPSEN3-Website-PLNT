@@ -5,16 +5,17 @@ import {IProject, Project} from '../../../../models/Project/project';
 import {ApiService} from '../../services/api/api.service';
 import {AuthService} from '../../../auth/services/auth.service';
 import {Observable} from 'rxjs';
+import { IProjectSimple, ProjectSimple } from '../../../../models/Project/project.simple';
 
 @Injectable({providedIn: 'root'})
 export class SearchBarService {
-  private obvProjectSearchResults: Observable<Project[]>;
+  private obvProjectSearchResults: Observable<ProjectSimple[]>;
   private searchQuery: string;
 
   constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {
   }
 
-  searchProjectsByTitle(title: string, isCaseSensitive: boolean = false): Observable<Project[]> {
+  searchProjectsByTitle(title: string, isCaseSensitive: boolean = false): Observable<ProjectSimple[]> {
     return this.apiService.get({
       auth: true,
       endpoint: '/project/search',
@@ -25,16 +26,16 @@ export class SearchBarService {
       }
     }).pipe(
       map(
-        (projects: IProject[]) => projects.map((project: IProject) => new Project(project))
+        (projects: IProjectSimple[]) => projects.map((project: IProjectSimple) => new ProjectSimple(project))
       )
     );
   }
 
-  getSearchResults(): Observable<Project[]> {
+  getSearchResults(): Observable<ProjectSimple[]> {
     return this.obvProjectSearchResults;
   }
 
-  setSearchResults(projects: Observable<Project[]>): void {
+  setSearchResults(projects: Observable<ProjectSimple[]>): void {
     this.obvProjectSearchResults = projects;
   }
 
