@@ -3,13 +3,17 @@ import {IProject, Project} from '../../../../models/Project/project';
 import {ProjectService} from '../../services/project.service';
 import {Education, IInstitute} from '../../../../models/Education/education';
 
-export interface CreateProjectData {
+export interface ICreateProjectData {
   createProjectParams: {
     title: string;
     language: string;
     grade: number;
     educationId: number;
     isExcellent: boolean;
+    validated: boolean;
+
+    availableEducations: Education[];
+    selectedInstitute: IInstitute;
   };
   file: File;
 }
@@ -21,21 +25,18 @@ export interface CreateProjectData {
 })
 export class CreateProjectDataComponent implements OnInit {
   @Input() cachedFiles: File[];
-  @Input() cachedCreateProjectData: CreateProjectData[];
+  @Input() cachedCreateProjectData: ICreateProjectData[];
 
-  @Output() eFilesData: EventEmitter<CreateProjectData[]>;
+  @Output() eFilesData: EventEmitter<ICreateProjectData[]>;
 
   files: File[] = [];
-  createProjectData: CreateProjectData[] = [];
+  createProjectData: ICreateProjectData[] = [];
 
   educations: Education[] = [];
   institutes: IInstitute[] = [];
 
-  availableEducations: Education[] = [];
-  selectedInstitute: IInstitute = null;
-
   constructor(private projectService: ProjectService) {
-    this.eFilesData = new EventEmitter<CreateProjectData[]>();
+    this.eFilesData = new EventEmitter<ICreateProjectData[]>();
   }
 
   ngOnInit() {
@@ -71,32 +72,36 @@ export class CreateProjectDataComponent implements OnInit {
         createProjectParams: {
           title: file.name,
           language: '',
-          grade: 0,
+          grade: null,
           educationId: null,
-          isExcellent: false
+          isExcellent: false,
+          validated: false,
+
+          selectedInstitute: null,
+          availableEducations: []
         },
         file
       });
     });
   }
 
-  selectInstituteBy(optionId: string) {
+  selectInstituteBy(projectDataIndex: number, optionId: string) {
     const id = +optionId;
 
     if (id === null) {
-      this.selectedInstitute = null;
+      this.createProjectData[projectDataIndex].createProjectParams.selectedInstitute = null;
     }
-    this.selectedInstitute = this.institutes.find(
+    this.createProjectData[projectDataIndex].createProjectParams.selectedInstitute = this.institutes.find(
       (institute: IInstitute) => institute.id === id
     );
 
-    this.setAvailableEducationsBy(id);
+    this.setAvailableEducationsBy(projectDataIndex, id);
 
-    console.log(this.availableEducations);
+    this.validateProjectData();
   }
 
-  setAvailableEducationsBy(instituteId: number) {
-    this.availableEducations = this.educations.filter(
+  setAvailableEducationsBy(projectDataIndex: number, instituteId: number) {
+    this.createProjectData[projectDataIndex].createProjectParams.availableEducations = this.educations.filter(
       (education: Education) => education.institute.id === instituteId
     );
   }
@@ -109,11 +114,48 @@ export class CreateProjectDataComponent implements OnInit {
     }
 
     this.createProjectData[projectDataIndex].createProjectParams.educationId = id;
+
+    this.validateProjectData();
   }
 
   setExcellentTo(projectDataIndex: number) {
     const isExcellent: boolean = this.createProjectData[projectDataIndex].createProjectParams.isExcellent;
 
     this.createProjectData[projectDataIndex].createProjectParams.isExcellent = !isExcellent;
+
+    if (this.createProjectData[projectDataIndex].createProjectParams.isExcellent) {
+      this.createProjectData[projectDataIndex].createProjectParams.grade = 8;
+    } else {
+      this.createProjectData[projectDataIndex].createProjectParams.grade = 6;
+    }
+
+    this.validateProjectData();
+  }
+
+  validateProjectData() {
+    this.createProjectData.forEach((projectData: ICreateProjectData) => {
+      if (projectData.createProjectParams.title === '') {
+        projectData.createProjectParams.validated = false;
+        return;
+      }
+
+      if (projectData.createProjectParams.educationId === null) {
+        projectData.createProjectParams.validated = false;
+        return;
+      }
+
+      if (projectData.createProjectParams.language === '') {
+        projectData.createProjectParams.validated = false;
+        return;
+      }
+
+      if (projectData.createProjectParams.grade === null) {
+        projectData.createProjectParams.validated = false;
+        return;
+      }
+
+      projectData.createProjectParams.validated = true;
+      this.eFilesData.emit(this.createProjectData);
+    });
   }
 }
