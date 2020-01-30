@@ -73,8 +73,13 @@ export class ApiService {
   delete(options: IApiOptions): Observable<any> {
     options = this.configureOptions(options);
 
+    const headers: HttpHeaders = new HttpHeaders();
+    headers.set('Content-Type', 'application/x-www-form-urlencoded');
+
     try {
-      return this.http.delete(this.generateUrl(options.endpoint), options.body);
+      return this.http.delete(this.generateUrl(options.endpoint), {
+        headers
+      });
     } catch (e) {
       console.error(e);
     }

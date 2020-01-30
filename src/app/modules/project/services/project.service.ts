@@ -17,7 +17,17 @@ import { LikeTypes } from '../components/like/types/like-types';
 export class ProjectService {
   private readonly PREFIX = '/project';
 
+  private editingProject: Project = null;
+
   constructor(private api: ApiService) {
+  }
+
+  getEditingProject() {
+    return this.editingProject;
+  }
+
+  setEditingProject(project: Project) {
+    this.editingProject = project;
   }
 
   getProjectBy(id: number): Observable<Project> {
@@ -149,5 +159,12 @@ export class ProjectService {
     }).pipe(
       map((project: IProject) => new Project(project))
     );
+  }
+
+  deleteProjectBy(id: number) {
+    return this.api.delete({
+      auth: true,
+      endpoint: this.PREFIX + `/delete/${id}`
+    });
   }
 }

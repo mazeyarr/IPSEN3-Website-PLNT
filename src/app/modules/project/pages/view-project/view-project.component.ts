@@ -5,6 +5,8 @@ import { ProjectService } from '../../services/project.service';
 import { Observable } from 'rxjs';
 import { Project } from '../../../../models/Project/project';
 import { ProjectSimple } from '../../../../models/Project/project.simple';
+import { MDBModalService } from 'angular-bootstrap-md';
+import { ModalConfirmDeleteComponent } from '../../components/modal-confirm-delete/modal-confirm-delete.component';
 
 @Component({
   selector: 'app-view-project',
@@ -21,7 +23,8 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private projectService: ProjectService,
               private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private modalService: MDBModalService) {
     this.obvProject = new Observable<Project>();
   }
 
@@ -30,13 +33,17 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
       this.id = +params.id;
 
       this.projectService.getProjectBy(this.id).subscribe(
-        (project: Project) => this.project = project
+        (project: Project) => {
+          this.project = project;
+          this.projectService.setEditingProject(project);
+        }
       );
     });
   }
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+    this.projectService.setEditingProject(null);
   }
 
   onProjectLike(projectId: number) {
@@ -53,5 +60,9 @@ export class ViewProjectComponent implements OnInit, OnDestroy {
 
   onEditProjectClick() {
     this.router.navigate(['edit-project', this.project.id]);
+  }
+
+  onDeleteClick() {
+    this.modalService.show(ModalConfirmDeleteComponent);
   }
 }

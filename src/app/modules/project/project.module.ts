@@ -17,6 +17,7 @@ import { NgxdModule } from '@ngxd/core';
 import { CreateProjectDataComponent } from './components/create-project-data/create-project-data.component';
 import { CreateProjectUploadComponent } from './components/create-project-upload/create-project-upload.component';
 import { PropertyShowComponent } from './components/property-show/property-show.component';
+import { ModalConfirmDeleteComponent } from './components/modal-confirm-delete/modal-confirm-delete.component';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,12 @@ import { PropertyShowComponent } from './components/property-show/property-show.
     CreateProjectDataComponent,
     CreateProjectUploadComponent,
     PropertyShowComponent,
+    ModalConfirmDeleteComponent,
   ],
   exports: [
     ProjectCardComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    ModalConfirmDeleteComponent
   ],
   imports: [
     RouterModule.forChild(projectRoutes),
@@ -48,7 +51,8 @@ import { PropertyShowComponent } from './components/property-show/property-show.
     NgxdModule
   ],
   entryComponents: [
-    CreateProjectDropzoneComponent
+    CreateProjectDropzoneComponent,
+    ModalConfirmDeleteComponent
   ]
 })
 export class ProjectModule { }

@@ -1,0 +1,39 @@
+<!--Content-->
+<div class="modal-content text-center">
+  <!--Header-->
+  <div class="modal-header d-flex justify-content-center">
+    <p class="heading">Weet u het zeker?</p>
+  </div>
+
+  <!--Body-->
+  <div class="modal-body">
+    <mdb-icon fas icon="times" size="4x" class="animated rotateIn"></mdb-icon>
+  </div>
+
+  <!--Footer-->
+  <div class="modal-footer justify-content-center">
+    <button
+      mdbBtn
+      color="danger"
+      outline="true"
+      class="waves-effect"
+      mdbWavesEffect
+      (click)="confirm()"
+    >
+      Ja
+    </button>
+
+    <button
+      type="button"
+      mdbBtn
+      color="danger"
+      class="waves-effect"
+      mdbWavesEffect
+      data-dismiss="modal"
+      (click)="confirmDeleteModelRef.hide()"
+    >
+      Nee
+    </button>
+  </div>
+</div>
+<!--/.Content-->
