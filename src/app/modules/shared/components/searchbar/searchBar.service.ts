@@ -1,16 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
-import { IProject, Project } from '../../../../models/Project/project';
-import { ApiService } from '../../services/api/api.service';
-import { AuthService } from '../../../auth/services/auth.service';
-import { Observable } from 'rxjs';
+import {map, tap} from 'rxjs/operators';
+import {IProject, Project} from '../../../../models/Project/project';
+import {ApiService} from '../../services/api/api.service';
+import {AuthService} from '../../../auth/services/auth.service';
+import {Observable} from 'rxjs';
 
 @Injectable({providedIn: 'root'})
 export class SearchBarService {
   private obvProjectSearchResults: Observable<Project[]>;
+  private searchQuery: string;
 
-  constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {}
+  constructor(private http: HttpClient, private apiService: ApiService, private authService: AuthService) {
+  }
 
   searchProjectsByTitle(title: string, isCaseSensitive: boolean = false): Observable<Project[]> {
     return this.apiService.get({
@@ -34,5 +36,13 @@ export class SearchBarService {
 
   setSearchResults(projects: Observable<Project[]>): void {
     this.obvProjectSearchResults = projects;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(query: string) {
+    this.searchQuery = query;
   }
 }

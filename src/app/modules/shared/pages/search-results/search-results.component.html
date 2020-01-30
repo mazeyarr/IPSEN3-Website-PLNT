@@ -1,7 +1,12 @@
 <div class="project-container p-5 mt-5">
   <div class="row">
     <div class="col-md-12">
+      <div class="card">
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">
+          Zoek resultaten voor: {{searchQuery}}
+        </h3>
       <app-project-list [obvProjects]="searchBarService.getSearchResults()"></app-project-list>
+      </div>
     </div>
   </div>
 </div>

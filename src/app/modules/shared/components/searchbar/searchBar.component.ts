@@ -49,10 +49,12 @@ export class SearchBarComponent implements OnInit {
   }
 
   private btnSearchOnClick() {
+    this.searchService.setSearchQuery(this.searchString);
     this.doSearch(this.searchString);
   }
 
   private searchBarOnEnter() {
+    this.searchService.setSearchQuery(this.searchString);
     this.doSearch(this.searchString);
   }
 }

@@ -10,6 +10,7 @@ import {map} from 'rxjs/operators';
 })
 export class TagService {
   private obvProjectSearchResults: Observable<Project[]>;
+  private searchQuery: string;
   private readonly PREFIX = '/project';
 
   constructor(private api: ApiService) {
@@ -35,5 +36,13 @@ export class TagService {
 
   setSearchResults(projects: Observable<Project[]>): void {
     this.obvProjectSearchResults = projects;
+  }
+
+  getSearchQuery() {
+    return this.searchQuery;
+  }
+
+  setSearchQuery(query: string) {
+    this.searchQuery = query;
   }
 }
