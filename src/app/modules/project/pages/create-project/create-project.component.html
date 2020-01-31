@@ -54,15 +54,27 @@
       </ng-container>
     </div>
 
-    <div class="col-xs-12 justify-content-end d-flex">
-      <button class="btn btn-info font-weight-bold" (click)="onPreviousStepClick()">
-        vorige
+<!--    <div class="col-xs-12 justify-content-end d-flex" *ngIf="activeStepComponent.stepComponentType">-->
+<!--      <button class="btn btn-info font-weight-bold" (click)="onPreviousStepClick()">-->
+<!--        vorige-->
+<!--      </button>-->
+<!--    </div>-->
+
+    <div
+      *ngIf="activeStepComponent.stepComponentType !== StepComponentTypes.UPLOAD"
+      class="col-xs-12 justify-content-start d-flex"
+    >
+      <button class="btn btn-info font-weight-bold" (click)="onNextStepClick()">
+        volgende
       </button>
     </div>
 
-    <div class="col-xs-12 justify-content-start d-flex">
-      <button class="btn btn-info font-weight-bold" (click)="onNextStepClick()">
-        volgende
+    <div
+      *ngIf="activeStepComponent.stepComponentType === StepComponentTypes.UPLOAD"
+      class="col-xs-12 justify-content-start d-flex"
+    >
+      <button class="btn btn-success font-weight-bold" (click)="onFinishClick()">
+        Klaar
       </button>
     </div>
   </div>

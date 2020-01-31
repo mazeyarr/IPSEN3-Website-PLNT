@@ -33,6 +33,7 @@ export class NavBarComponent implements OnInit {
     this.authService.setAuthenticated(false);
     this.authService.checkAndSetAdmin();
     this.authService.setAuthToken('');
+    this.authService.removeToken();
 
     this.router.navigate(['']);
   }

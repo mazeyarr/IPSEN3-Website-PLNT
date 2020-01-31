@@ -18,22 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(authReq);
     }
 
-    // if (JSON.parse(req.headers.get('auth'))) {
-    //   if (!this.isAuthTokenSet()) {
-    //     throw new Error('Auth token is not set!');
-    //   }
-    //
-    //   req.headers.delete('auth');
-    //
-    //   const authToken = this.auth.getAuthToken();
-    //
-    //   // cloned headers, updated with the authorization.
-    //   const authReq = req.clone({ setHeaders: { Authorization: authToken } });
-    //
-    //   // send cloned request with header to the next handler.
-    //   return next.handle(authReq);
-    // }
-
     return next.handle(req);
   }
 

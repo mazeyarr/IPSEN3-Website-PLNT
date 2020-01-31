@@ -6,13 +6,18 @@
   <div class="form-row mb-4">
     <div class="col-xs-12 col-md-12">
       <!-- Titel -->
-      <input
-        type="text"
-        class="form-control"
-        [placeholder]="projectData.createProjectParams.title"
-        [(ngModel)]="projectData.createProjectParams.title"
-        [ngModelOptions]="{standalone: true}"
-      />
+      <div class="md-form w-100">
+        <input
+          [id]="projectData.file.name"
+          mdbInput
+          type="text"
+          class="form-control"
+          [placeholder]="projectData.createProjectParams.title"
+          [(ngModel)]="projectData.createProjectParams.title"
+          [ngModelOptions]="{standalone: true}"
+        />
+        <label [for]="projectData.file.name" class="">Titel</label>
+      </div>
     </div>
   </div>
 
@@ -90,15 +95,42 @@
         Excellent : {{ projectData.createProjectParams.isExcellent ? 'ja' : 'nee' }}
       </button>
     </div>
+
+    <div class="col-md-12 mx-auto">
+      <div class="md-form w-100">
+        <input
+          mdbInput
+          type="text"
+          [id]="'tagging-' + projectData.file.name"
+          class="form-control"
+          [(ngModel)]="projectData.createProjectParams.tagInput"
+          [ngModelOptions]="{standalone: true}"
+          (keydown.enter)="addTags(projectDataIndex)"
+        />
+        <label [for]="'tagging-' + projectData.file.name" class="">
+          #Tags (scheiden d.m.v. ' , ')
+        </label>
+      </div>
+    </div>
+
+    <div
+      *ngIf="projectData.createProjectParams.tags.length > 0"
+      class="col-md-12 d-flex justify-content-start mb-2">
+      <mdb-badge
+        *ngFor="let tag of projectData.createProjectParams.tags; let tagIndex = index"
+        info="true"
+        class="mr-1"
+      >
+        <mdb-icon fas icon="times" (click)="removeTag(projectDataIndex, tagIndex)"></mdb-icon>
+        {{ tag }}
+      </mdb-badge>
+    </div>
+
+    <div class="col-md-4 mx-auto d-flex justify-content-center">
+      <button mdbBtn type="button" class="btn-success" block="true" (click)="addTags(projectDataIndex)">
+        Tags toevoegen
+      </button>
+    </div>
   </div>
-
-<!--  &lt;!&ndash; Description &ndash;&gt;-->
-<!--  <div class="form-group">-->
-<!--    <textarea class="form-control rounded-0" rows="3" placeholder="Typ hier uw beschrijving"></textarea>-->
-<!--  </div>-->
-
-
-
-  <!-- excellent -->
 </form>
 

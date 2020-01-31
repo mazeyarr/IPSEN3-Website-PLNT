@@ -112,12 +112,14 @@ export class ProjectService {
               .set('educationId', projectData.createProjectParams.educationId.toString()),
             endpoint: this.PREFIX + '/create'
           }).pipe(
-            map((project: IProject) => new Project(project))
+            map((project: IProject) => new Project(project)),
           ).subscribe(
             (project: Project) =>
               this.createProjectResource(project, projectData.file).then(
-                (projectWithResource: Project) => resolve(projectWithResource)
-              )
+                (projectWithResource: Project) => {
+                  this.tagProject(projectWithResource.id, projectData.createProjectParams.tags);
+                  resolve(projectWithResource);
+                })
           );
         })
       );
@@ -166,5 +168,19 @@ export class ProjectService {
       auth: true,
       endpoint: this.PREFIX + `/delete/${id}`
     });
+  }
+
+  tagProject(projectId: number, tags: string[]): void {
+    tags.forEach(
+      (tag: string) => this.api.put({
+        auth: true,
+        body: new HttpParams()
+          .set('id', projectId.toString())
+          .set('tag', tag),
+        endpoint: this.PREFIX + `/tag/${projectId}`
+      }).pipe(
+        map((project: IProject) => new Project(project))
+      ).subscribe()
+    );
   }
 }

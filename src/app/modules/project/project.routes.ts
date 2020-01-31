@@ -21,7 +21,8 @@ export const projectRoutes: Routes = [
   {
     path: 'create-project',
     component: CreateProjectComponent,
-    data: {animation: 'CreateProject'}
+    data: {animation: 'CreateProject'},
+    canActivate: [AuthGuard]
   },
   {
     path: 'edit-project/:id',

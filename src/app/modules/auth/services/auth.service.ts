@@ -9,6 +9,7 @@ import {of} from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
+  private readonly TOKEN_KEY = 'app-ipsen-token';
   private readonly PREFIX = '/user';
 
   public isAuthenticated = false;
@@ -19,6 +20,58 @@ export class AuthService {
 
   constructor(private api: ApiService) {
     this.authToken = '';
+  }
+
+  tryTokenLogin(): Promise<boolean> {
+    return new Promise(resolve => {
+      if (this.isAuthenticated) {
+        return resolve(true);
+      }
+
+      if (localStorage.getItem(this.TOKEN_KEY) !== null) {
+        this.setAuthToken(localStorage.getItem(this.TOKEN_KEY));
+        this.loginWithToken().then((isAuthenticated: boolean) => resolve(isAuthenticated));
+      } else {
+        resolve(false);
+      }
+    });
+  }
+
+  loginWithToken(): Promise<boolean> {
+    return new Promise<boolean>(resolve => {
+      this.api.post({
+        auth: true,
+        body: new HttpParams()
+          .set('token', this.getAuthToken()),
+        endpoint: this.PREFIX + '/login/token'
+      })
+        .pipe(
+          retry(2),
+          catchError(() => {
+            this.removeToken();
+            return of(this.setAuthenticated(false));
+          })
+        ).subscribe(
+        (user: IUser) => {
+          if (user === undefined) {
+            this.removeToken();
+            resolve(false);
+            return;
+          }
+
+          if (user.username != null) {
+            this.setAuthUser(new User(user));
+            this.setAuthenticated(true);
+            this.checkAndSetAdmin();
+
+            resolve(true);
+          }
+        },
+        () => {
+          this.removeToken();
+          resolve(false);
+        });
+    });
   }
 
   login(username: string, password: string) {
@@ -40,6 +93,8 @@ export class AuthService {
           this.setAuthToken(
             this.getAuthUser().jwt
           );
+
+          localStorage.setItem(this.TOKEN_KEY, this.getAuthToken());
 
           this.setAuthenticated(true);
           this.checkAndSetAdmin();
@@ -102,5 +157,9 @@ export class AuthService {
 
   setAuthToken(token: string): void {
     this.authToken = token;
+  }
+
+  removeToken(): void {
+    localStorage.removeItem(this.TOKEN_KEY);
   }
 }

@@ -3,11 +3,6 @@ import {ICreateProjectData} from '../create-project-data/create-project-data.com
 import {ProjectService} from '../../services/project.service';
 import {Project} from '../../../../models/Project/project';
 
-export interface ICreatedProject {
-  project: Project;
-  projectData: ICreateProjectData;
-}
-
 @Component({
   selector: 'app-create-project-upload',
   templateUrl: './create-project-upload.component.html',
@@ -15,6 +10,8 @@ export interface ICreatedProject {
 })
 export class CreateProjectUploadComponent implements OnInit {
   @Input() createProjectData: ICreateProjectData[];
+
+  projects: Project[] = [];
 
   constructor(private projectService: ProjectService) { }
 
@@ -24,11 +21,11 @@ export class CreateProjectUploadComponent implements OnInit {
 
   createProjects() {
     this.projectService.createProjects(this.createProjectData).then(
-      (projects: Project[]) => {
-        console.log(projects);
-        console.log('done!');
-      }
+      (projects: Project[]) => this.projects = projects
     );
   }
 
+  onClickViewProject(project: Project) {
+    window.open(project.hasResource.resourceUrl, '_blank');
+  }
 }

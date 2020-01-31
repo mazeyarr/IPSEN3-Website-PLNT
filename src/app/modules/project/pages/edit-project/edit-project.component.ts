@@ -86,6 +86,8 @@ export class EditProjectComponent implements OnInit, OnDestroy {
 
     this.selectedEducation = this.educations.find((education: Education) => education.id === id);
     this.selectedInstitute = this.selectedEducation.institute;
+
+    this.project.education = this.selectedEducation;
   }
 
   onExcellentClick() {

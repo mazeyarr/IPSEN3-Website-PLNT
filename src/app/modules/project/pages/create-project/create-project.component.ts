@@ -1,5 +1,6 @@
 import { Component, OnInit, Type } from '@angular/core';
 import { ICreateProjectData } from '../../components/create-project-data/create-project-data.component';
+import { Router } from '@angular/router';
 
 interface IStep {
   title: string;
@@ -56,7 +57,7 @@ export class CreateProjectComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.setStepActive(CreateProjectComponent.FIRST_STEP, true);
@@ -123,6 +124,10 @@ export class CreateProjectComponent implements OnInit {
     }
   }
 
+  onFinishClick() {
+    this.router.navigate(['projects']);
+  }
+
   setStepComplete(stepIndex: number, toggle: boolean): void {
     this.steps[stepIndex].complete = toggle;
     this.steps[stepIndex].warning = !toggle;
@@ -149,7 +154,7 @@ export class CreateProjectComponent implements OnInit {
 
   getCurrentIndex = (): number => this.steps.findIndex(
     (step: IStep) => step.stepComponentType === this.activeStepComponent.stepComponentType
-  );
+  )
 
   isFirstStep = (stepIndex: number): boolean => stepIndex === 0;
   isLastStep = (stepIndex: number): boolean => this.steps[stepIndex + 1] === undefined;

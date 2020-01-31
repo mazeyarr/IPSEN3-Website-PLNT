@@ -14,6 +14,9 @@ export interface ICreateProjectData {
 
     availableEducations: Education[];
     selectedInstitute: IInstitute;
+
+    tagInput: string;
+    tags: string[];
   };
   file: File;
 }
@@ -78,7 +81,10 @@ export class CreateProjectDataComponent implements OnInit {
           validated: false,
 
           selectedInstitute: null,
-          availableEducations: []
+          availableEducations: [],
+
+          tagInput: '',
+          tags: []
         },
         file
       });
@@ -128,6 +134,29 @@ export class CreateProjectDataComponent implements OnInit {
     } else {
       this.createProjectData[projectDataIndex].createProjectParams.grade = 6;
     }
+
+    this.validateProjectData();
+  }
+
+  addTags(projectDataIndex: number) {
+    const tags: string[] = this.createProjectData[projectDataIndex].createProjectParams.tags;
+    const input: string = this.createProjectData[projectDataIndex].createProjectParams.tagInput;
+
+    if (input !== '' || input !== null) {
+      if (tags.length < 5) {
+        this.createProjectData[projectDataIndex].createProjectParams.tags = tags.concat(
+          input.split(',')
+        );
+
+        this.createProjectData[projectDataIndex].createProjectParams.tagInput = '';
+      }
+    }
+
+    this.validateProjectData();
+  }
+
+  removeTag(projectDataIndex: number, indexTag: number) {
+    this.createProjectData[projectDataIndex].createProjectParams.tags.splice(indexTag, 1);
 
     this.validateProjectData();
   }

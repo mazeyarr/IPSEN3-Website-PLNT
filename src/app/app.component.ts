@@ -12,8 +12,8 @@ import { RouterOutlet } from '@angular/router';
 export class AppComponent implements OnInit {
   title = 'website';
 
-  constructor() {
-
+  constructor(private authService: AuthService) {
+    this.authService.tryTokenLogin();
   }
 
   ngOnInit(): void {
