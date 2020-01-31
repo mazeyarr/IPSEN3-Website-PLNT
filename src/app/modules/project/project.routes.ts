@@ -27,7 +27,7 @@ export const projectRoutes: Routes = [
   {
     path: 'edit-project/:id',
     component: EditProjectComponent,
-    data: { animation: 'Project' },
+    data: { animation: 'EditProject' },
     canActivate: [AuthGuard]
   }
 ];

@@ -6,6 +6,7 @@ import {
   animate,
   group
 } from '@angular/animations';
+
 export const slideInAnimation =
   trigger('routeAnimation', [
 
@@ -23,7 +24,7 @@ export const slideInAnimation =
             style({ transform: 'translateY(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateY(0%)'}),
+          style({ transform: 'translateY(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateY(-100%)' }))
         ], { optional: true }),
@@ -41,7 +42,7 @@ export const slideInAnimation =
             style({ transform: 'translateY(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateY(0%)'}),
+          style({ transform: 'translateY(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateY(100%)' }))
         ], { optional: true }),
@@ -59,7 +60,7 @@ export const slideInAnimation =
             style({ transform: 'translateY(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateY(0%)'}),
+          style({ transform: 'translateY(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateY(100%)' }))
         ], { optional: true }),
@@ -81,7 +82,7 @@ export const slideInAnimation =
             style({ transform: 'translateY(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateY(0%)'}),
+          style({ transform: 'translateY(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateY(-100%)' }))
         ], { optional: true }),
@@ -99,9 +100,27 @@ export const slideInAnimation =
             style({ transform: 'translateY(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateY(0%)'}),
+          style({ transform: 'translateY(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateY(100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('SearchResults => Project', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(-100%)' }))
         ], { optional: true }),
       ])
     ]),
@@ -117,7 +136,7 @@ export const slideInAnimation =
             style({ transform: 'scale(0)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform: 'scale(0)'}),
+          style({ transform: 'scale(0)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'scale(1)' }))
         ], { optional: true }),
@@ -136,7 +155,115 @@ export const slideInAnimation =
             style({ transform: 'translateX(0%)' }))
         ], { optional: true }),
         query(':leave', [
-          style({ transform:   'translateX(0%)'}),
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('Projects => CreateProject', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(-100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('CreateProject => Projects', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(-100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('Project => Projects', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(-100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('Project => Home', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(-100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('Project => EditProject', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(-100%)' }))
+        ], { optional: true }),
+      ])
+    ]),
+
+    transition('EditProject => Project', [
+      query(':enter, :leave',
+        style({ position: 'fixed', width: '100%' }),
+        { optional: true }),
+      group([
+        query(':enter', [
+          style({ transform: 'translateX(-100%)' }),
+          animate('0.5s ease-in-out',
+            style({ transform: 'translateX(0%)' }))
+        ], { optional: true }),
+        query(':leave', [
+          style({ transform: 'translateX(0%)' }),
           animate('0.5s ease-in-out',
             style({ transform: 'translateX(100%)' }))
         ], { optional: true }),
@@ -145,7 +272,7 @@ export const slideInAnimation =
 
     transition('Projects => *', [
       query(':enter, :leave',
-        style({ position: 'fixed',  width: '100%' }),
+        style({ position: 'fixed', width: '100%' }),
         { optional: true }),
       group([
         query(':enter', [
